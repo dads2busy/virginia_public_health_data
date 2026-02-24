@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/icon.svg" />
+        <link rel="icon" href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/icon.svg`} />
         <title>Virginia Department of Health Data Commons</title>
         <meta name="description" content="Virginia Department of Health Rural Health Data Dashboard" />
       </head>
