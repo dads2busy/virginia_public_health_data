@@ -30,7 +30,6 @@ export default function DashboardPage() {
 
           {/* Main content area */}
           <main className="flex flex-1 flex-col p-4">
-            <Breadcrumb />
             <DynamicHeading />
 
             <div className="mx-auto mb-4">
@@ -40,6 +39,7 @@ export default function DashboardPage() {
             {/* Map + Info section */}
             <div className="mb-4 grid grid-cols-1 gap-4 lg:grid-cols-12">
               <div className="lg:col-span-7">
+                <Breadcrumb />
                 <Suspense fallback={<div className="flex h-[430px] items-center justify-center bg-gray-100 dark:bg-gray-800">Loading map...</div>}>
                   <DashboardMap />
                 </Suspense>

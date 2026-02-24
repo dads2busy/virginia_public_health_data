@@ -72,12 +72,24 @@ export function MapInner() {
   useEffect(() => {
     const districtCleared = prevDistrict.current && !selectedDistrict
     const countyCleared = prevCounty.current && !selectedCounty
-    if (districtCleared || countyCleared) {
+
+    if (districtCleared) {
+      // Went all the way back to district overview
       setMapBounds(null)
+    } else if (countyCleared && selectedDistrict && geoData.district) {
+      // Went back from tract to county: re-zoom to the selected district
+      const feature = geoData.district.features.find(
+        (f) => f.properties.geoid === selectedDistrict
+      )
+      if (feature) {
+        const layer = L.geoJSON(feature as GeoJSON.Feature)
+        setMapBounds(layer.getBounds())
+      }
     }
+
     prevDistrict.current = selectedDistrict
     prevCounty.current = selectedCounty
-  }, [selectedDistrict, selectedCounty])
+  }, [selectedDistrict, selectedCounty, geoData.district])
 
   // Load GeoJSON shapes
   useEffect(() => {
@@ -98,7 +110,13 @@ export function MapInner() {
         setGeoData((prev) => ({ ...prev, county: data }))
       })
     }
-  }, [shapes, geoData])
+    // Ensure district GeoJSON is available for back-navigation bounds
+    if (selectedDistrict && !geoData.district) {
+      loadGeoJson('/geo/district.geojson').then((data) => {
+        setGeoData((prev) => ({ ...prev, district: data }))
+      })
+    }
+  }, [shapes, geoData, selectedDistrict])
 
   // Compute region values and summary for coloring
   const { regionValues, summary, sortedValues } = useMemo(() => {
@@ -165,12 +183,13 @@ export function MapInner() {
         },
         click: (e: LeafletMouseEvent) => {
           const id = feature.properties.geoid
+          const name = (feature.properties.region_name as string) ?? feature.properties.name ?? null
           if (shapes === 'district') {
             setMapBounds((e.target as L.Polygon).getBounds())
-            setSelectedDistrict(id)
+            setSelectedDistrict(id, name)
           } else if (shapes === 'county') {
             setMapBounds((e.target as L.Polygon).getBounds())
-            setSelectedCounty(id)
+            setSelectedCounty(id, name)
           } else {
             setSelectedRegionId(id)
           }

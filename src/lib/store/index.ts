@@ -42,7 +42,9 @@ export interface DashboardState {
   metricSet: MetricSet
   startingShapes: ShapeLevel
   selectedDistrict: string | null
+  selectedDistrictName: string | null
   selectedCounty: string | null
+  selectedCountyName: string | null
   selectedVariable: string
   selectedYear: number
   regionTypes: { rural: boolean; mixed: boolean; urban: boolean }
@@ -65,8 +67,8 @@ export interface DashboardState {
   // Actions
   setMetricSet: (set: MetricSet) => void
   setStartingShapes: (shapes: ShapeLevel) => void
-  setSelectedDistrict: (id: string | null) => void
-  setSelectedCounty: (id: string | null) => void
+  setSelectedDistrict: (id: string | null, name?: string | null) => void
+  setSelectedCounty: (id: string | null, name?: string | null) => void
   setSelectedVariable: (variable: string) => void
   setSelectedYear: (year: number) => void
   setRegionType: (type: 'rural' | 'mixed' | 'urban', value: boolean) => void
@@ -111,7 +113,9 @@ export const useDashboardStore = create<DashboardState>()(
       metricSet: 'rural_health',
       startingShapes: 'district',
       selectedDistrict: null,
+      selectedDistrictName: null,
       selectedCounty: null,
+      selectedCountyName: null,
       selectedVariable: 'perc_hh_with_broadband',
       selectedYear: 2023,
       regionTypes: { rural: true, mixed: true, urban: true },
@@ -134,10 +138,10 @@ export const useDashboardStore = create<DashboardState>()(
       // Actions
       setMetricSet: (metricSet) => set({ metricSet }),
       setStartingShapes: (startingShapes) =>
-        set({ startingShapes, selectedDistrict: null, selectedCounty: null, selectedRegionId: null }),
-      setSelectedDistrict: (selectedDistrict) =>
-        set({ selectedDistrict, selectedCounty: null, selectedRegionId: selectedDistrict }),
-      setSelectedCounty: (selectedCounty) => set({ selectedCounty, selectedRegionId: selectedCounty }),
+        set({ startingShapes, selectedDistrict: null, selectedDistrictName: null, selectedCounty: null, selectedCountyName: null, selectedRegionId: null }),
+      setSelectedDistrict: (selectedDistrict, name) =>
+        set({ selectedDistrict, selectedDistrictName: name ?? null, selectedCounty: null, selectedCountyName: null, selectedRegionId: selectedDistrict }),
+      setSelectedCounty: (selectedCounty, name) => set({ selectedCounty, selectedCountyName: name ?? null, selectedRegionId: selectedCounty }),
       setSelectedVariable: (selectedVariable) => set({ selectedVariable }),
       setSelectedYear: (selectedYear) => set({ selectedYear }),
       setRegionType: (type, value) =>
@@ -156,7 +160,9 @@ export const useDashboardStore = create<DashboardState>()(
       resetSelection: () =>
         set({
           selectedDistrict: null,
+          selectedDistrictName: null,
           selectedCounty: null,
+          selectedCountyName: null,
           selectedRegionId: null,
           hoveredRegionId: null,
         }),

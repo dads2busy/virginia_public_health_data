@@ -135,7 +135,7 @@ export function ExportDialog() {
         onClick={() => setOpen(!open)}
         className="w-full rounded border border-gray-300 bg-white px-3 py-1.5 text-sm hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700"
       >
-        Download Selected
+        Download Selected Variable and Geography
       </button>
       {open && (
         <div className="mt-2 rounded border border-gray-200 bg-white p-3 dark:border-gray-700 dark:bg-gray-800">
