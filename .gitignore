@@ -12,7 +12,6 @@ renv/*
 
 # Dependencies
 node_modules
-package-lock.json
 
 # Next.js
 .next
@@ -22,8 +21,3 @@ out
 public/data/*.json
 public/geo/*.geojson
 
-# Netlify
-.netlify
-
-# Legacy
-docs/dist
