@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { loadInitialData, loadDataset, isDatasetCached } from '@/lib/data/loader'
+import { loadInitialData, loadDataset, loadRegionTypes, isDatasetCached } from '@/lib/data/loader'
 import { useDashboardStore } from '@/lib/store'
 import { selectShapes } from '@/lib/store/selectors'
 import type { DataLookup, MeasureInfoMap, Datapackage, ShapeLevel } from '@/lib/data/types'
@@ -36,6 +36,7 @@ interface DataContextValue {
   error: string | null
   activeDataset: DataLookup | null
   availableLevels: AvailableLevels
+  regionTypeMap: Record<string, 'rural' | 'mixed' | 'urban'>
 }
 
 const DataContext = createContext<DataContextValue>({
@@ -48,6 +49,7 @@ const DataContext = createContext<DataContextValue>({
   error: null,
   activeDataset: null,
   availableLevels: { district: true, county: true, tract: true },
+  regionTypeMap: {},
 })
 
 export function useData() {
@@ -60,6 +62,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [tract, setTract] = useState<DataLookup | null>(null)
   const [measureInfo, setMeasureInfo] = useState<MeasureInfoMap | null>(null)
   const [datapackage, setDatapackage] = useState<Datapackage | null>(null)
+  const [regionTypeMap, setRegionTypeMap] = useState<Record<string, 'rural' | 'mixed' | 'urban'>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -70,12 +73,13 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   // Load initial data (district + county + metadata)
   useEffect(() => {
-    loadInitialData()
-      .then((data) => {
+    Promise.all([loadInitialData(), loadRegionTypes()])
+      .then(([data, rtMap]) => {
         setDistrict(data.district)
         setCounty(data.county)
         setMeasureInfo(data.measureInfo)
         setDatapackage(data.datapackage)
+        setRegionTypeMap(rtMap)
         setLoading(false)
       })
       .catch((err) => {
@@ -122,7 +126,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   return (
     <DataContext.Provider
-      value={{ district, county, tract, measureInfo, datapackage, loading, error, activeDataset, availableLevels }}
+      value={{ district, county, tract, measureInfo, datapackage, loading, error, activeDataset, availableLevels, regionTypeMap }}
     >
       {children}
     </DataContext.Provider>

@@ -23,8 +23,20 @@ export function RankTable() {
   const setHoveredRegionId = useDashboardStore((s) => s.setHoveredRegionId)
   const setSelectedRegionId = useDashboardStore((s) => s.setSelectedRegionId)
 
-  const { activeDataset } = useData()
+  const regionTypes = useDashboardStore((s) => s.regionTypes)
+
+  const { activeDataset, regionTypeMap } = useData()
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const regionTypeFilter = useMemo(() => {
+    const allOn = regionTypes.rural && regionTypes.mixed && regionTypes.urban
+    if (allOn || Object.keys(regionTypeMap).length === 0) return undefined
+    return (regionId: string) => {
+      const t = regionTypeMap[regionId]
+      if (!t) return true
+      return regionTypes[t]
+    }
+  }, [regionTypes, regionTypeMap])
 
   // Build table data
   const data = useMemo((): RowData[] => {
@@ -32,16 +44,17 @@ export function RankTable() {
 
     const meta = activeDataset._meta
     const timeOffset = selectedYear - meta.time.value[0]
-    const values = getRegionValues(activeDataset, selectedVariable, timeOffset)
+    const values = getRegionValues(activeDataset, selectedVariable, timeOffset, regionTypeFilter)
 
     const rows: RowData[] = []
     for (const regionId of Object.keys(activeDataset)) {
       if (regionId === '_meta') continue
+      if (regionTypeFilter && !regionTypeFilter(regionId)) continue
       rows.push({ regionId, value: values.get(regionId) ?? null })
     }
 
     return rows
-  }, [activeDataset, selectedVariable, selectedYear])
+  }, [activeDataset, selectedVariable, selectedYear, regionTypeFilter])
 
   const columns = useMemo((): ColumnDef<RowData>[] => {
     return [

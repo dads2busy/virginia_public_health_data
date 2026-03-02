@@ -29,6 +29,11 @@ export async function loadDatapackage(): Promise<Datapackage> {
   return fetchJson<Datapackage>(`${basePath}/data/datapackage.json`, 'datapackage')
 }
 
+/** Load region-types.json — a { geoid: "rural"|"mixed"|"urban" } lookup */
+export async function loadRegionTypes(): Promise<Record<string, 'rural' | 'mixed' | 'urban'>> {
+  return fetchJson<Record<string, 'rural' | 'mixed' | 'urban'>>(`${basePath}/data/region-types.json`, 'region_types')
+}
+
 /** Load a GeoJSON shape file */
 export async function loadGeoJson(path: string): Promise<GeoJSONFeatureCollection> {
   const url = path.startsWith('/') ? `${basePath}${path}` : path

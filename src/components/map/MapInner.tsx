@@ -61,7 +61,9 @@ export function MapInner() {
   const selectedDistrict = useDashboardStore((s) => s.selectedDistrict)
   const selectedCounty = useDashboardStore((s) => s.selectedCounty)
 
-  const { activeDataset } = useData()
+  const regionTypes = useDashboardStore((s) => s.regionTypes)
+
+  const { activeDataset, regionTypeMap } = useData()
 
   const [geoData, setGeoData] = useState<Record<string, GeoJSONFeatureCollection>>({})
   const [mapBounds, setMapBounds] = useState<L.LatLngBounds | null>(null)
@@ -118,6 +120,17 @@ export function MapInner() {
     }
   }, [shapes, geoData, selectedDistrict])
 
+  // Build a filter function from the active regionTypes checkboxes
+  const regionTypeFilter = useMemo(() => {
+    const allOn = regionTypes.rural && regionTypes.mixed && regionTypes.urban
+    if (allOn || Object.keys(regionTypeMap).length === 0) return undefined
+    return (regionId: string) => {
+      const t = regionTypeMap[regionId]
+      if (!t) return true // unknown regions pass through
+      return regionTypes[t]
+    }
+  }, [regionTypes, regionTypeMap])
+
   // Compute region values and summary for coloring
   const { regionValues, summary, sortedValues } = useMemo(() => {
     if (!activeDataset) return { regionValues: new Map<string, number>(), summary: null, sortedValues: [] }
@@ -125,12 +138,12 @@ export function MapInner() {
     const meta = activeDataset._meta
     const timeOffset = selectedYear - meta.time.value[0]
 
-    const values = getRegionValues(activeDataset, selectedVariable, timeOffset)
-    const summ = computeSummary(activeDataset, selectedVariable, timeOffset)
+    const values = getRegionValues(activeDataset, selectedVariable, timeOffset, regionTypeFilter)
+    const summ = computeSummary(activeDataset, selectedVariable, timeOffset, regionTypeFilter)
     const sorted = Array.from(values.values()).sort((a, b) => a - b)
 
     return { regionValues: values, summary: summ, sortedValues: sorted }
-  }, [activeDataset, selectedVariable, selectedYear])
+  }, [activeDataset, selectedVariable, selectedYear, regionTypeFilter])
 
   const borderColor = themeDark ? '#475569' : '#94a3b8'
   const hoverBorderColor = themeDark ? '#93c5fd' : '#1e3a5f'
@@ -223,7 +236,7 @@ export function MapInner() {
       <MapController bounds={mapBounds} />
       {currentGeoJson && (
         <GeoJSON
-          key={`${shapes}-${selectedVariable}-${selectedYear}-${paletteName}-${hoveredRegionId}`}
+          key={`${shapes}-${selectedVariable}-${selectedYear}-${paletteName}-${hoveredRegionId}-${regionTypes.rural}-${regionTypes.mixed}-${regionTypes.urban}`}
           data={currentGeoJson}
           style={styleFeature as (feature?: GeoJSON.Feature) => PathOptions}
           onEachFeature={onEachFeature as (feature: GeoJSON.Feature, layer: Layer) => void}

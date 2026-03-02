@@ -299,7 +299,42 @@ async function fetchGeoJsonShapes(): Promise<void> {
   }
 }
 
-async function buildDataset(datasetName: string, csvFile: string): Promise<{
+/**
+ * Fetch the VA entity map and extract a { geoid -> "rural"|"mixed"|"urban" } lookup.
+ *
+ * The entity map is structured as { category: { geoid: { type, ... } } }.
+ * We extract from the "county", "district", and "tract" categories, which
+ * correspond to the three geographic levels in the dashboard.
+ */
+async function buildRegionTypeLookup(): Promise<void> {
+  const outPath = path.join(PUBLIC_DATA_DIR, 'region-types.json')
+
+  console.log('\nFetching entity map for region type classification...')
+  const entityMap = (await fetchJson(ENTITY_MAP_URL)) as Record<string, Record<string, { type?: string }>>
+
+  const lookup: Record<string, 'rural' | 'mixed' | 'urban'> = {}
+  const validTypes = new Set(['rural', 'mixed', 'urban'])
+  const categories = ['county', 'district', 'tract']
+
+  for (const category of categories) {
+    const entities = entityMap[category]
+    if (!entities) continue
+    for (const [id, entity] of Object.entries(entities)) {
+      const t = entity?.type?.toLowerCase()
+      if (t && validTypes.has(t)) {
+        lookup[id] = t as 'rural' | 'mixed' | 'urban'
+      }
+    }
+  }
+
+  fs.writeFileSync(outPath, JSON.stringify(lookup))
+  console.log(`  Wrote region-types.json (${Object.keys(lookup).length} classified regions)`)
+}
+
+async function buildDataset(
+  datasetName: string,
+  csvFile: string
+): Promise<{
   lookup: DataLookup
   fields: FieldInfo[]
   rowCount: number
@@ -428,6 +463,9 @@ async function main() {
   // Fetch GeoJSON shapes
   console.log('\nFetching GeoJSON shapes...')
   await fetchGeoJsonShapes()
+
+  // Build region type lookup
+  await buildRegionTypeLookup()
 
   console.log('\n=== Build complete ===')
 }
