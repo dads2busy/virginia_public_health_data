@@ -117,7 +117,7 @@
       "title": "A three-step floating catchment area method for analyzing spatial access to health services",
       "journal": "International Journal of Geographical Information Science",
       "volume": "26",
-      "page": "1073–1089",
+      "page": "1073\u20131089",
       "doi": "10.1080/13658816.2011.624987"
     },
     "bii21": {
@@ -178,9 +178,9 @@
     "short_name": "{variant} {category}",
     "long_name": "{variant.short_description}",
     "short_description": "{variant}",
-    "long_description": "{variant} 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups {category} Redistribution to non-census geolevels was performed using the redistribute R package.",
+    "long_description": "{variant} 5-year ACS estimates.",
     "statement": "{variant}",
-    "citations": "bii-redist",
+    "citations": "",
     "sources": [
       {
         "name": "American Community Survey",
@@ -188,51 +188,16 @@
         "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
         "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Zip Codes",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::zip-codes/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Supervisor Districts",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::supervisor-districts-5/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Health & Human Service > Human Services Regions",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::human-services-regions/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "MHUD Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::mhud-polygons/about",
-        "date_accessed": 2023,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "Civic Association Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::civic-association-polygons-1/about",
-        "date_accessed": 2021,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
       }
     ],
     "categories": {
-      "_parcels": {
-        "default": "parcels",
-        "long_description": "and parcels, then the value of each block group is divided across all living units within each intersecting parcel. Once parcel-level values are assigned, spatial overlaps are calculated between parcels and target regions such that parcel values can be aggregated to each intersecting target region based on proportion of overlap."
+      "_geo20": {
+        "default": "2020 geographies",
+        "long_description": "Values are provided on Census 2020 geography boundaries. Pre-2020 values have been standardized to 2020 boundaries using area-weighted crosswalks."
       },
-      "_direct": {
-        "default": "direct",
-        "long_description": "and target regions, then the value of each block group is aggregated/disaggregated to any intersecting target region based on proportion of overlap."
+      "_geo10": {
+        "default": "2010 geographies",
+        "long_description": "Values are provided on original Census 2010 geography boundaries for years prior to 2020."
       }
     },
     "variants": {
@@ -467,9 +432,9 @@
     "short_name": "{variant} {category}",
     "long_name": "{variant.short_description}",
     "short_description": "{variant}",
-    "long_description": "{variant} 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups {category} Redistribution to non-census geolevels was performed using the redistribute R package.",
+    "long_description": "{variant} 5-year ACS estimates.",
     "statement": "{variant}",
-    "citations": "bii-redist",
+    "citations": "",
     "sources": [
       {
         "name": "American Community Survey",
@@ -477,51 +442,16 @@
         "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
         "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Zip Codes",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::zip-codes/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Supervisor Districts",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::supervisor-districts-5/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Health & Human Service > Human Services Regions",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::human-services-regions/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "MHUD Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::mhud-polygons/about",
-        "date_accessed": 2023,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "Civic Association Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::civic-association-polygons-1/about",
-        "date_accessed": 2021,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
       }
     ],
     "categories": {
-      "_parcels": {
-        "default": "parcels",
-        "long_description": "and parcels, then the value of each block group is divided across all living units within each intersecting parcel. Once parcel-level values are assigned, spatial overlaps are calculated between parcels and target regions such that parcel values can be aggregated to each intersecting target region based on proportion of overlap."
+      "_geo20": {
+        "default": "2020 geographies",
+        "long_description": "Values are provided on Census 2020 geography boundaries. Pre-2020 values have been standardized to 2020 boundaries using area-weighted crosswalks."
       },
-      "_direct": {
-        "default": "direct",
-        "long_description": "and target regions, then the value of each block group is aggregated to any intersecting target region based on proportion of overlap."
+      "_geo10": {
+        "default": "2010 geographies",
+        "long_description": "Values are provided on original Census 2010 geography boundaries for years prior to 2020."
       }
     },
     "variants": {
@@ -760,7 +690,7 @@
     "data_type": "numeric",
     "equity_category": "Status",
     "layer": "",
-    "long_description": "The percentage of food insecure children. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
+    "long_description": "The percentage of food insecure children. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
     "long_name": "Percentage of food insecure children",
     "measure_type": "percent",
     "short_description": "",
@@ -1017,7 +947,7 @@
     "data_type": "numeric",
     "equity_category": "Availability",
     "layer": "",
-    "long_description": "Dental care availability is based on 2-step enhanced floating catchment areas. This method is an aggregation of dentists per population with ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for dentists (which is the population served by dentists). Provide address data was collected from WebMD’s online Physician Directory. Geographies: Block group (12), Census tract (11), County (5), Civic Associations (51013_ca)",
+    "long_description": "Dental care availability is based on 2-step enhanced floating catchment areas. This method is an aggregation of dentists per population with ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for dentists (which is the population served by dentists). Provide address data was collected from WebMD\u2019s online Physician Directory. Geographies: Block group (12), Census tract (11), County (5), Civic Associations (51013_ca)",
     "long_name": "Dental care availability by count",
     "measure_type": "count",
     "short_description": "",
@@ -1134,10 +1064,10 @@
     "data_type": "decimal",
     "equity_category": "Status",
     "layer": "",
-    "long_description": "Earnings per job are calculated based on the GDP and Personal Income table for the Bureau of Economic Analysis (BEA). Earnings per job is the total earnings divided by total number of jobs. Total earnings is the sum of wages and salaries, supplements to wages and salaries, and proprietor’s income. Wages and salaries refer to the monetary remuneration of employees; it includes compensation of corporate officers; commissions, tips, and bonuses, compensation plans, such as a 401(k) plans; and receipts in kind, or pay-in0kind, that represent income to the recipient. Supplements to wages and salaries consist of employer contributions for employee pension and insurance funds and employer contributions for government social insurance. The proprietor’s income is the current-production income (including the income in kind) of sole proprietorships and partnerships and of tax-exempt cooperatives. Geographies: County(5), Health Districts (51_hd)",
+    "long_description": "Earnings per job are calculated based on the GDP and Personal Income table for the Bureau of Economic Analysis (BEA). Earnings per job is the total earnings divided by total number of jobs. Total earnings is the sum of wages and salaries, supplements to wages and salaries, and proprietor\u2019s income. Wages and salaries refer to the monetary remuneration of employees; it includes compensation of corporate officers; commissions, tips, and bonuses, compensation plans, such as a 401(k) plans; and receipts in kind, or pay-in0kind, that represent income to the recipient. Supplements to wages and salaries consist of employer contributions for employee pension and insurance funds and employer contributions for government social insurance. The proprietor\u2019s income is the current-production income (including the income in kind) of sole proprietorships and partnerships and of tax-exempt cooperatives. Geographies: County(5), Health Districts (51_hd)",
     "long_name": "Earnings per job",
     "measure_type": "",
-    "short_description": "Earnings per job are calculated based on the GDP and Personal Income table for the Bureau of Economic Analysis (BEA). Earnings per job is the total earnings divided by total number of jobs. Total earnings is the sum of wages and salaries, supplements to wages and salaries, and proprietor’s income. Wages and salaries refer to the monetary remuneration of employees; it includes compensation of corporate officers; commissions, tips, and bonuses, compensation plans, such as a 401(k) plans; and receipts in kind, or pay-in0kind, that represent income to the recipient. Supplements to wages and salaries consist of employer contributions for employee pension and insurance funds and employer contributions for government social insurance. The proprietor’s income is the current-production income (including the income in kind) of sole proprietorships and partnerships and of tax-exempt cooperatives. Geographies: County(5), Health Districts (51_hd)",
+    "short_description": "Earnings per job are calculated based on the GDP and Personal Income table for the Bureau of Economic Analysis (BEA). Earnings per job is the total earnings divided by total number of jobs. Total earnings is the sum of wages and salaries, supplements to wages and salaries, and proprietor\u2019s income. Wages and salaries refer to the monetary remuneration of employees; it includes compensation of corporate officers; commissions, tips, and bonuses, compensation plans, such as a 401(k) plans; and receipts in kind, or pay-in0kind, that represent income to the recipient. Supplements to wages and salaries consist of employer contributions for employee pension and insurance funds and employer contributions for government social insurance. The proprietor\u2019s income is the current-production income (including the income in kind) of sole proprietorships and partnerships and of tax-exempt cooperatives. Geographies: County(5), Health Districts (51_hd)",
     "short_name": "Earnings per job",
     "sources": [
       {
@@ -1419,7 +1349,7 @@
     "data_type": "numeric",
     "equity_category": "Access",
     "layer": "",
-    "long_description": "Share of tract population that are low income individuals beyond 1 mile from supermarket. The criteria for identifying a census tract as low income are from the Department of Treasury’s New Markets Tax Credit (NMTC) program. This program defines a low-income census tract as any tract where:The tract’s poverty rate is 20 percent or greater; or The tract’s median family income is less than or equal to 80 percent of the State-wide median family income; or The tract is in a metropolitan area and has a median family income less than or equal to 80 percent of the metropolitan area's median family income. low access to healthy food: being far from a supermarket, supercenter, or large grocery store. A census tract is considered to have low access if a significant number or share of individuals in the tract is far from a supermarket. Three measures of food access based on distance to a supermarket. If 1 mile from the supermarket information is not available, use half a mile information. NULL corresonds to zero values.",
+    "long_description": "Share of tract population that are low income individuals beyond 1 mile from supermarket. The criteria for identifying a census tract as low income are from the Department of Treasury\u2019s New Markets Tax Credit (NMTC) program. This program defines a low-income census tract as any tract where:The tract\u2019s poverty rate is 20 percent or greater; or The tract\u2019s median family income is less than or equal to 80 percent of the State-wide median family income; or The tract is in a metropolitan area and has a median family income less than or equal to 80 percent of the metropolitan area's median family income. low access to healthy food: being far from a supermarket, supercenter, or large grocery store. A census tract is considered to have low access if a significant number or share of individuals in the tract is far from a supermarket. Three measures of food access based on distance to a supermarket. If 1 mile from the supermarket information is not available, use half a mile information. NULL corresonds to zero values.",
     "long_name": "Food Access",
     "measure_type": "percent",
     "short_description": "Low access, low-income population at 1 mile from supermarket.",
@@ -1476,9 +1406,9 @@
     "short_name": "{variant} {category}",
     "long_name": "{variant.short_description}",
     "short_description": "{variant}",
-    "long_description": "{variant} 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups {category} Redistribution to non-census geolevels was performed using the redistribute R package.",
+    "long_description": "{variant} 5-year ACS estimates.",
     "statement": "{variant}",
-    "citations": "bii-redist",
+    "citations": "",
     "sources": [
       {
         "name": "American Community Survey",
@@ -1486,51 +1416,16 @@
         "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
         "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Zip Codes",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::zip-codes/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Supervisor Districts",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::supervisor-districts-5/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Health & Human Service > Human Services Regions",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::human-services-regions/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "MHUD Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::mhud-polygons/about",
-        "date_accessed": 2023,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "Civic Association Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::civic-association-polygons-1/about",
-        "date_accessed": 2021,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
       }
     ],
     "categories": {
-      "_parcels": {
-        "default": "parcels",
-        "long_description": "and parcels, then the value of each block group is divided across all living units within each intersecting parcel. Once parcel-level values are assigned, spatial overlaps are calculated between parcels and target regions such that parcel values can be aggregated to each intersecting target region based on proportion of overlap."
+      "_geo20": {
+        "default": "2020 geographies",
+        "long_description": "Values are provided on Census 2020 geography boundaries. Pre-2020 values have been standardized to 2020 boundaries using area-weighted crosswalks."
       },
-      "_direct": {
-        "default": "direct",
-        "long_description": "and target regions, then the value of each block group is aggregated/disaggregated to any intersecting target region based on proportion of overlap."
+      "_geo10": {
+        "default": "2010 geographies",
+        "long_description": "Values are provided on original Census 2010 geography boundaries for years prior to 2020."
       }
     },
     "variants": {
@@ -1922,9 +1817,9 @@
     "short_name": "{variant} {category}",
     "long_name": "{variant.short_description}",
     "short_description": "{variant}",
-    "long_description": "{variant} 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups {category} Redistribution to non-census geolevels was performed using the redistribute R package.",
+    "long_description": "{variant} 5-year ACS estimates.",
     "statement": "{variant}",
-    "citations": "bii-redist",
+    "citations": "",
     "sources": [
       {
         "name": "American Community Survey",
@@ -1932,51 +1827,16 @@
         "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
         "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Zip Codes",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::zip-codes/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Supervisor Districts",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::supervisor-districts-5/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Health & Human Service > Human Services Regions",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::human-services-regions/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "MHUD Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::mhud-polygons/about",
-        "date_accessed": 2023,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "Civic Association Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::civic-association-polygons-1/about",
-        "date_accessed": 2021,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
       }
     ],
     "categories": {
-      "_parcels": {
-        "default": "parcels",
-        "long_description": "and parcels, then the value of each block group is divided across all living units within each intersecting parcel. Once parcel-level values are assigned, spatial overlaps are calculated between parcels and target regions such that parcel values can be aggregated to each intersecting target region based on proportion of overlap."
+      "_geo20": {
+        "default": "2020 geographies",
+        "long_description": "Values are provided on Census 2020 geography boundaries. Pre-2020 values have been standardized to 2020 boundaries using area-weighted crosswalks."
       },
-      "_direct": {
-        "default": "direct",
-        "long_description": "and target regions, then the value of each block group is aggregated/disaggregated to any intersecting target region based on proportion of overlap."
+      "_geo10": {
+        "default": "2010 geographies",
+        "long_description": "Values are provided on original Census 2010 geography boundaries for years prior to 2020."
       }
     },
     "variants": {
@@ -13940,7 +13800,7 @@
     "data_type": "numeric",
     "equity_category": "Status",
     "layer": "",
-    "long_description": "The number of food insecure children. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
+    "long_description": "The number of food insecure children. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
     "long_name": "Count of food insecure children",
     "measure_type": "count",
     "short_description": "",
@@ -13968,7 +13828,7 @@
     "data_type": "numeric",
     "equity_category": "",
     "layer": "",
-    "long_description": "Estimated number of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America’s Map the Meal Gap website. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
+    "long_description": "Estimated number of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America\u2019s Map the Meal Gap website. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
     "long_name": "Estimated number of total people in food insecure households",
     "measure_type": "count",
     "short_description": "",
@@ -14029,7 +13889,7 @@
     "data_type": "numeric",
     "equity_category": "Availability",
     "layer": "",
-    "long_description": "OBGYN care availability is based on 2-step floating catchment areas. This method is an aggregation of OBGYNS per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for OBGYNs (population served by OBGYNs).  Provider address data was collected from WebMD’s online physician directory. Geographies: Block group (12), Census tract (11), County (5), Health Districts (51_hd), Civic Associations (51013_ca)",
+    "long_description": "OBGYN care availability is based on 2-step floating catchment areas. This method is an aggregation of OBGYNS per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for OBGYNs (population served by OBGYNs).  Provider address data was collected from WebMD\u2019s online physician directory. Geographies: Block group (12), Census tract (11), County (5), Health Districts (51_hd), Civic Associations (51013_ca)",
     "long_name": "OBGYN care availability by count",
     "measure_type": "count",
     "short_description": "",
@@ -14118,7 +13978,7 @@
     "data_type": "numeric",
     "equity_category": "Availability",
     "layer": "",
-    "long_description": "Pediatric care availability is based on 2-step floating catchment areas. This method is an aggregation of pediatricians per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for pediatricians (population under 16). Provider address data was collected from WebMD’s online physician directory. Geographies: Block group (12), Census tract (11), County (5), Civic Association, (51013_ca), Health Districts (51_hd)",
+    "long_description": "Pediatric care availability is based on 2-step floating catchment areas. This method is an aggregation of pediatricians per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for pediatricians (population under 16). Provider address data was collected from WebMD\u2019s online physician directory. Geographies: Block group (12), Census tract (11), County (5), Civic Association, (51013_ca), Health Districts (51_hd)",
     "long_name": "Pediatric care availability by count",
     "measure_type": "count",
     "short_description": "",
@@ -14146,7 +14006,7 @@
     "data_type": "decimal",
     "equity_category": "",
     "layer": "",
-    "long_description": "The percentage of households whose monthly housing costs from mortgage payments or rent account for 30% or more of their household’s income in the past 12 months.",
+    "long_description": "The percentage of households whose monthly housing costs from mortgage payments or rent account for 30% or more of their household\u2019s income in the past 12 months.",
     "long_name": "Percentage of Households Whose Mortgage Payments or Rent Account for 30% or More of Their Household Income",
     "measure_type": "percent",
     "short_description": "",
@@ -14202,7 +14062,7 @@
     "data_type": "decimal",
     "equity_category": "",
     "layer": "",
-    "long_description": "The percentage of renter-occupied households whose monthly housing costs from rent payments account for 30% or more of their household’s income in the past 12 months.",
+    "long_description": "The percentage of renter-occupied households whose monthly housing costs from rent payments account for 30% or more of their household\u2019s income in the past 12 months.",
     "long_name": "Percentage of Renter-Occupied Households Whose Rent Accounts for 30% or More of Their Household Income",
     "measure_type": "percent",
     "short_description": "",
@@ -14699,7 +14559,7 @@
     "data_type": "numeric",
     "equity_category": "",
     "layer": "",
-    "long_description": "Estimated percentage of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America’s Map the Meal Gap website. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
+    "long_description": "Estimated percentage of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America\u2019s Map the Meal Gap website. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
     "long_name": "Estimated percentage of total people in food insecure households",
     "measure_type": "percent",
     "short_description": "",
@@ -14980,7 +14840,7 @@
     "data_type": "numeric",
     "equity_category": "Availability",
     "layer": "",
-    "long_description": "Primary care availability is based on 2-step floating catchment areas. This method is an aggregation of physicians per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for physicians (population served by physicians). Provider address data was collected from WebMD’s online physician directory. Geographies: Block group (12), Census tract (11), County (5), Health Districts (51_hd), Civic Associations (51013_ca)",
+    "long_description": "Primary care availability is based on 2-step floating catchment areas. This method is an aggregation of physicians per population ratios weighted by distance or travel time in each catchment area (area within which a provider is accessible). Weights are defined as the demand for physicians (population served by physicians). Provider address data was collected from WebMD\u2019s online physician directory. Geographies: Block group (12), Census tract (11), County (5), Health Districts (51_hd), Civic Associations (51013_ca)",
     "long_name": "Primary care availability by count",
     "measure_type": "count",
     "short_description": "",
@@ -15009,9 +14869,9 @@
     "short_name": "{variant} {category}",
     "long_name": "{variant.short_description}",
     "short_description": "{variant}",
-    "long_description": "{variant} 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups {category} Redistribution to non-census geolevels was performed using the redistribute R package.",
+    "long_description": "{variant} 5-year ACS estimates.",
     "statement": "{variant}",
-    "citations": "bii-redist",
+    "citations": "",
     "sources": [
       {
         "name": "American Community Survey",
@@ -15019,51 +14879,16 @@
         "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
         "date_accessed": 2023,
         "url": "https://www.census.gov/programs-surveys/acs.html"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Zip Codes",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::zip-codes/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Boundaries > Supervisor Districts",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::supervisor-districts-5/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Fairfax County Geospatial Data",
-        "location": "Health & Human Service > Human Services Regions",
-        "location_url": "https://data-fairfaxcountygis.opendata.arcgis.com/datasets/Fairfaxcountygis::human-services-regions/about",
-        "date_accessed": 2022,
-        "url": "https://data-fairfaxcountygis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "MHUD Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::mhud-polygons/about",
-        "date_accessed": 2023,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
-      },
-      {
-        "name": "Arlington County GIS Open Data",
-        "location": "Civic Association Polygons",
-        "location_url": "https://gisdata-arlgis.opendata.arcgis.com/datasets/ArlGIS::civic-association-polygons-1/about",
-        "date_accessed": 2021,
-        "url": "https://gisdata-arlgis.opendata.arcgis.com/"
       }
     ],
     "categories": {
-      "_parcels": {
-        "default": "parcels",
-        "long_description": "and parcels, then the value of each block group is divided across all living units within each intersecting parcel. Once parcel-level values are assigned, spatial overlaps are calculated between parcels and target regions such that parcel values can be aggregated to each intersecting target region based on proportion of overlap."
+      "_geo20": {
+        "default": "2020 geographies",
+        "long_description": "Values are provided on Census 2020 geography boundaries. Pre-2020 values have been standardized to 2020 boundaries using area-weighted crosswalks."
       },
-      "_direct": {
-        "default": "direct",
-        "long_description": "and target regions, then the value of each block group is aggregated/disaggregated to any intersecting target region based on proportion of overlap."
+      "_geo10": {
+        "default": "2010 geographies",
+        "long_description": "Values are provided on original Census 2010 geography boundaries for years prior to 2020."
       }
     },
     "variants": {
