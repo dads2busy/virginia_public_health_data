@@ -6,13 +6,12 @@ import { selectShapes, selectShowCountyInput } from '@/lib/store/selectors'
 import { useData } from '@/components/DataProvider'
 import { resolveVariables, groupByCategory } from '@/lib/data/measure-info-resolver'
 import type { ShapeLevel } from '@/lib/data/types'
+import { VariableDropdown } from '@/components/shared/VariableDropdown'
 
 export function FilterMenu() {
   const filterOpen = useDashboardStore((s) => s.filterOpen)
   const startingShapes = useDashboardStore((s) => s.startingShapes)
   const setStartingShapes = useDashboardStore((s) => s.setStartingShapes)
-  const selectedDistrict = useDashboardStore((s) => s.selectedDistrict)
-  const setSelectedDistrict = useDashboardStore((s) => s.setSelectedDistrict)
   const selectedCounty = useDashboardStore((s) => s.selectedCounty)
   const setSelectedCounty = useDashboardStore((s) => s.setSelectedCounty)
   const selectedVariable = useDashboardStore((s) => s.selectedVariable)
@@ -22,17 +21,9 @@ export function FilterMenu() {
   const shapes = useDashboardStore(selectShapes)
   const showCountyInput = useDashboardStore(selectShowCountyInput)
 
-  const { district, county, measureInfo, availableLevels } = useData()
+  const { county, measureInfo, availableLevels } = useData()
 
-  // Get district IDs for the combobox
-  const districtIds = useMemo(() => {
-    if (!district) return []
-    return Object.keys(district)
-      .filter((k) => k !== '_meta')
-      .sort()
-  }, [district])
-
-  // Get county IDs, optionally filtered by selected district
+  // Get county IDs
   const countyIds = useMemo(() => {
     if (!county) return []
     return Object.keys(county)
@@ -53,7 +44,7 @@ export function FilterMenu() {
   if (!filterOpen) return null
 
   return (
-    <div className="border-b border-slate-700 bg-[#0f1b35] px-4 py-3">
+    <div className="border-b border-slate-700 px-4 py-3" style={{ backgroundColor: 'var(--surface-dark)' }}>
       <div className="flex flex-wrap items-end gap-4">
         {/* Starting Layer */}
         <div>
@@ -80,23 +71,6 @@ export function FilterMenu() {
               )
             })}
           </div>
-        </div>
-
-        {/* Health District */}
-        <div>
-          <label className="mb-1 block text-xs font-medium text-slate-400">Health District</label>
-          <select
-            value={selectedDistrict || ''}
-            onChange={(e) => setSelectedDistrict(e.target.value || null)}
-            className="rounded border border-slate-600 bg-slate-700 px-3 py-1 text-sm text-slate-200"
-          >
-            <option value="">All Districts</option>
-            {districtIds.map((id) => (
-              <option key={id} value={id}>
-                {id}
-              </option>
-            ))}
-          </select>
         </div>
 
         {/* County (conditional) */}
@@ -139,21 +113,11 @@ export function FilterMenu() {
         {/* Variable */}
         <div className="min-w-[200px] flex-1">
           <label className="mb-1 block text-xs font-medium text-slate-400">Variable</label>
-          <select
+          <VariableDropdown
             value={selectedVariable}
-            onChange={(e) => setSelectedVariable(e.target.value)}
-            className="w-full rounded border border-slate-600 bg-slate-700 px-3 py-1 text-sm text-slate-200"
-          >
-            {variableOptions.map((group) => (
-              <optgroup key={group.category} label={group.category}>
-                {group.variables.map((v) => (
-                  <option key={v.name} value={v.name}>
-                    {v.label}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
+            onChange={setSelectedVariable}
+            options={variableOptions}
+          />
         </div>
       </div>
     </div>
