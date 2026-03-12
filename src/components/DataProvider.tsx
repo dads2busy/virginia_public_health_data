@@ -1,10 +1,10 @@
 'use client'
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { loadInitialData, loadDataset, loadRegionTypes, isDatasetCached } from '@/lib/data/loader'
+import { loadInitialData, loadDataset, loadRegionTypes, loadRegionNames, loadNarratives, loadCorrelations, isDatasetCached } from '@/lib/data/loader'
 import { useDashboardStore } from '@/lib/store'
 import { selectShapes } from '@/lib/store/selectors'
-import type { DataLookup, MeasureInfoMap, Datapackage, ShapeLevel } from '@/lib/data/types'
+import type { DataLookup, MeasureInfoMap, Datapackage, NarrativeMap, CorrelationMatrix, ShapeLevel } from '@/lib/data/types'
 
 /** Check if a variable has data at a given level using the datapackage metadata */
 function variableAvailableAtLevel(
@@ -32,11 +32,14 @@ interface DataContextValue {
   tract: DataLookup | null
   measureInfo: MeasureInfoMap | null
   datapackage: Datapackage | null
+  narratives: NarrativeMap
+  correlations: CorrelationMatrix
   loading: boolean
   error: string | null
   activeDataset: DataLookup | null
   availableLevels: AvailableLevels
   regionTypeMap: Record<string, 'rural' | 'mixed' | 'urban'>
+  regionNameMap: Record<string, string>
 }
 
 const DataContext = createContext<DataContextValue>({
@@ -45,11 +48,14 @@ const DataContext = createContext<DataContextValue>({
   tract: null,
   measureInfo: null,
   datapackage: null,
+  narratives: {},
+  correlations: {},
   loading: true,
   error: null,
   activeDataset: null,
   availableLevels: { district: true, county: true, tract: true },
   regionTypeMap: {},
+  regionNameMap: {},
 })
 
 export function useData() {
@@ -62,7 +68,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const [tract, setTract] = useState<DataLookup | null>(null)
   const [measureInfo, setMeasureInfo] = useState<MeasureInfoMap | null>(null)
   const [datapackage, setDatapackage] = useState<Datapackage | null>(null)
+  const [narratives, setNarratives] = useState<NarrativeMap>({})
+  const [correlations, setCorrelations] = useState<CorrelationMatrix>({})
   const [regionTypeMap, setRegionTypeMap] = useState<Record<string, 'rural' | 'mixed' | 'urban'>>({})
+  const [regionNameMap, setRegionNameMap] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -73,13 +82,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   // Load initial data (district + county + metadata)
   useEffect(() => {
-    Promise.all([loadInitialData(), loadRegionTypes()])
-      .then(([data, rtMap]) => {
+    Promise.all([loadInitialData(), loadRegionTypes(), loadRegionNames(), loadNarratives(), loadCorrelations()])
+      .then(([data, rtMap, rnMap, narr, corr]) => {
         setDistrict(data.district)
         setCounty(data.county)
         setMeasureInfo(data.measureInfo)
         setDatapackage(data.datapackage)
         setRegionTypeMap(rtMap)
+        setRegionNameMap(rnMap)
+        setNarratives(narr)
+        setCorrelations(corr)
         setLoading(false)
       })
       .catch((err) => {
@@ -126,7 +138,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
   return (
     <DataContext.Provider
-      value={{ district, county, tract, measureInfo, datapackage, loading, error, activeDataset, availableLevels, regionTypeMap }}
+      value={{ district, county, tract, measureInfo, datapackage, narratives, correlations, loading, error, activeDataset, availableLevels, regionTypeMap, regionNameMap }}
     >
       {children}
     </DataContext.Provider>

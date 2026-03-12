@@ -157,3 +157,9 @@ export type SummarySelection = 'dataset' | 'filtered' | 'all'
 
 /** Table scroll behavior */
 export type ScrollBehavior = 'instant' | 'smooth' | 'auto'
+
+/** AI narrative summaries keyed by variable name */
+export type NarrativeMap = Record<string, string>
+
+/** Correlation matrix: { level: { "varA|varB": r } } */
+export type CorrelationMatrix = Record<string, Record<string, number>>

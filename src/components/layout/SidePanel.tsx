@@ -26,22 +26,24 @@ export function SidePanel() {
 
   return (
     <aside className="hidden w-64 shrink-0 border-r bg-gray-50 dark:border-gray-700 dark:bg-gray-900 lg:block">
-      {/* Metric set tabs */}
-      <div className="border-b dark:border-gray-700">
-        <select
-          value={metricSet}
-          onChange={(e) => setMetricSet(e.target.value as MetricSet)}
-          className="w-full border-none bg-transparent px-4 py-3 text-sm font-medium focus:outline-none"
-        >
-          {metricSetTabs.map((tab) => (
-            <option key={tab.key} value={tab.key}>
-              {tab.label}
-            </option>
-          ))}
-        </select>
-        <div className="px-4 pb-2 text-center text-xs text-gray-500 dark:text-gray-400">
-          {metricSetTabs.find((t) => t.key === metricSet)?.subtitle}
-        </div>
+      {/* Metric set selector */}
+      <div className="border-b bg-red-50 p-2 dark:border-gray-700 dark:bg-red-950/40">
+        <p className="mb-1 text-center text-xs font-semibold text-gray-500 dark:text-gray-400">
+          Priority Metrics for:
+        </p>
+        {metricSetTabs.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setMetricSet(tab.key)}
+            className={`w-full rounded px-3 py-2 text-left text-sm font-medium transition-colors ${
+              metricSet === tab.key
+                ? 'bg-red-800 text-white'
+                : 'text-gray-700 hover:bg-red-100 dark:text-gray-300 dark:hover:bg-red-950/60'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {/* Variable buttons */}

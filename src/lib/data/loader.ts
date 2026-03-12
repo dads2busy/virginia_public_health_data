@@ -1,4 +1,4 @@
-import type { DataLookup, MeasureInfoMap, Datapackage, GeoJSONFeatureCollection, DatasetName } from './types'
+import type { DataLookup, MeasureInfoMap, Datapackage, GeoJSONFeatureCollection, DatasetName, NarrativeMap, CorrelationMatrix } from './types'
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const dataCache = new Map<string, unknown>()
@@ -29,9 +29,36 @@ export async function loadDatapackage(): Promise<Datapackage> {
   return fetchJson<Datapackage>(`${basePath}/data/datapackage.json`, 'datapackage')
 }
 
+/** Load narratives.json — AI-generated variable summaries */
+export async function loadNarratives(): Promise<NarrativeMap> {
+  try {
+    return await fetchJson<NarrativeMap>(`${basePath}/data/narratives.json`, 'narratives')
+  } catch {
+    return {}
+  }
+}
+
 /** Load region-types.json — a { geoid: "rural"|"mixed"|"urban" } lookup */
 export async function loadRegionTypes(): Promise<Record<string, 'rural' | 'mixed' | 'urban'>> {
   return fetchJson<Record<string, 'rural' | 'mixed' | 'urban'>>(`${basePath}/data/region-types.json`, 'region_types')
+}
+
+/** Load correlations.json — pre-computed pairwise correlations */
+export async function loadCorrelations(): Promise<CorrelationMatrix> {
+  try {
+    return await fetchJson<CorrelationMatrix>(`${basePath}/data/correlations.json`, 'correlations')
+  } catch {
+    return {}
+  }
+}
+
+/** Load region-names.json — a { geoid: "Region Name" } lookup */
+export async function loadRegionNames(): Promise<Record<string, string>> {
+  try {
+    return await fetchJson<Record<string, string>>(`${basePath}/data/region-names.json`, 'region_names')
+  } catch {
+    return {}
+  }
 }
 
 /** Load a GeoJSON shape file */

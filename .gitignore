@@ -10,6 +10,12 @@ renv/*
 # OS
 .DS_Store
 
+# Environment
+.env.local
+
+# Caches
+data/.narrative-cache.json
+
 # Dependencies
 node_modules
 

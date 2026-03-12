@@ -17,6 +17,8 @@ import { DynamicHeading } from '@/components/shared/DynamicHeading'
 import { YearSelector } from '@/components/shared/YearSelector'
 import { ExportDialog } from '@/components/shared/ExportDialog'
 import { DataProvider } from '@/components/DataProvider'
+import { AskGeminiButton } from '@/components/chat/AskGeminiButton'
+import { ChatDrawer } from '@/components/chat/ChatDrawer'
 
 export default function DashboardPage() {
   return (
@@ -48,6 +50,7 @@ export default function DashboardPage() {
                 <VariableInfo />
                 <RegionInfo />
                 <SummaryInfo />
+                <AskGeminiButton />
                 <ExportDialog />
               </div>
             </div>
@@ -67,6 +70,7 @@ export default function DashboardPage() {
           </main>
         </div>
       </div>
+      <ChatDrawer />
     </DataProvider>
   )
 }

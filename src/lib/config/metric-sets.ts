@@ -17,11 +17,11 @@ export interface MetricSection {
 export const ruralHealthSections: MetricSection[] = [
   {
     heading: 'Education',
-    buttons: [{ label: 'Child Readiness', variable: 'median_read_pass_rate' }],
+    buttons: [{ label: 'Child Readiness', variable: 'mean_read_pass_rate' }],
   },
   {
     heading: 'Broadband',
-    buttons: [{ label: 'Households with Broadband', variable: 'perc_hh_with_broadband' }],
+    buttons: [{ label: 'Households with Broadband', variable: 'perc_hh_with_broadband_geo20' }],
   },
   {
     heading: 'Nutrition and Food Security',
@@ -82,7 +82,7 @@ export const hoiSections: MetricSection[] = [
       { label: 'Geographic Mobility', variable: 'perc_moving_geo20' },
       { label: 'Population Density', variable: 'population_density_geo20' },
       { label: 'Segregation', variable: 'segregation_indicator_geo20' },
-      { label: 'Walkability', variable: 'walkability_index_raw' },
+      { label: 'Walkability', variable: 'walkability_index_geo20' },
       { label: 'Affordability (H&T)', variable: 'affordability_index_geo20' },
       { label: 'Environmental Hazard Index', variable: 'environmental_hazard_index' },
       { label: 'Care Access (VDH)', variable: 'access_care_indicator_geo20' },
@@ -109,7 +109,7 @@ export const unitProfilesSections: MetricSection[] = [
       { label: 'Hispanic Population', variable: 'race_hispanic_or_latino_percent_direct' },
       { label: 'Median Household Income', variable: 'median_household_income' },
       { label: 'Children Raised by Grandparents', variable: 'perc_children_raised_by_GPs' },
-      { label: 'Without vehicle', variable: 'perc_no_vehicle' },
+      { label: 'Without vehicle', variable: 'perc_no_vehicle_geo20' },
     ],
   },
   {

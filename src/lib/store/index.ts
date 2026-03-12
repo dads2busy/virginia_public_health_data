@@ -64,6 +64,10 @@ export interface DashboardState {
   // Filter menu visibility
   filterOpen: boolean
 
+  // Chat state
+  chatOpen: boolean
+  chatMessages: { role: 'user' | 'model'; text: string }[]
+
   // Actions
   setMetricSet: (set: MetricSet) => void
   setStartingShapes: (shapes: ShapeLevel) => void
@@ -78,6 +82,9 @@ export interface DashboardState {
   setExportTableFormat: (format: TableFormat) => void
   setExportFileFormat: (format: FileFormat) => void
   setFilterOpen: (open: boolean) => void
+  setChatOpen: (open: boolean) => void
+  addChatMessage: (msg: { role: 'user' | 'model'; text: string }) => void
+  clearChatMessages: () => void
   resetSelection: () => void
 }
 
@@ -110,13 +117,13 @@ export const useDashboardStore = create<DashboardState>()(
   persist(
     (set) => ({
       // Primary inputs
-      metricSet: 'rural_health',
+      metricSet: 'hoi',
       startingShapes: 'district',
       selectedDistrict: null,
       selectedDistrictName: null,
       selectedCounty: null,
       selectedCountyName: null,
-      selectedVariable: 'perc_hh_with_broadband',
+      selectedVariable: 'health_opportunity_indicator',
       selectedYear: 2023,
       regionTypes: { rural: true, mixed: true, urban: true },
 
@@ -134,6 +141,10 @@ export const useDashboardStore = create<DashboardState>()(
 
       // Filter
       filterOpen: true,
+
+      // Chat
+      chatOpen: false,
+      chatMessages: [],
 
       // Actions
       setMetricSet: (metricSet) => set({ metricSet }),
@@ -157,6 +168,9 @@ export const useDashboardStore = create<DashboardState>()(
       setExportTableFormat: (exportTableFormat) => set({ exportTableFormat }),
       setExportFileFormat: (exportFileFormat) => set({ exportFileFormat }),
       setFilterOpen: (filterOpen) => set({ filterOpen }),
+      setChatOpen: (chatOpen) => set({ chatOpen }),
+      addChatMessage: (msg) => set((state) => ({ chatMessages: [...state.chatMessages, msg] })),
+      clearChatMessages: () => set({ chatMessages: [] }),
       resetSelection: () =>
         set({
           selectedDistrict: null,
