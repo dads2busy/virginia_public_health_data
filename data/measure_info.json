@@ -1824,6 +1824,125 @@
         "unit": "",
         "variants": ""
     },
+    "employment_access_index_geo20": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Employment/Workforce Development",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "The Employment Access Index quantifies how easily residents of a community can reach jobs, using a gravity model that accounts for both the number of nearby jobs and the distance to them. Communities with low employment access face longer commutes, higher transportation costs, and fewer economic opportunities, all of which contribute to financial instability and reduced quality of life. This measure is a key input to the VDH Health Opportunity Index, where it contributes to the Economic Opportunity profile.",
+        "long_name": "Employment Access Index",
+        "measure_type": "index",
+        "provenance": "Computed using a gravity model from LEHD-LODES Workplace Area Characteristics (WAC) job counts and TIGER/Line Census block centroids. Employment intensity is calculated as the sum of jobs divided by the square of the distance (in miles) from each Census block group to all nearby employment locations, using a hierarchical distance approximation: individual block-level job counts within 34 miles, tract-level aggregates from 34 to 165 miles, and county-level aggregates from 165 to 200 miles. Inspired by the Center for Neighborhood Technology (CNT) H+T Affordability Index gravity model approach.",
+        "short_description": "Gravity-based index of employment accessibility measuring proximity to jobs, weighted by distance decay.",
+        "short_name": "Employment Access",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "LODES WAC S000 JT00, column C000 (total jobs per Census block)",
+                "location_url": "https://lehd.ces.census.gov/data/lodes/LODES8/",
+                "name": "LEHD-LODES Workplace Area Characteristics",
+                "url": "https://lehd.ces.census.gov/data/lodes/"
+            },
+            {
+                "date_accessed": 2026,
+                "location": "TABBLOCK20, BG, TRACT, COUNTY shapefiles (INTPTLAT, INTPTLON fields)",
+                "location_url": "https://www2.census.gov/geo/tiger/TIGER2020/",
+                "name": "TIGER/Line Shapefiles (2020 Census Geography)",
+                "url": "https://www2.census.gov/geo/tiger/TIGER2020/"
+            }
+        ],
+        "statement": "The employment access index for {features.name} is {value}.",
+        "type": "index",
+        "unit": "index score",
+        "variants": ""
+    },
+    "emp_rate_geo20": {
+        "aggregation_method": "percent",
+        "categories": "",
+        "category": "Employment/Workforce Development",
+        "citations": "",
+        "data_type": "decimal",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "The employment rate measures the share of the civilian labor force that is currently working. High employment rates indicate a healthy local labor market with sufficient job opportunities. Low rates may reflect structural economic challenges, skills mismatches, or barriers to employment such as transportation or childcare access.",
+        "long_name": "Percentage civilian employed",
+        "measure_type": "",
+        "provenance": "Computed from ACS 5-year estimates, table B23025 (Employment Status for the Population 16 Years and Over). Employment rate calculated as B23025_004 (employed) / B23025_003 (civilian labor force) \u00d7 100.",
+        "short_description": "Percentage of the civilian workforce population that is employed.",
+        "short_name": "Percentage employed",
+        "sources": [
+            {
+                "name": "American Community Survey",
+                "location": "5-Year estimates, table B23025, via the API",
+                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+                "date_accessed": "2023",
+                "url": "https://www.census.gov/programs-surveys/acs.html"
+            }
+        ],
+        "statement": "{value} of the population in {region_name} is employed.",
+        "type": "percent",
+        "unit": "individual",
+        "variants": ""
+    },
+    "tot_employment": {
+        "aggregation_method": "count",
+        "categories": "",
+        "category": "Employment/Workforce Development",
+        "citations": "",
+        "data_type": "integer",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total employment counts the number of full-time and part-time jobs in a county, including wage and salary jobs plus proprietors. This measure reflects the overall size of a local economy and its capacity to provide employment opportunities for residents.",
+        "long_name": "Total Employment",
+        "measure_type": "",
+        "provenance": "From Bureau of Economic Analysis (BEA) Regional Economic Accounts, Total full-time and part-time employment by county.",
+        "short_description": "Total number of full-time and part-time jobs in the county, from BEA regional accounts.",
+        "short_name": "Total Employment",
+        "sources": [
+            {
+                "date_accessed": "2021",
+                "location": "",
+                "location_url": "",
+                "name": "Bureau of Economic Analysis",
+                "url": "https://apps.bea.gov/iTable/iTable.cfm?reqid=70&step=1&acrdn=6"
+            }
+        ],
+        "statement": "Total employment in {region_name} is {value}.",
+        "type": "",
+        "unit": "jobs",
+        "variants": ""
+    },
+    "tot_compensation": {
+        "aggregation_method": "count",
+        "categories": "",
+        "category": "Employment/Workforce Development",
+        "citations": "",
+        "data_type": "decimal",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total compensation measures the aggregate pay and benefits received by all employees in a county, including wages, salaries, and supplements such as employer contributions to health insurance and pension plans. This reflects the total economic value flowing to workers in a local economy.",
+        "long_name": "Total Compensation",
+        "measure_type": "",
+        "provenance": "From Bureau of Economic Analysis (BEA) Regional Economic Accounts, total compensation of employees by county.",
+        "short_description": "Total compensation of employees including wages, salaries, and employer-provided benefits, from BEA.",
+        "short_name": "Total Compensation",
+        "sources": [
+            {
+                "date_accessed": "2021",
+                "location": "",
+                "location_url": "",
+                "name": "Bureau of Economic Analysis",
+                "url": "https://apps.bea.gov/iTable/iTable.cfm?reqid=70&step=1&acrdn=6"
+            }
+        ],
+        "statement": "Total compensation in {region_name} is {value}.",
+        "type": "",
+        "unit": "dollar",
+        "variants": ""
+    },
     "earnings_per_job": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
