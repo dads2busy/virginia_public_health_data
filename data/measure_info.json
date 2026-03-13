@@ -27,34 +27,6 @@
         "unit": "household",
         "variants": ""
     },
-    "perc_hh_with_broadband_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Broadband",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Availability",
-        "layer": "",
-        "long_description": "Percentage of households self-reported to have a broadband internet connection. Broadband internet is defined as any type of internet other than a dial-up connection. Based on American Community Survey Table B28002 (Presence and Types of Internet Subscriptions in Household).",
-        "long_name": "Percentage of households with broadband (2010 geographies)",
-        "measure_type": "percent",
-        "short_description": "Percentage of households with a broadband internet connection (any type other than dial-up), from ACS Table B28002.",
-        "short_name": "Households with broadband",
-        "sources": [
-            {
-                "date_accessed": "2025",
-                "location": "Table B28002",
-                "location_url": "",
-                "name": "U.S. Census American Community Survey",
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "provenance": "Computed from ACS Table B28002: B28002_004 (broadband of any type) / B28002_001 (total households) \u00d7 100.",
-        "statement": "{value} of households in {features.name} have a broadband connection.",
-        "type": "percent",
-        "unit": "household",
-        "variants": ""
-    },
     "perc_hh_with_cable_fiber_dsl_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -83,34 +55,6 @@
         "unit": "household",
         "variants": ""
     },
-    "perc_hh_with_cable_fiber_dsl_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Broadband",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Availability",
-        "layer": "",
-        "long_description": "Percentage of households self-reported to have a high-speed internet service. A high-speed internet service is defined as a cable, fiber optic, or DSL internet connection. Based on American Community Survey Table B28002 (Presence and Types of Internet Subscriptions in Household).",
-        "long_name": "Percentage of households with cable, fiber optic, or DSL (2010 geographies)",
-        "measure_type": "percent",
-        "short_description": "Percentage of households with cable, fiber optic, or DSL internet, from ACS Table B28002.",
-        "short_name": "Households with cable, fiber optic, or DSL",
-        "sources": [
-            {
-                "date_accessed": "2025",
-                "location": "Table B28002",
-                "location_url": "",
-                "name": "U.S. Census American Community Survey",
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "provenance": "Computed from ACS Table B28002: B28002_007 (cable, fiber optic, or DSL) / B28002_001 (total households) \u00d7 100.",
-        "statement": "{value} of households in {features.name} have a cable, fiber optic, or DSL internet connection.",
-        "type": "percent",
-        "unit": "household",
-        "variants": ""
-    },
     "perc_hh_without_internet_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -121,34 +65,6 @@
         "layer": "",
         "long_description": "Percentage of households self-reported to not have internet access at home. Based on American Community Survey Table B28002 (Presence and Types of Internet Subscriptions in Household).",
         "long_name": "Percentage of households without internet access (2020 geographies)",
-        "measure_type": "percent",
-        "short_description": "Percentage of households without any internet access at home, from ACS Table B28002.",
-        "short_name": "Households without internet access",
-        "sources": [
-            {
-                "date_accessed": "2025",
-                "location": "Table B28002",
-                "location_url": "",
-                "name": "U.S. Census American Community Survey",
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "provenance": "Computed from ACS Table B28002: B28002_013 (no internet access) / B28002_001 (total households) \u00d7 100.",
-        "statement": "{value} of households in {features.name} do not have internet access.",
-        "type": "percent",
-        "unit": "household",
-        "variants": ""
-    },
-    "perc_hh_without_internet_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Broadband",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Availability",
-        "layer": "",
-        "long_description": "Percentage of households self-reported to not have internet access at home. Based on American Community Survey Table B28002 (Presence and Types of Internet Subscriptions in Household).",
-        "long_name": "Percentage of households without internet access (2010 geographies)",
         "measure_type": "percent",
         "short_description": "Percentage of households without any internet access at home, from ACS Table B28002.",
         "short_name": "Households without internet access",
@@ -475,33 +391,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "age_20_64_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Between 20 and 64 population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The population estimates between age 20 and 64.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "Population between age 20 and 64 (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The population between age 20 and 64 is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "age_20_64_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -515,33 +404,6 @@
         "measure_type": "",
         "short_description": "The population estimates between age 20 and 64.",
         "short_name": "Percent of the population between age 20 and 64 (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The percent of the population between age 20 and 64 is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "age_20_64_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The population estimates between age 20 and 64. 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups and target regions, then the value of each block group is aggregated to any intersecting target region based on proportion of overlap. Redistribution to non-census geolevels was performed using the redistribute R package. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The population estimates between age 20 and 64.",
-        "measure_type": "",
-        "short_description": "The population estimates between age 20 and 64.",
-        "short_name": "Percent of the population between age 20 and 64 (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -583,33 +445,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "age_65_plus_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Over 64 population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The population over age 64.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "Population over age 64 (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The population over age 64 is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "age_65_plus_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -623,33 +458,6 @@
         "measure_type": "",
         "short_description": "The percent of the population over age 64.",
         "short_name": "Percent of the population over age 64 (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The percent of the population over age 64 is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "age_65_plus_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The percent of the population over age 64. 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups and target regions, then the value of each block group is aggregated to any intersecting target region based on proportion of overlap. Redistribution to non-census geolevels was performed using the redistribute R package. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The percent of the population over age 64.",
-        "measure_type": "",
-        "short_description": "The percent of the population over age 64.",
-        "short_name": "Percent of the population over age 64 (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -691,33 +499,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "age_total_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Total count of the population. 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups and target regions, then the value of each block group is aggregated to any intersecting target region based on proportion of overlap. Redistribution to non-census geolevels was performed using the redistribute R package. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "Total count of the population.",
-        "measure_type": "",
-        "short_description": "Total count of the population.",
-        "short_name": "Total count of the population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "Total count of the population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "age_under_20_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -745,33 +526,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "age_under_20_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Under 20 population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The population estimates under age 20.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "Population under age 20 (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The population under age 20 is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "age_under_20_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -785,33 +539,6 @@
         "measure_type": "",
         "short_description": "The percent of the population under age 20.",
         "short_name": "Percent of the population under age 20 (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The percent of the population under age 20 is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "age_under_20_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The percent of the population under age 20. 5-year ACS estimates in provided census geolevels. For non-census geolevels (such as zip codes), spatial overlaps are calculated between census block groups and target regions, then the value of each block group is aggregated to any intersecting target region based on proportion of overlap. Redistribution to non-census geolevels was performed using the redistribute R package. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The percent of the population under age 20.",
-        "measure_type": "",
-        "short_description": "The percent of the population under age 20.",
-        "short_name": "Percent of the population under age 20 (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -854,33 +581,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "gender_female_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Female population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The count of females in population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "Female population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The female population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "gender_female_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -894,33 +594,6 @@
         "measure_type": "",
         "short_description": "The percent of females in the total population.",
         "short_name": "Percentage of females (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The percent of females is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "gender_female_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The percent of females in the total population. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The percent of females in the total population.",
-        "measure_type": "",
-        "short_description": "The percent of females in the total population.",
-        "short_name": "Percentage of females (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -962,33 +635,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "gender_male_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Male population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The count of males in population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "Male population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The male population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "gender_male_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -1016,33 +662,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "gender_male_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The percent of males in the total population. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The percent of males in the total population.",
-        "measure_type": "",
-        "short_description": "The percent of males in the total population.",
-        "short_name": "Percentage of males (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The percent of males is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "gender_total_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -1056,33 +675,6 @@
         "measure_type": "",
         "short_description": "Total count of the population.",
         "short_name": "Total count of the population (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "Total count of the population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "gender_total_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Total count of the population. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "Total count of the population.",
-        "measure_type": "",
-        "short_description": "Total count of the population.",
-        "short_name": "Total count of the population (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -1125,33 +717,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "perc_moving_geo10": {
-        "aggregation_method": "Population Weighted Average",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Population moving in the past year from the current residence. 5-year ACS estimates in provided census geolevels (Census 2010 boundaries).",
-        "long_name": "Population moving in the past year.",
-        "measure_type": "",
-        "short_description": "Population moving in the past year from the current residence.",
-        "short_name": "Population moving in the past year.",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B07204, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "Population moving is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "geo_mobility_total_count_geo20": {
         "aggregation_method": "Sum",
         "categories": "",
@@ -1179,33 +744,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "geo_mobility_total_count_geo10": {
-        "aggregation_method": "Sum",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "integer",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Total population for geographic mobility denominator. 5-year ACS estimates (Census 2010 boundaries).",
-        "long_name": "Geographic mobility total population.",
-        "measure_type": "",
-        "short_description": "Total population (geographic mobility denominator).",
-        "short_name": "Total pop (mobility).",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B07204, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "Geographic mobility total population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "geo_mobility_moving_count_geo20": {
         "aggregation_method": "Sum",
         "categories": "",
@@ -1215,33 +753,6 @@
         "equity_category": "Status",
         "layer": "",
         "long_description": "Population that moved in the past year. 5-year ACS estimates (Census 2020 boundaries).",
-        "long_name": "Population that moved.",
-        "measure_type": "",
-        "short_description": "Population that moved in the past year.",
-        "short_name": "Pop moved.",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B07204, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "Population that moved is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "geo_mobility_moving_count_geo10": {
-        "aggregation_method": "Sum",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "integer",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Population that moved in the past year. 5-year ACS estimates (Census 2010 boundaries).",
         "long_name": "Population that moved.",
         "measure_type": "",
         "short_description": "Population that moved in the past year.",
@@ -1288,33 +799,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "language_hh_limited_english_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Households with Limited English Direct population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The count of households with limited English.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "Households with limited English (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table C16002, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The count of households with limited English is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "language_hh_limited_english_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -1338,68 +822,6 @@
             }
         ],
         "statement": "The percent of households with limited English is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "language_hh_limited_english_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The percent of households with limited English. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The percent of households with limited English.",
-        "measure_type": "",
-        "short_description": "The percent of households with limited English.",
-        "short_name": "Percentage of households with limited English (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table C16002, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The percent of households with limited English is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "population_density_geo10": {
-        "aggregation_method": "Population Weighted Average",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Population density calculated as persons per square mile, combining ACS 5-year total population estimates (table B01001) with Census TIGER/Line geographic data for land area. Density is computed as total population (B01001_001) divided by land area in square miles at Census tract, county, and block group levels. Values are available on both Census 2020 and Census 2010 geography boundaries.",
-        "long_name": "Population density calculated as persons per square mile.",
-        "measure_type": "",
-        "provenance": "Population from ACS 5-year estimates, table B01001 (total population). Land area from Census TIGER/Line shapefiles. Density calculated as total population divided by land area in square miles.",
-        "short_description": "Population density calculated as persons per square mile (2010 Census geography).",
-        "short_name": "Population Density, Persons per Square Mile (2010 geo)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B01001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            },
-            {
-                "name": "Census Tiger Files",
-                "location": "tracts and counties, via the API",
-                "location_url": "https://www2.census.gov/geo/tiger/",
-                "date_accessed": 2024,
-                "url": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html"
-            }
-        ],
-        "statement": "Population density is {value} persons per sq mi in {region_name}.",
         "type": "",
         "unit": "individual",
         "variants": ""
@@ -1466,33 +888,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_AAPI_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Asian American/Pacific Islanders population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Asian American/Pacific Islander population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The Asian American/Pacific Islander population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Asian American/Pacific Islander population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_AAPI_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -1506,33 +901,6 @@
         "measure_type": "",
         "short_description": "The Asian American/Pacific Islander population percent.",
         "short_name": "The Asian American/Pacific Islander population percentage (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Asian American/Pacific Islander population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_AAPI_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Asian American/Pacific Islander population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Asian American/Pacific Islander population percent.",
-        "measure_type": "",
-        "short_description": "The Asian American/Pacific Islander population percent.",
-        "short_name": "The Asian American/Pacific Islander population percentage (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -1574,33 +942,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_afr_amer_alone_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Black population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Black population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The Black population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Black population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_afr_amer_alone_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -1614,33 +955,6 @@
         "measure_type": "",
         "short_description": "The Black population percent.",
         "short_name": "Black population percentage (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Black population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_afr_amer_alone_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Black population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Black population percent.",
-        "measure_type": "",
-        "short_description": "The Black population percent.",
-        "short_name": "Black population percentage (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -1682,33 +996,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_total_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Total count of the population. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "Total count of the population.",
-        "measure_type": "",
-        "short_description": "Total count of the population.",
-        "short_name": "Total count of the population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "Total count of the population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_hispanic_or_latino_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -1722,33 +1009,6 @@
         "measure_type": "",
         "short_description": "",
         "short_name": "The Hispanic/Latino population (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Hispanic/Latino population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_hispanic_or_latino_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Hispanic/Latino population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Hispanic/Latino population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The Hispanic/Latino population (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -1790,33 +1050,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_hispanic_or_latino_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Hispanic/Latino population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Hispanic/Latino population percent.",
-        "measure_type": "",
-        "short_description": "The Hispanic/Latino population percent.",
-        "short_name": "The Hispanic/Latino population percentage (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Hispanic/Latino population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_native_alone_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -1830,33 +1063,6 @@
         "measure_type": "",
         "short_description": "",
         "short_name": "The Native population (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Native population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_native_alone_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Native population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Native population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The Native population (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -1898,33 +1104,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_native_alone_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Native population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Native population percent.",
-        "measure_type": "",
-        "short_description": "The Native population percent.",
-        "short_name": "The Native population percentage (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Native population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_other_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -1938,33 +1117,6 @@
         "measure_type": "",
         "short_description": "",
         "short_name": "The Other racial population (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Other racial population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_other_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Other Racial population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Other racial population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The Other racial population (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -2006,33 +1158,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_other_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Other racial population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Other racial population percent.",
-        "measure_type": "",
-        "short_description": "The Other racial population percent.",
-        "short_name": "The Other racial population percentage (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Other racial population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_two_or_more_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -2046,33 +1171,6 @@
         "measure_type": "",
         "short_description": "",
         "short_name": "The two or more races population (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The two or more races population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_two_or_more_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Two or More Races population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The two or more races population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The two or more races population (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -2114,33 +1212,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_two_or_more_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The two or more races population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The two or more races population percent.",
-        "measure_type": "",
-        "short_description": "The two or more races population percent.",
-        "short_name": "The two or more races population percentage (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The two or more races population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "race_wht_alone_count_geo20": {
         "aggregation_method": "arithmetic mean",
         "categories": "",
@@ -2154,33 +1225,6 @@
         "measure_type": "",
         "short_description": "",
         "short_name": "The White population (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The White population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "race_wht_alone_count_geo10": {
-        "aggregation_method": "arithmetic mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The White population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The White population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The White population (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -2222,33 +1266,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "race_wht_alone_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The White population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The White population percent.",
-        "measure_type": "",
-        "short_description": "The White population percent.",
-        "short_name": "The White population percentage (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, tables B02001 and B03003, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The White population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "segregation_indicator_geo20": {
         "aggregation_method": "mean",
         "categories": "",
@@ -2259,34 +1276,6 @@
         "layer": "",
         "long_description": "Residential segregation indicator computed as the Entropy Index (Theil's H) from ACS 5-year estimates, table B03002 (Hispanic or Latino Origin by Race). The index measures how the racial/ethnic composition of a sub-area compares to that of the state as a whole, using eight categories: Hispanic/Latino, White, Black/African American, American Indian/Alaska Native, Asian, Native Hawaiian/Other Pacific Islander, Some Other Race, and Two or More Races. Higher values indicate greater deviation from the statewide racial/ethnic composition. County and Health District values are aggregated from tract-level scores. Computed using 2020 Census geographic boundaries.",
         "long_name": "Segregation indicator (2020 geographies)",
-        "measure_type": "index",
-        "short_description": "Entropy Index (Theil's H) measuring how sub-area racial/ethnic composition differs from the overall state composition.",
-        "short_name": "Segregation indicator",
-        "sources": [
-            {
-                "name": "U.S. Census Bureau",
-                "location": "ACS 5-Year Estimates, Table B03002 (Hispanic or Latino Origin by Race)",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "provenance": "The segregation indicator uses the Entropy Index (Theil's H), a method for measuring multigroup residential segregation that quantifies how sub-area racial/ethnic composition differs from the overall composition (Theil, 1972; Reardon & Firebaugh, 2002). This pipeline builds on methodology developed by the Virginia Department of Health, Office of Minority Health and Health Equity (VDH-OMHHE) for the Health Opportunity Index (HOI), which includes a segregation indicator as one of its 13 community health profiles.",
-        "statement": "The segregation indicator in {features.name} is {value}.",
-        "type": "index",
-        "unit": "",
-        "variants": ""
-    },
-    "segregation_indicator_geo10": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "Theil, H. (1972). Statistical Decomposition Analysis. Amsterdam: North-Holland Publishing Company.; Reardon, S. F., & Firebaugh, G. (2002). Measures of Multigroup Segregation. Sociological Methodology, 32(1), 33\u201367.",
-        "data_type": "decimal",
-        "equity_category": "",
-        "layer": "",
-        "long_description": "Residential segregation indicator computed as the Entropy Index (Theil's H) from ACS 5-year estimates, table B03002 (Hispanic or Latino Origin by Race). The index measures how the racial/ethnic composition of a sub-area compares to that of the state as a whole, using eight categories: Hispanic/Latino, White, Black/African American, American Indian/Alaska Native, Asian, Native Hawaiian/Other Pacific Islander, Some Other Race, and Two or More Races. Higher values indicate greater deviation from the statewide racial/ethnic composition. County and Health District values are aggregated from tract-level scores. Computed using 2010 Census geographic boundaries.",
-        "long_name": "Segregation indicator (2010 geographies)",
         "measure_type": "index",
         "short_description": "Entropy Index (Theil's H) measuring how sub-area racial/ethnic composition differs from the overall state composition.",
         "short_name": "Segregation indicator",
@@ -2333,33 +1322,6 @@
         "unit": "individual",
         "variants": ""
     },
-    "veteran_count_geo10": {
-        "aggregation_method": "count",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Veteran population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Veteran population.",
-        "measure_type": "",
-        "short_description": "",
-        "short_name": "The Veteran population (2010 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B21001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Veteran population is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "veteran_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -2373,33 +1335,6 @@
         "measure_type": "",
         "short_description": "The Veteran population percent.",
         "short_name": "The Veteran population percent (2020 geographies)",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table B21001, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The Veteran population percent is {value} in {region_name}.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "veteran_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Demographics",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Veteran population percent. 5-year ACS estimates in provided census geolevels. Values are provided on original Census 2010 geography boundaries for years prior to 2020.",
-        "long_name": "The Veteran population percent.",
-        "measure_type": "",
-        "short_description": "The Veteran population percent.",
-        "short_name": "The Veteran population percent (2010 geographies)",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -2640,33 +1575,6 @@
         "unit": "dollars",
         "variants": ""
     },
-    "acs_postsecondary_percent_geo10": {
-        "aggregation_method": "percent",
-        "categories": "",
-        "category": "Education",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Percentage of the population who reported any postsecondary education, according to the US Census American Community Survey 5-year estimates (2010 Census geography).",
-        "long_name": "Estimated Percentage of the Population With Any Postsecondary Education",
-        "measure_type": "",
-        "short_description": "Percentage of the population who reported any postsecondary education, according to the US Census American Community Survey 5-year estimates (2010 Census geography).",
-        "short_name": "Postsecondary Education (percent)",
-        "sources": [
-            {
-                "name": "U.S. Census, American Community Survey",
-                "location": "5-Year estimates, table B06009, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2023,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "{value} of those in {region_name} report any postsecondary education.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
     "acs_postsecondary_percent_geo20": {
         "aggregation_method": "percent",
         "categories": "",
@@ -2690,33 +1598,6 @@
             }
         ],
         "statement": "{value} of those in {region_name} report any postsecondary education.",
-        "type": "",
-        "unit": "individual",
-        "variants": ""
-    },
-    "acs_postsecondary_count_geo10": {
-        "aggregation_method": "count",
-        "categories": "",
-        "category": "Education",
-        "citations": "",
-        "data_type": "integer",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Number of people who reported any postsecondary education, according to the U.S. Census American Community Survey 5-year estimates (2010 Census geography).",
-        "long_name": "Estimated Number of People With Any Postsecondary Education",
-        "measure_type": "",
-        "short_description": "Number of people who reported any postsecondary education (2010 Census geography).",
-        "short_name": "Postsecondary Education (count)",
-        "sources": [
-            {
-                "name": "U.S. Census, American Community Survey",
-                "location": "5-Year estimates, table B06009, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2023,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "In {region_name}, {value} report any postsecondary education.",
         "type": "",
         "unit": "individual",
         "variants": ""
@@ -2773,34 +1654,6 @@
         "statement": "On average, {value} of 3rd graders pass reading in {region_name}.",
         "type": "",
         "unit": "person",
-        "variants": ""
-    },
-    "average_years_schooling_geo10": {
-        "aggregation_method": "",
-        "categories": "",
-        "category": "Education",
-        "citations": "",
-        "data_type": "numeric",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The Education Index measures the average education level achieved by the adult population in an area. This is based on the average years of schooling in an area (2010 Census geography). Geographies: Census tract (11)",
-        "long_name": "Education Index (Average Years of Schooling)",
-        "measure_type": "average",
-        "short_description": "The Education Index measures the average education level achieved by the adult population in an area (2010 Census geography). Geographies: Census tract (11)",
-        "short_name": "Average Years of Schooling (2010 geo)",
-        "sources": [
-            {
-                "date_accessed": "2023",
-                "location": "Table B15001",
-                "location_url": "",
-                "name": "American Community Survey",
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "provenance": "Average years of schooling is calculated by mapping each education attainment level to a number of years following the crosswalk in Bennett, D.L. (2011), 'Educational Inequality in the United States,' Center for College Affordability and Productivity.",
-        "statement": "{value} is the avg yrs of schooling in {features.name}.",
-        "type": "average",
-        "unit": "",
         "variants": ""
     },
     "average_years_schooling_geo20": {
@@ -2953,34 +1806,6 @@
         "layer": "",
         "long_description": "Townsend Material Deprivation Index adapted for U.S. Census data. Combines four ACS-derived indicators: (1) unemployment rate (B23025, log-transformed), (2) overcrowding \u2014 proportion of occupied housing units with more than 1 person per room (B25014, log-transformed), (3) non-car ownership \u2014 proportion of households with no vehicle (B25044), and (4) non-home ownership \u2014 proportion of renter-occupied units (S2502). Each indicator is z-scored within year and geography level, summed, the sum is z-scored again, then min-max rescaled to [0, 1]. Higher values indicate greater material deprivation. Computed using 2020 Census geographic boundaries.",
         "long_name": "Material deprivation indicator (2020 geographies)",
-        "measure_type": "index",
-        "short_description": "Townsend Material Deprivation Index (0-1) combining unemployment, overcrowding, non-car ownership, and non-home ownership.",
-        "short_name": "Material deprivation indicator",
-        "sources": [
-            {
-                "name": "U.S. Census Bureau",
-                "location": "ACS 5-Year Estimates, Tables B23025 (Employment Status), B25014 (Tenure by Occupants per Room), B25044 (Tenure by Vehicles Available), and S2502 (Demographic Characteristics for Occupied Housing Units)",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "provenance": "Based on the Townsend Material Deprivation Index (Townsend, Phillimore & Beattie, 1988), originally developed for the UK Census to measure area-level material deprivation. This pipeline adapts the methodology for U.S. Census ACS variables. The four component indicators (unemployment, overcrowding, non-car ownership, non-home ownership) are computed from ACS 5-year estimates, z-scored within year and geography level, summed, z-scored again, and min-max rescaled to [0, 1]. The VDH Health Opportunity Index includes a similar adaptation of the Townsend index as one of its 13 indicators.",
-        "statement": "The material deprivation indicator in {features.name} is {value}.",
-        "type": "index",
-        "unit": "",
-        "variants": ""
-    },
-    "material_deprivation_indicator_geo10": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Financial Well-Being",
-        "citations": "Townsend, P., Phillimore, P., & Beattie, A. (1988). Health and Deprivation: Inequality and the North. London: Croom Helm.",
-        "data_type": "decimal",
-        "equity_category": "",
-        "layer": "",
-        "long_description": "Townsend Material Deprivation Index adapted for U.S. Census data. Combines four ACS-derived indicators: (1) unemployment rate (B23025, log-transformed), (2) overcrowding \u2014 proportion of occupied housing units with more than 1 person per room (B25014, log-transformed), (3) non-car ownership \u2014 proportion of households with no vehicle (B25044), and (4) non-home ownership \u2014 proportion of renter-occupied units (S2502). Each indicator is z-scored within year and geography level, summed, the sum is z-scored again, then min-max rescaled to [0, 1]. Higher values indicate greater material deprivation. Computed using 2010 Census geographic boundaries.",
-        "long_name": "Material deprivation indicator (2010 geographies)",
         "measure_type": "index",
         "short_description": "Townsend Material Deprivation Index (0-1) combining unemployment, overcrowding, non-car ownership, and non-home ownership.",
         "short_name": "Material deprivation indicator",
@@ -3769,33 +2594,6 @@
         "unit": "minutes",
         "variants": ""
     },
-    "commute_time_geo10": {
-        "aggregation_method": "Mean",
-        "categories": "",
-        "category": "Transportation",
-        "citations": "",
-        "data_type": "numeric",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Self-reported mean travel time to work. 5-year ACS estimates from table S0801 (Census 2010 boundaries).",
-        "long_name": "Mean commute time",
-        "measure_type": "",
-        "short_description": "Mean commute time.",
-        "short_name": "Commute time",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table S0801, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "The mean commute time in {region_name} is {value} minutes.",
-        "type": "drive time",
-        "unit": "minutes",
-        "variants": ""
-    },
     "perc_carpool_geo20": {
         "aggregation_method": "Mean",
         "categories": "",
@@ -3823,33 +2621,6 @@
         "unit": "percent",
         "variants": ""
     },
-    "perc_carpool_geo10": {
-        "aggregation_method": "Mean",
-        "categories": "",
-        "category": "Transportation",
-        "citations": "",
-        "data_type": "numeric",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Percentage of workers who carpooled to work. 5-year ACS estimates from table S0801 (Census 2010 boundaries).",
-        "long_name": "Percentage carpool to work",
-        "measure_type": "",
-        "short_description": "Population self-reported to carpool to work.",
-        "short_name": "Carpool to work",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table S0801, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "{value} of the population in {region_name} carpools to work.",
-        "type": "percent",
-        "unit": "percent",
-        "variants": ""
-    },
     "perc_no_vehicle_geo20": {
         "aggregation_method": "Mean",
         "categories": "",
@@ -3859,33 +2630,6 @@
         "equity_category": "Status",
         "layer": "",
         "long_description": "Percentage of occupied housing units with no vehicle available. 5-year ACS estimates from table S2504 (Census 2020 boundaries).",
-        "long_name": "Percentage of households without vehicle available",
-        "measure_type": "",
-        "short_description": "Households self-reported to not have a vehicle available at home.",
-        "short_name": "Without vehicle",
-        "sources": [
-            {
-                "name": "American Community Survey",
-                "location": "5-Year estimates, table S2504, via the API",
-                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
-                "date_accessed": 2025,
-                "url": "https://www.census.gov/programs-surveys/acs.html"
-            }
-        ],
-        "statement": "{value} of households in {region_name} do not have a vehicle available at home.",
-        "type": "percent",
-        "unit": "percent",
-        "variants": ""
-    },
-    "perc_no_vehicle_geo10": {
-        "aggregation_method": "Mean",
-        "categories": "",
-        "category": "Transportation",
-        "citations": "",
-        "data_type": "numeric",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "Percentage of occupied housing units with no vehicle available. 5-year ACS estimates from table S2504 (Census 2010 boundaries).",
         "long_name": "Percentage of households without vehicle available",
         "measure_type": "",
         "short_description": "Households self-reported to not have a vehicle available at home.",
@@ -3960,100 +2704,6 @@
         "unit": "",
         "variants": ""
     },
-    "walkability_index_geo10": {
-        "aggregation_method": "population-weighted mean",
-        "categories": "",
-        "category": "Transportation",
-        "citations": "",
-        "data_type": "numeric",
-        "equity_category": "",
-        "layer": "",
-        "long_description": "The Walkability Index is a composite measure that ranks block groups according to their relative walkability, computed annually for 2017-2023. It combines four components: (1) D2A_Ranked \u2014 employment and household land use entropy from LEHD LODES WAC job counts by NAICS sector and ACS B11001 household counts, measuring the diversity of nearby land uses; (2) D2B_Ranked \u2014 employment-only entropy across five tiers (retail, office, industrial, service, entertainment); (3) D3B_Ranked \u2014 street intersection density from the EPA Smart Location Database V3, measuring pedestrian-friendly street connectivity; and (4) D4C_Ranked \u2014 distance to the nearest transit stop computed from national GTFS feeds via the Mobility Database, measuring transit accessibility. Each component is ranked into 20 quantile bins across all block groups in the coverage area. The final index is calculated as NatWalkInd = D2A_Ranked/6 + D2B_Ranked/6 + D3B_Ranked/3 + D4C_Ranked/3, producing scores from 1 (least walkable) to 20 (most walkable). Block group scores are aggregated to Census tracts and counties using population-weighted means.",
-        "long_name": "Walkability Index",
-        "measure_type": "index",
-        "short_description": "Composite walkability score (1-20) combining employment entropy, street connectivity, and transit proximity, updated annually from LODES, EPA SLD, and GTFS data.",
-        "short_name": "Walkability Index",
-        "sources": [
-            {
-                "date_accessed": 2025,
-                "location": "Smart Location Database V3, January 2021",
-                "location_url": "https://www.epa.gov/smartgrowth/smart-location-mapping#walkability",
-                "name": "Environmental Protection Agency",
-                "url": "https://www.epa.gov/smartgrowth/smart-location-mapping"
-            },
-            {
-                "date_accessed": 2025,
-                "location": "LODES 8 Workplace Area Characteristics",
-                "location_url": "https://lehd.ces.census.gov/data/lodes/LODES8/",
-                "name": "Census Bureau LEHD",
-                "url": "https://lehd.ces.census.gov/"
-            },
-            {
-                "date_accessed": 2025,
-                "location": "ACS 5-Year Estimates, Table B11001 (Household Type)",
-                "location_url": "https://data.census.gov/table/ACSDT5Y2023.B11001",
-                "name": "Census Bureau ACS",
-                "url": "https://data.census.gov"
-            },
-            {
-                "date_accessed": 2025,
-                "location": "Mobility Database and Transitland GTFS feeds",
-                "location_url": "https://mobilitydatabase.org",
-                "name": "GTFS Transit Feeds",
-                "url": "https://mobilitydatabase.org"
-            },
-            {
-                "date_accessed": 2025,
-                "location": "Census 2010 Centers of Population (block group centroids)",
-                "location_url": "https://www.census.gov/geographies/reference-files/time-series/geo/centers-population.html",
-                "name": "Census Bureau",
-                "url": "https://www.census.gov"
-            }
-        ],
-        "provenance": "Derived from the EPA National Walkability Index methodology. Employment entropy (D2A/D2B) computed annually from LEHD LODES + ACS data. Street connectivity (D3B) from EPA SLD V3. Transit proximity (D4C) computed annually from national GTFS feeds. Formula: NatWalkInd = D2A_Ranked/6 + D2B_Ranked/6 + D3B_Ranked/3 + D4C_Ranked/3.",
-        "statement": "The Walkability Index in {region_name} is {value}.",
-        "type": "index",
-        "unit": "",
-        "variants": ""
-    },
-    "incarceration_rate_per_100000_geo10": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Public Safety",
-        "citations": [
-            "vera",
-            "ppi"
-        ],
-        "data_type": "numeric",
-        "equity_category": "Crime",
-        "layer": "",
-        "long_description": "The incarceration rate estimates how many people per 100,000 residents are held in jail, allocated to the census tracts where they lived before incarceration. Communities with high rates experience disproportionate removal of residents into the criminal justice system, which disrupts families, reduces household income, and weakens social networks. Only jail population is captured; state prison data is not available at the county level for Virginia. Values on original 2010 census tract boundaries.",
-        "long_name": "Incarceration Rate Per 100,000 (2010 geographies)",
-        "measure_type": "rate",
-        "short_description": "Jail incarceration rate per 100,000 residents, allocated to tracts by pre-incarceration residence, on 2010 census boundaries.",
-        "short_name": "Incarceration Rate",
-        "sources": [
-            {
-                "date_accessed": 2025,
-                "location": "Vera Institute Incarceration Trends",
-                "location_url": "https://github.com/vera-institute/incarceration-trends",
-                "name": "Vera Institute of Justice",
-                "url": "https://www.vera.org/"
-            },
-            {
-                "date_accessed": 2025,
-                "location": "Prison Policy Initiative VA 2020",
-                "location_url": "https://www.prisonpolicy.org/origin/va/2020/tract.html",
-                "name": "Prison Policy Initiative",
-                "url": "https://www.prisonpolicy.org/"
-            }
-        ],
-        "provenance": "Tract-level incarceration counts from Prison Policy Initiative (PPI) 2020, which estimates pre-incarceration residence using Bureau of Justice Statistics survey data applied to 2020 Census group quarters. County-level annual jail population from Vera Institute (mean of quarterly observations, 2016-2023). PPI 2020 tract counts scaled by Vera year-over-year county jail population change relative to 2020 baseline. Rates computed as scaled count / PPI total population * 100,000. Virginia uses regional jails shared across counties; Vera attributes populations back to individual counties. 129 of 133 VA counties have Vera data; remaining 4 use unscaled PPI 2020 values for all years. Values on original 2010 census tract boundaries.",
-        "statement": "The incarceration rate per 100,000 in {features.name} is {value}.",
-        "type": "rate",
-        "unit": "per 100,000 population",
-        "variants": ""
-    },
     "incarceration_rate_per_100000_geo20": {
         "aggregation_method": "mean",
         "categories": "",
@@ -4090,36 +2740,6 @@
         "statement": "The incarceration rate per 100,000 in {features.name} is {value}.",
         "type": "rate",
         "unit": "per 100,000 population",
-        "variants": ""
-    },
-    "food_access_percentage_geo10": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Nutrition and Food Security",
-        "citations": [
-            "usdafara"
-        ],
-        "data_type": "numeric",
-        "equity_category": "Access",
-        "layer": "",
-        "long_description": "Food access measures the share of a tract's population that is both low-income and lives more than one mile from a supermarket. Tracts with high values have larger populations facing simultaneous barriers of poverty and geographic distance to healthy food retailers, which is associated with poorer diet quality and higher rates of diet-related chronic disease. Values on original 2010 census tract boundaries.",
-        "long_name": "Food Access (2010 geographies)",
-        "measure_type": "percent",
-        "short_description": "Share of low-income population beyond one mile from a supermarket, on 2010 census boundaries.",
-        "short_name": "Food Access",
-        "sources": [
-            {
-                "date_accessed": 2024,
-                "location": "Food Access Research Atlas",
-                "location_url": "https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/",
-                "name": "USDA Economic Research Service",
-                "url": "https://www.ers.usda.gov/"
-            }
-        ],
-        "provenance": "Tract-level low-access, low-income population shares (lalowi1share, with lalowihalfshare as fallback) extracted from USDA Food Access Research Atlas 2015 and 2019 Excel editions. Low-income defined by Department of Treasury NMTC criteria (poverty rate >= 20%, or median family income <= 80% of state/metro median). Values for 2016-2018 linearly interpolated between 2015 and 2019 observations. Values for 2020-2023 linearly extrapolated from the 2015-2019 trend. Original tract IDs are on 2010 census boundaries.",
-        "statement": "{value} percent of the low-income population in {features.name} lives beyond one mile from a supermarket.",
-        "type": "percent",
-        "unit": "",
         "variants": ""
     },
     "food_access_percentage_geo20": {
@@ -4442,34 +3062,6 @@
         "equity_category": "Environment",
         "layer": "",
         "long_description": "The Environmental Hazard Index captures the cumulative burden of environmental hazards in a community by distilling 12 EPA pollution and proximity indicators into a single score. Communities with high values face greater combined exposure to air toxics, particulate matter, ozone, hazardous waste sites, and aging housing stock. The index is reported as a z-score, where zero represents the Virginia average and each unit represents one standard deviation of additional hazard burden.",
-        "long_name": "Environmental Hazard Index",
-        "measure_type": "index",
-        "provenance": "Block-group-level data for 12 environmental indicators (CANCER, RESP, PTRAF, PWDIS, PNPL, PRMP, PTSDF, OZONE, PM25, PRE1960PCT, DSLPM, UST) extracted from EPA EJScreen annual CSVs (2016-2024, archived via Internet Archive). UST values backfilled from 2021 for years 2016-2020 when the variable was unavailable. Variables standardized per year, then reduced via Principal Component Analysis (1 component) using scikit-learn. PC1 scores converted to z-scores. Block groups aggregated to tracts via population-weighted mean (simple mean fallback). 2024 uses 10 variables (EPA dropped CANCER and RESP). EJScreen used 2010 census block groups through 2021 and switched to 2020 block groups in 2022. Pre-2022 tract values crosswalked from 2010 to 2020 boundaries via area-weighted redistribution.",
-        "short_description": "A z-score summarizing cumulative environmental hazard exposure from 12 EPA pollution and proximity indicators.",
-        "short_name": "Environmental Hazard",
-        "sources": [
-            {
-                "date_accessed": 2025,
-                "location": "EPA EJScreen (archived)",
-                "location_url": "https://web.archive.org/web/2024/https://gaftp.epa.gov/EJSCREEN/",
-                "name": "U.S. Environmental Protection Agency",
-                "url": "https://www.epa.gov/"
-            }
-        ],
-        "statement": "The environmental hazard index in {features.name} is {value}.",
-        "type": "index",
-        "unit": "z-score",
-        "variants": ""
-    },
-    "environmental_hazard_index_geo10": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Environmental Health",
-        "citations": "",
-        "data_type": "numeric",
-        "equity_category": "Environment",
-        "layer": "",
-        "long_description": "The Environmental Hazard Index captures the cumulative burden of environmental hazards in a community by distilling 12 EPA pollution and proximity indicators into a single score. Communities with high values face greater combined exposure to air toxics, particulate matter, ozone, hazardous waste sites, and aging housing stock. The index is reported as a z-score, where zero represents the Virginia average and each unit represents one standard deviation of additional hazard burden. Values on original 2010 census tract boundaries.",
         "long_name": "Environmental Hazard Index",
         "measure_type": "index",
         "provenance": "Block-group-level data for 12 environmental indicators (CANCER, RESP, PTRAF, PWDIS, PNPL, PRMP, PTSDF, OZONE, PM25, PRE1960PCT, DSLPM, UST) extracted from EPA EJScreen annual CSVs (2016-2024, archived via Internet Archive). UST values backfilled from 2021 for years 2016-2020 when the variable was unavailable. Variables standardized per year, then reduced via Principal Component Analysis (1 component) using scikit-learn. PC1 scores converted to z-scores. Block groups aggregated to tracts via population-weighted mean (simple mean fallback). 2024 uses 10 variables (EPA dropped CANCER and RESP). EJScreen used 2010 census block groups through 2021 and switched to 2020 block groups in 2022. Pre-2022 tract values crosswalked from 2010 to 2020 boundaries via area-weighted redistribution.",
