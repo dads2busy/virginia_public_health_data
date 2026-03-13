@@ -15,6 +15,7 @@ import * as path from 'path'
 import * as lzma from 'lzma-native'
 import { parse } from 'csv-parse/sync'
 import { mean, median, standardDeviation, min as ssMin, max as ssMax } from 'simple-statistics'
+import * as yazl from 'yazl'
 
 const ROOT = path.resolve(__dirname, '..')
 const DATA_DIR = path.join(ROOT, 'data')
@@ -339,6 +340,8 @@ async function buildDataset(
   fields: FieldInfo[]
   rowCount: number
   entityCount: number
+  cleanRows: CsvRow[]
+  cleanVariableNames: string[]
 }> {
   console.log(`\nBuilding ${datasetName} from ${csvFile}...`)
   const csvPath = path.join(DATA_DIR, csvFile)
@@ -394,7 +397,94 @@ async function buildDataset(
 
   console.log(`  Done: ${entityIds.length} entities, ${cleanVariableNames.length} variables`)
 
-  return { lookup, fields, rowCount: cleanRows.length, entityCount: entityIds.length }
+  return { lookup, fields, rowCount: cleanRows.length, entityCount: entityIds.length, cleanRows, cleanVariableNames }
+}
+
+/** Helper: write a buffer to a zip file */
+async function writeZip(zipPath: string, entries: { name: string; data: Buffer }[]): Promise<void> {
+  const zipfile = new yazl.ZipFile()
+  for (const entry of entries) {
+    zipfile.addBuffer(entry.data, entry.name)
+  }
+  zipfile.end()
+
+  const chunks: Buffer[] = []
+  zipfile.outputStream.on('data', (chunk: Buffer) => chunks.push(chunk))
+  await new Promise<void>((resolve, reject) => {
+    zipfile.outputStream.on('end', () => {
+      fs.writeFileSync(zipPath, Buffer.concat(chunks))
+      resolve()
+    })
+    zipfile.outputStream.on('error', reject)
+  })
+}
+
+/**
+ * Extract a single variable from a JSON lookup as a tall CSV buffer.
+ * Returns null if the variable has no data at this level.
+ */
+function extractVariableCsv(dataset: DataLookup, varName: string): Buffer | null {
+  const meta = dataset._meta
+  const varInfo = meta.variables[varName]
+  if (!varInfo || varInfo.time_range[0] === -1) return null
+
+  const { code, time_range: [rangeStart, rangeEnd] } = varInfo
+  const regionIds = Object.keys(dataset).filter((k) => k !== '_meta')
+  const lines: string[] = ['geoid,time,value']
+
+  for (const regionId of regionIds) {
+    const rd = dataset[regionId] as Record<string, number | string | (number | string)[]>
+    const data = rd[code]
+    if (data === undefined) continue
+
+    if (Array.isArray(data)) {
+      for (let i = 0; i <= rangeEnd - rangeStart; i++) {
+        const val = data[i]
+        if (val === 'NA' || val === undefined) continue
+        lines.push(`${regionId},${meta.time.value[rangeStart + i]},${val}`)
+      }
+    } else {
+      if (data === 'NA') continue
+      lines.push(`${regionId},${meta.time.value[rangeStart]},${data}`)
+    }
+  }
+
+  if (lines.length <= 1) return null
+  return Buffer.from(lines.join('\n'), 'utf-8')
+}
+
+/**
+ * Generate one zip per variable, each containing up to 3 CSVs
+ * (district.csv, county.csv, tract.csv) with columns: geoid,time,value
+ */
+async function writePerVariableZips(lookups: Record<string, DataLookup>): Promise<void> {
+  // Collect all variable names across all levels
+  const allVars = new Set<string>()
+  for (const dataset of Object.values(lookups)) {
+    for (const [name, info] of Object.entries(dataset._meta.variables)) {
+      if (info.time_range[0] !== -1) allVars.add(name)
+    }
+  }
+
+  const levels = ['district', 'county', 'tract'] as const
+  let count = 0
+
+  for (const varName of allVars) {
+    const entries: { name: string; data: Buffer }[] = []
+    for (const level of levels) {
+      const dataset = lookups[level]
+      if (!dataset) continue
+      const csv = extractVariableCsv(dataset, varName)
+      if (csv) entries.push({ name: `${level}.csv`, data: csv })
+    }
+    if (entries.length === 0) continue
+
+    const zipPath = path.join(PUBLIC_DATA_DIR, `${varName}.csv.zip`)
+    await writeZip(zipPath, entries)
+    count++
+  }
+
+  console.log(`  Wrote ${count} per-variable zip files`)
 }
 
 async function main() {
@@ -428,23 +518,41 @@ async function main() {
     entities: number
   }> = []
 
+  const lookups: Record<string, DataLookup> = {}
+
   for (const [name, csvFile] of Object.entries(DATASETS)) {
-    const result = await buildDataset(name, csvFile)
+    try {
+      const result = await buildDataset(name, csvFile)
 
-    // Write lookup JSON
-    const lookupPath = path.join(PUBLIC_DATA_DIR, `${name}.json`)
-    const jsonStr = JSON.stringify(result.lookup)
-    fs.writeFileSync(lookupPath, jsonStr)
-    console.log(`  Wrote ${name}.json (${(jsonStr.length / 1024 / 1024).toFixed(1)} MB)`)
+      // Write lookup JSON
+      const lookupPath = path.join(PUBLIC_DATA_DIR, `${name}.json`)
+      const jsonStr = JSON.stringify(result.lookup)
+      fs.writeFileSync(lookupPath, jsonStr)
+      console.log(`  Wrote ${name}.json (${(jsonStr.length / 1024 / 1024).toFixed(1)} MB)`)
 
-    resources.push({
-      name,
-      schema: { fields: result.fields },
-      bytes: Buffer.byteLength(jsonStr),
-      rows: result.rowCount,
-      entities: result.entityCount,
-    })
+      lookups[name] = result.lookup
+
+      resources.push({
+        name,
+        schema: { fields: result.fields },
+        bytes: Buffer.byteLength(jsonStr),
+        rows: result.rowCount,
+        entities: result.entityCount,
+      })
+    } catch (err) {
+      console.warn(`  WARNING: Failed to build ${name} from ${csvFile}: ${err}`)
+      // Fall back to loading existing JSON for zip generation
+      const jsonPath = path.join(PUBLIC_DATA_DIR, `${name}.json`)
+      if (fs.existsSync(jsonPath)) {
+        console.log(`  Loading existing ${name}.json for zip generation...`)
+        lookups[name] = JSON.parse(fs.readFileSync(jsonPath, 'utf-8')) as DataLookup
+      }
+    }
   }
+
+  // Generate per-variable zip files (one zip per variable, containing CSVs for each level)
+  console.log('\nGenerating per-variable download zips...')
+  await writePerVariableZips(lookups)
 
   // Build datapackage.json
   const measureInfo = fs.existsSync(measureInfoSrc) ? JSON.parse(fs.readFileSync(measureInfoSrc, 'utf-8')) : {}

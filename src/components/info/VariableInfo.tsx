@@ -30,9 +30,9 @@ function findMeasureInfo(measureInfo: MeasureInfoMap, variableName: string): Mea
 
 export function VariableInfo() {
   const selectedVariable = useDashboardStore((s) => s.selectedVariable)
-  const { measureInfo, narratives } = useData()
+  const { measureInfo } = useData()
   const [showLongDesc, setShowLongDesc] = useState(false)
-  const [showNarrative, setShowNarrative] = useState(true)
+  const [showProvenance, setShowProvenance] = useState(false)
 
   const info = useMemo((): MeasureInfo | null => {
     if (!measureInfo) return null
@@ -53,17 +53,34 @@ export function VariableInfo() {
       {info.short_description && (
         <p className="mb-2 text-xs text-gray-600 dark:text-gray-400">{info.short_description}</p>
       )}
-      {info.long_description && (
+      {(info.long_description || info.provenance) && (
         <div className="mb-2">
-          <button
-            onClick={() => setShowLongDesc(!showLongDesc)}
-            className="text-xs text-blue-500 hover:text-blue-400 hover:underline"
-          >
-            {showLongDesc ? 'Less info' : 'More info'}
-          </button>
-          {showLongDesc && (
+          <span className="inline-flex gap-2">
+            {info.long_description && (
+              <button
+                onClick={() => { setShowLongDesc(!showLongDesc); setShowProvenance(false) }}
+                className="text-xs text-blue-500 hover:text-blue-400 hover:underline"
+              >
+                {showLongDesc ? 'Less info' : 'More info'}
+              </button>
+            )}
+            {info.provenance && (
+              <button
+                onClick={() => { setShowProvenance(!showProvenance); setShowLongDesc(false) }}
+                className="text-xs text-blue-500 hover:text-blue-400 hover:underline"
+              >
+                {showProvenance ? 'Hide provenance' : 'Provenance'}
+              </button>
+            )}
+          </span>
+          {showLongDesc && info.long_description && (
             <p className="mt-1 text-xs leading-relaxed text-gray-600 dark:text-gray-400">
               {info.long_description}
+            </p>
+          )}
+          {showProvenance && info.provenance && (
+            <p className="mt-1 text-xs leading-relaxed text-gray-600 dark:text-gray-400">
+              {info.provenance}
             </p>
           )}
         </div>
@@ -83,24 +100,6 @@ export function VariableInfo() {
               {i < info.sources.length - 1 && ', '}
             </span>
           ))}
-        </div>
-      )}
-      {narratives[selectedVariable] && (
-        <div className="mt-2 border-t pt-2 dark:border-gray-700">
-          <button
-            onClick={() => setShowNarrative(!showNarrative)}
-            className="text-xs text-purple-500 hover:text-purple-400 hover:underline"
-          >
-            {showNarrative ? 'Hide AI summary' : 'AI summary'}
-          </button>
-          {showNarrative && (
-            <div className="mt-1">
-              <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-400">
-                {narratives[selectedVariable]}
-              </p>
-              <p className="mt-1 text-[10px] text-gray-400 dark:text-gray-500">AI-generated summary</p>
-            </div>
-          )}
         </div>
       )}
     </div>

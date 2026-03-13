@@ -59,15 +59,15 @@ export const ruralHealthSections: MetricSection[] = [
 export const hoiSections: MetricSection[] = [
   {
     heading: '',
-    buttons: [{ label: 'Health Opportunity Index', variable: 'health_opportunity_indicator' }],
+    buttons: [{ label: 'Health Opportunity Index', variable: 'health_opportunity_index_geo20' }],
   },
   {
     heading: 'HOI Component Indexes',
     buttons: [
-      { label: 'Economic Opportunity', variable: 'economic_opportunity_indicator' },
-      { label: 'Built Environment', variable: 'community_environment_indicator' },
-      { label: 'Consumer Opportunity', variable: 'consumer_opportunity_indicator' },
-      { label: 'Social Impact', variable: 'wellness_disparity_indicator' },
+      { label: 'Economic Opportunity', variable: 'economic_opportunity_profile_geo20' },
+      { label: 'Built Environment', variable: 'built_environment_profile_geo20' },
+      { label: 'Consumer Opportunity', variable: 'consumer_opportunity_profile_geo20' },
+      { label: 'Social Impact', variable: 'social_impact_profile_geo20' },
     ],
   },
   {
@@ -84,9 +84,9 @@ export const hoiSections: MetricSection[] = [
       { label: 'Segregation', variable: 'segregation_indicator_geo20' },
       { label: 'Walkability', variable: 'walkability_index_geo20' },
       { label: 'Affordability (H&T)', variable: 'affordability_index_geo20' },
-      { label: 'Environmental Hazard Index', variable: 'environmental_hazard_index' },
+      { label: 'Environmental Hazard Index', variable: 'environmental_hazard_index_geo20' },
       { label: 'Care Access (VDH)', variable: 'access_care_indicator_geo20' },
-      { label: 'Incarceration Rate (PPI)', variable: 'incarceration_rate_per_100000' },
+      { label: 'Incarceration Rate (PPI)', variable: 'incarceration_rate_per_100000_geo20' },
     ],
   },
 ]

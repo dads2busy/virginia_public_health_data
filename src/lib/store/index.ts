@@ -123,7 +123,7 @@ export const useDashboardStore = create<DashboardState>()(
       selectedDistrictName: null,
       selectedCounty: null,
       selectedCountyName: null,
-      selectedVariable: 'health_opportunity_indicator',
+      selectedVariable: 'health_opportunity_index_geo20',
       selectedYear: 2023,
       regionTypes: { rural: true, mixed: true, urban: true },
 

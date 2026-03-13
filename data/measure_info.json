@@ -4013,5 +4013,422 @@
         "type": "index",
         "unit": "",
         "variants": ""
+    },
+    "incarceration_rate_per_100000_geo10": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Public Safety",
+        "citations": [
+            "vera",
+            "ppi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Crime",
+        "layer": "",
+        "long_description": "The incarceration rate estimates how many people per 100,000 residents are held in jail, allocated to the census tracts where they lived before incarceration. Communities with high rates experience disproportionate removal of residents into the criminal justice system, which disrupts families, reduces household income, and weakens social networks. Only jail population is captured; state prison data is not available at the county level for Virginia. Values on original 2010 census tract boundaries.",
+        "long_name": "Incarceration Rate Per 100,000 (2010 geographies)",
+        "measure_type": "rate",
+        "short_description": "Jail incarceration rate per 100,000 residents, allocated to tracts by pre-incarceration residence, on 2010 census boundaries.",
+        "short_name": "Incarceration Rate",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Vera Institute Incarceration Trends",
+                "location_url": "https://github.com/vera-institute/incarceration-trends",
+                "name": "Vera Institute of Justice",
+                "url": "https://www.vera.org/"
+            },
+            {
+                "date_accessed": 2025,
+                "location": "Prison Policy Initiative VA 2020",
+                "location_url": "https://www.prisonpolicy.org/origin/va/2020/tract.html",
+                "name": "Prison Policy Initiative",
+                "url": "https://www.prisonpolicy.org/"
+            }
+        ],
+        "provenance": "Tract-level incarceration counts from Prison Policy Initiative (PPI) 2020, which estimates pre-incarceration residence using Bureau of Justice Statistics survey data applied to 2020 Census group quarters. County-level annual jail population from Vera Institute (mean of quarterly observations, 2016-2023). PPI 2020 tract counts scaled by Vera year-over-year county jail population change relative to 2020 baseline. Rates computed as scaled count / PPI total population * 100,000. Virginia uses regional jails shared across counties; Vera attributes populations back to individual counties. 129 of 133 VA counties have Vera data; remaining 4 use unscaled PPI 2020 values for all years. Values on original 2010 census tract boundaries.",
+        "statement": "The incarceration rate per 100,000 in {features.name} is {value}.",
+        "type": "rate",
+        "unit": "per 100,000 population",
+        "variants": ""
+    },
+    "incarceration_rate_per_100000_geo20": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Public Safety",
+        "citations": [
+            "vera",
+            "ppi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Crime",
+        "layer": "",
+        "long_description": "The incarceration rate estimates how many people per 100,000 residents are held in jail, allocated to the census tracts where they lived before incarceration. Communities with high rates experience disproportionate removal of residents into the criminal justice system, which disrupts families, reduces household income, and weakens social networks. Only jail population is captured; state prison data is not available at the county level for Virginia.",
+        "long_name": "Incarceration Rate Per 100,000",
+        "measure_type": "rate",
+        "short_description": "Jail incarceration rate per 100,000 residents, allocated to tracts by pre-incarceration residence.",
+        "short_name": "Incarceration Rate",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Vera Institute Incarceration Trends",
+                "location_url": "https://github.com/vera-institute/incarceration-trends",
+                "name": "Vera Institute of Justice",
+                "url": "https://www.vera.org/"
+            },
+            {
+                "date_accessed": 2025,
+                "location": "Prison Policy Initiative VA 2020",
+                "location_url": "https://www.prisonpolicy.org/origin/va/2020/tract.html",
+                "name": "Prison Policy Initiative",
+                "url": "https://www.prisonpolicy.org/"
+            }
+        ],
+        "provenance": "Tract-level incarceration counts from Prison Policy Initiative (PPI) 2020, which estimates pre-incarceration residence using Bureau of Justice Statistics survey data applied to 2020 Census group quarters. County-level annual jail population from Vera Institute (mean of quarterly observations, 2016-2023). PPI 2020 tract counts scaled by Vera year-over-year county jail population change relative to 2020 baseline. Rates computed as scaled count / PPI total population * 100,000. Virginia uses regional jails shared across counties; Vera attributes populations back to individual counties. 129 of 133 VA counties have Vera data; remaining 4 use unscaled PPI 2020 values for all years. PPI data uses 2020 census tracts natively; standardize_all appends geo suffixes.",
+        "statement": "The incarceration rate per 100,000 in {features.name} is {value}.",
+        "type": "rate",
+        "unit": "per 100,000 population",
+        "variants": ""
+    },
+    "food_access_percentage_geo10": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Nutrition and Food Security",
+        "citations": [
+            "usdafara"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Access",
+        "layer": "",
+        "long_description": "Food access measures the share of a tract's population that is both low-income and lives more than one mile from a supermarket. Tracts with high values have larger populations facing simultaneous barriers of poverty and geographic distance to healthy food retailers, which is associated with poorer diet quality and higher rates of diet-related chronic disease. Values on original 2010 census tract boundaries.",
+        "long_name": "Food Access (2010 geographies)",
+        "measure_type": "percent",
+        "short_description": "Share of low-income population beyond one mile from a supermarket, on 2010 census boundaries.",
+        "short_name": "Food Access",
+        "sources": [
+            {
+                "date_accessed": 2024,
+                "location": "Food Access Research Atlas",
+                "location_url": "https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/",
+                "name": "USDA Economic Research Service",
+                "url": "https://www.ers.usda.gov/"
+            }
+        ],
+        "provenance": "Tract-level low-access, low-income population shares (lalowi1share, with lalowihalfshare as fallback) extracted from USDA Food Access Research Atlas 2015 and 2019 Excel editions. Low-income defined by Department of Treasury NMTC criteria (poverty rate >= 20%, or median family income <= 80% of state/metro median). Values for 2016-2018 linearly interpolated between 2015 and 2019 observations. Values for 2020-2023 linearly extrapolated from the 2015-2019 trend. Original tract IDs are on 2010 census boundaries.",
+        "statement": "{value} percent of the low-income population in {features.name} lives beyond one mile from a supermarket.",
+        "type": "percent",
+        "unit": "",
+        "variants": ""
+    },
+    "food_access_percentage_geo20": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Nutrition and Food Security",
+        "citations": [
+            "usdafara"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Access",
+        "layer": "",
+        "long_description": "Food access measures the share of a tract's population that is both low-income and lives more than one mile from a supermarket. Tracts with high values have larger populations facing simultaneous barriers of poverty and geographic distance to healthy food retailers, which is associated with poorer diet quality and higher rates of diet-related chronic disease.",
+        "long_name": "Food Access",
+        "measure_type": "percent",
+        "short_description": "Share of low-income population beyond one mile from a supermarket.",
+        "short_name": "Food Access",
+        "sources": [
+            {
+                "date_accessed": 2024,
+                "location": "Food Access Research Atlas",
+                "location_url": "https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data/",
+                "name": "USDA Economic Research Service",
+                "url": "https://www.ers.usda.gov/"
+            }
+        ],
+        "provenance": "Tract-level low-access, low-income population shares (lalowi1share, with lalowihalfshare as fallback) extracted from USDA Food Access Research Atlas 2015 and 2019 Excel editions. Low-income defined by Department of Treasury NMTC criteria (poverty rate >= 20%, or median family income <= 80% of state/metro median). Values for 2016-2018 linearly interpolated between 2015 and 2019 observations. Values for 2020-2023 linearly extrapolated from the 2015-2019 trend. Original FARA data uses 2010 census tracts; values crosswalked to 2020 boundaries via area-weighted redistribution using the Census Bureau tract relationship file.",
+        "statement": "{value} percent of the low-income population in {features.name} lives beyond one mile from a supermarket.",
+        "type": "percent",
+        "unit": "",
+        "variants": ""
+    },
+    "economic_opportunity_profile_geo20": {
+        "aggregation_method": "population-weighted mean",
+        "categories": "",
+        "category": "Health Opportunity Index",
+        "citations": [
+            "vdh_hoi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Economic",
+        "layer": "",
+        "long_description": "PCA-derived profile score measuring economic opportunities within a community. Computed from three min-max normalized indicators: employment access index, income inequality (Gini, inverted), and labor force participation rate. Weights are from the VDH HOI PCA weight matrix. Higher values indicate greater economic opportunity.",
+        "long_name": "Economic Opportunity Profile",
+        "measure_type": "index",
+        "short_description": "PCA-weighted composite of employment access, income inequality, and labor force participation.",
+        "short_name": "Economic Opportunity",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Health Opportunity Index methodology",
+                "location_url": "https://apps.vdh.virginia.gov/omhhe/hoi/",
+                "name": "Virginia Department of Health",
+                "url": "https://www.vdh.virginia.gov/"
+            }
+        ],
+        "provenance": "Reproduced from VDH HOI methodology using independently computed sub-indicators from Census ACS, LODES, EPA EJScreen, USDA FARA, CMS PUF, Vera Institute, and other sources. Each indicator is min-max normalized per year, inverted where higher raw values indicate worse outcomes, then combined via VDH's PCA weight matrix to produce profile scores.",
+        "statement": "The economic opportunity profile score in {features.name} is {value}.",
+        "type": "index",
+        "unit": "",
+        "variants": ""
+    },
+    "consumer_opportunity_profile_geo20": {
+        "aggregation_method": "population-weighted mean",
+        "categories": "",
+        "category": "Health Opportunity Index",
+        "citations": [
+            "vdh_hoi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Economic",
+        "layer": "",
+        "long_description": "PCA-derived profile score measuring consumer resources available within a community. Computed from four min-max normalized indicators: H+T affordability index (inverted), average years of schooling, food access percentage (inverted), and material deprivation index (inverted). Weights are from the VDH HOI PCA weight matrix. Higher values indicate greater consumer opportunity.",
+        "long_name": "Consumer Opportunity Profile",
+        "measure_type": "index",
+        "short_description": "PCA-weighted composite of affordability, education, food access, and material deprivation.",
+        "short_name": "Consumer Opportunity",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Health Opportunity Index methodology",
+                "location_url": "https://apps.vdh.virginia.gov/omhhe/hoi/",
+                "name": "Virginia Department of Health",
+                "url": "https://www.vdh.virginia.gov/"
+            }
+        ],
+        "provenance": "Reproduced from VDH HOI methodology using independently computed sub-indicators from Census ACS, LODES, EPA EJScreen, USDA FARA, CMS PUF, Vera Institute, and other sources. Each indicator is min-max normalized per year, inverted where higher raw values indicate worse outcomes, then combined via VDH's PCA weight matrix to produce profile scores.",
+        "statement": "The consumer opportunity profile score in {features.name} is {value}.",
+        "type": "index",
+        "unit": "",
+        "variants": ""
+    },
+    "social_impact_profile_geo20": {
+        "aggregation_method": "population-weighted mean",
+        "categories": "",
+        "category": "Health Opportunity Index",
+        "citations": [
+            "vdh_hoi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Social",
+        "layer": "",
+        "long_description": "PCA-derived profile score measuring disparate access to health services and social cohesion within a community. Computed from three min-max normalized indicators: access to care index, segregation index (inverted), and incarceration rate (inverted). Weights are from the VDH HOI PCA weight matrix. Higher values indicate lower social impact burden.",
+        "long_name": "Social Impact Profile",
+        "measure_type": "index",
+        "short_description": "PCA-weighted composite of access to care, segregation, and incarceration.",
+        "short_name": "Social Impact",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Health Opportunity Index methodology",
+                "location_url": "https://apps.vdh.virginia.gov/omhhe/hoi/",
+                "name": "Virginia Department of Health",
+                "url": "https://www.vdh.virginia.gov/"
+            }
+        ],
+        "provenance": "Reproduced from VDH HOI methodology using independently computed sub-indicators from Census ACS, LODES, EPA EJScreen, USDA FARA, CMS PUF, Vera Institute, and other sources. Each indicator is min-max normalized per year, inverted where higher raw values indicate worse outcomes, then combined via VDH's PCA weight matrix to produce profile scores.",
+        "statement": "The social impact profile score in {features.name} is {value}.",
+        "type": "index",
+        "unit": "",
+        "variants": ""
+    },
+    "built_environment_profile_geo20": {
+        "aggregation_method": "population-weighted mean",
+        "categories": "",
+        "category": "Health Opportunity Index",
+        "citations": [
+            "vdh_hoi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Environment",
+        "layer": "",
+        "long_description": "PCA-derived profile score measuring the natural, built, and social environment of a community. Computed from four min-max normalized indicators: environmental hazard index (inverted), population churning rate (inverted), population density, and walkability index. Weights are from the VDH HOI PCA weight matrix. Higher values indicate a more favorable built environment.",
+        "long_name": "Built Environment Profile",
+        "measure_type": "index",
+        "short_description": "PCA-weighted composite of environmental hazard, population churning, density, and walkability.",
+        "short_name": "Built Environment",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Health Opportunity Index methodology",
+                "location_url": "https://apps.vdh.virginia.gov/omhhe/hoi/",
+                "name": "Virginia Department of Health",
+                "url": "https://www.vdh.virginia.gov/"
+            }
+        ],
+        "provenance": "Reproduced from VDH HOI methodology using independently computed sub-indicators from Census ACS, LODES, EPA EJScreen, USDA FARA, CMS PUF, Vera Institute, and other sources. Each indicator is min-max normalized per year, inverted where higher raw values indicate worse outcomes, then combined via VDH's PCA weight matrix to produce profile scores.",
+        "statement": "The built environment profile score in {features.name} is {value}.",
+        "type": "index",
+        "unit": "",
+        "variants": ""
+    },
+    "health_opportunity_index_geo20": {
+        "aggregation_method": "population-weighted mean",
+        "categories": "",
+        "category": "Health Opportunity Index",
+        "citations": [
+            "vdh_hoi"
+        ],
+        "data_type": "numeric",
+        "equity_category": "Health",
+        "layer": "",
+        "long_description": "The Health Opportunity Index (HOI) is a composite index measuring social determinants of health at the census tract level. It combines 14 indicators into 4 profiles (Economic Opportunity, Consumer Opportunity, Social Impact, Built Environment) via PCA, then aggregates profiles into a single index using VDH's weight matrix. Higher values indicate greater health opportunity. Quintile labels (Very Low to Very High Opportunity) are assigned per year based on the distribution of tract-level scores.",
+        "long_name": "Health Opportunity Index",
+        "measure_type": "index",
+        "short_description": "Composite index of social determinants of health from 14 indicators across 4 profiles.",
+        "short_name": "Health Opportunity Index",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "Health Opportunity Index methodology",
+                "location_url": "https://apps.vdh.virginia.gov/omhhe/hoi/",
+                "name": "Virginia Department of Health",
+                "url": "https://www.vdh.virginia.gov/"
+            }
+        ],
+        "provenance": "Reproduced from VDH HOI methodology using independently computed sub-indicators from Census ACS, LODES, EPA EJScreen, USDA FARA, CMS PUF, Vera Institute, and other sources. The 14 indicators are min-max normalized per year, inverted where higher raw values indicate worse outcomes, multiplied by VDH's 14x4 PCA weight matrix to produce 4 profile scores, then combined with composite weights to produce the final HOI score. Methodology documented in docs/composite_indices_methodology.md.",
+        "statement": "The Health Opportunity Index in {features.name} is {value}.",
+        "type": "index",
+        "unit": "",
+        "variants": ""
+    },
+    "affordability_index_geo20": {
+        "category": "Housing",
+        "data_type": "numeric",
+        "unit": "percent",
+        "long_name": "Housing + Transportation Affordability Index",
+        "short_name": "H+T Affordability",
+        "short_description": "Proportion of income spent on combined housing and transportation costs for a Regional Typical Household.",
+        "long_description": "The Housing + Transportation (H+T) Affordability Index measures the true cost of housing by combining housing and transportation costs as a percentage of household income. A neighborhood is considered affordable when H+T costs consume no more than 45% of household income. This measure uses the Regional Typical Household variant, which reflects a household earning the regional median income. Reproduced independently using CNT's published regression coefficients (Tables 3-6) applied to ACS demographic data, LEHD employment data, and GTFS transit schedule data at block group resolution.",
+        "aggregation_method": "mean",
+        "type": "index",
+        "statement": "In {features.name}, combined housing and transportation costs consume {value}% of a typical household's income.",
+        "provenance": "Independently reproduced using the methodology published by the Center for Neighborhood Technology (CNT). Regression coefficients from CNT Tables 3-6 are applied to 17 independent variables computed from American Community Survey data, LEHD Origin-Destination Employment Statistics, TIGER geographic data, and GTFS transit feeds. Block group estimates are aggregated to tract and county via unweighted means.",
+        "sources": [
+            {
+                "name": "Center for Neighborhood Technology",
+                "location": "H+T Affordability Index Methods",
+                "location_url": "https://htaindex.cnt.org/about/HTMethods_2016.pdf",
+                "url": "https://htaindex.cnt.org/"
+            },
+            {
+                "name": "American Community Survey 5-Year Estimates",
+                "location": "U.S. Census Bureau",
+                "url": "https://www.census.gov/programs-surveys/acs"
+            },
+            {
+                "name": "LEHD Origin-Destination Employment Statistics",
+                "location": "U.S. Census Bureau",
+                "url": "https://lehd.ces.census.gov/data/"
+            },
+            {
+                "name": "General Transit Feed Specification (GTFS)",
+                "location": "Mobility Database",
+                "url": "https://mobilitydatabase.org/"
+            }
+        ]
+    },
+    "housing_cost_pct_geo20": {
+        "category": "Housing",
+        "data_type": "numeric",
+        "unit": "percent",
+        "long_name": "Housing Cost as Percent of Income",
+        "short_name": "Housing Cost %",
+        "short_description": "Housing cost as a percentage of income for a Regional Typical Household.",
+        "long_description": "Annual housing cost (weighted average of median owner costs and gross rent by tenure ratio) as a percentage of the regional median household income. Part of the H+T Affordability Index decomposition.",
+        "aggregation_method": "mean",
+        "type": "percent",
+        "statement": "In {features.name}, housing costs consume {value}% of a typical household's income.",
+        "sources": [
+            {
+                "name": "American Community Survey 5-Year Estimates",
+                "location": "U.S. Census Bureau",
+                "url": "https://www.census.gov/programs-surveys/acs"
+            }
+        ]
+    },
+    "transport_cost_pct_geo20": {
+        "category": "Housing",
+        "data_type": "numeric",
+        "unit": "percent",
+        "long_name": "Transportation Cost as Percent of Income",
+        "short_name": "Transport Cost %",
+        "short_description": "Transportation cost as a percentage of income for a Regional Typical Household.",
+        "long_description": "Annual transportation cost (auto ownership + vehicle miles traveled + transit use) as a percentage of the regional median household income. Derived from CNT regression models for auto ownership, VMT, and transit ridership applied to neighborhood-level variables.",
+        "aggregation_method": "mean",
+        "type": "percent",
+        "statement": "In {features.name}, transportation costs consume {value}% of a typical household's income.",
+        "sources": [
+            {
+                "name": "Center for Neighborhood Technology",
+                "location": "H+T Affordability Index Methods",
+                "url": "https://htaindex.cnt.org/"
+            }
+        ]
+    },
+    "autos_per_hh_geo20": {
+        "category": "Housing",
+        "data_type": "numeric",
+        "unit": "vehicles",
+        "long_name": "Predicted Autos per Household",
+        "short_name": "Autos/HH",
+        "short_description": "Predicted number of automobiles per household based on neighborhood characteristics.",
+        "long_description": "Predicted automobile ownership per household from the CNT auto ownership regression model. Uses household income, density, transit access, employment gravity, and housing stock characteristics as predictors.",
+        "aggregation_method": "mean",
+        "type": "rate",
+        "statement": "In {features.name}, the predicted auto ownership is {value} vehicles per household.",
+        "sources": [
+            {
+                "name": "Center for Neighborhood Technology",
+                "location": "H+T Affordability Index Methods, Table 4",
+                "url": "https://htaindex.cnt.org/"
+            }
+        ]
+    },
+    "vmt_per_hh_geo20": {
+        "category": "Housing",
+        "data_type": "numeric",
+        "unit": "miles",
+        "long_name": "Predicted Annual Vehicle Miles Traveled per Household",
+        "short_name": "VMT/HH",
+        "short_description": "Predicted annual vehicle miles traveled per household based on neighborhood characteristics.",
+        "long_description": "Predicted annual vehicle miles traveled per household from the CNT VMT regression model. Reflects how neighborhood density, transit access, employment access, and housing patterns influence driving behavior.",
+        "aggregation_method": "mean",
+        "type": "rate",
+        "statement": "In {features.name}, the predicted annual VMT is {value} miles per household.",
+        "sources": [
+            {
+                "name": "Center for Neighborhood Technology",
+                "location": "H+T Affordability Index Methods, Table 5",
+                "url": "https://htaindex.cnt.org/"
+            }
+        ]
+    },
+    "transit_frac_geo20": {
+        "category": "Housing",
+        "data_type": "numeric",
+        "unit": "percent",
+        "long_name": "Predicted Transit Commuter Fraction",
+        "short_name": "Transit Use %",
+        "short_description": "Predicted fraction of commuters using public transit based on neighborhood characteristics.",
+        "long_description": "Predicted fraction of commuters using public transit from the CNT transit use regression model (quasibinomial). Reflects how transit connectivity, employment access, density, and household characteristics influence transit ridership. Block groups with no transit service are assigned 0%.",
+        "aggregation_method": "mean",
+        "type": "percent",
+        "statement": "In {features.name}, an estimated {value}% of commuters use public transit.",
+        "sources": [
+            {
+                "name": "Center for Neighborhood Technology",
+                "location": "H+T Affordability Index Methods, Table 6",
+                "url": "https://htaindex.cnt.org/"
+            }
+        ]
     }
 }
