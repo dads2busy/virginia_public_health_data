@@ -2895,10 +2895,11 @@
         "data_type": "decimal",
         "equity_category": "Status",
         "layer": "",
-        "long_description": "The percentage of individuals, ages 16-64, in the active labor force. The job participation rate is often used by economists as an indicator of economic development and growth. Geographies: Census Tract (11), County (5)",
+        "long_description": "Labor force participation measures the share of working-age adults (16-64) who are either employed or actively seeking work. Low participation rates may indicate discouraged workers who have stopped looking for employment, high rates of disability, or populations engaged in unpaid caregiving. Economists consider participation rates a more complete picture of economic engagement than employment rates alone.",
         "long_name": "Labor Force Participation Rate",
         "measure_type": "",
-        "short_description": "The percentage of individuals, ages 16-64, in the active labor force. The job participation rate is often used by economists as an indicator of economic development and growth. Geographies: Census Tract (11), County (5)",
+        "provenance": "From ACS 5-year estimates, table S2301 (Employment Status), variable S2301_C02_001 (civilian labor force participation rate for the population 16-64 years).",
+        "short_description": "Percentage of individuals aged 16-64 participating in the civilian labor force.",
         "short_name": "Labor Force Participation Rate",
         "sources": [
             {
