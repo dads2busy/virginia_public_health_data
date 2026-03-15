@@ -1,17 +1,12 @@
 import { defineConfig, devices } from '@playwright/test'
 
 /**
- * Playwright E2E config for running against an already-running dev server.
+ * Playwright E2E config.
  *
- * Usage:
- *   1) In one terminal: npm run dev
- *   2) In another:      npm run test:e2e
- *
- * Notes:
- * - By default this expects Next dev server at http://127.0.0.1:3000
- * - Override with: BASE_URL=http://127.0.0.1:3001 npm run test:e2e
+ * Defaults to port 3001 to avoid collisions with NCR dev server on 3000.
+ * Override with: BASE_URL=http://127.0.0.1:4000 npm run test:e2e
  */
-const baseURL = process.env.BASE_URL ?? 'http://127.0.0.1:3000'
+const baseURL = process.env.BASE_URL ?? 'http://127.0.0.1:3001'
 
 export default defineConfig({
   testDir: './e2e',
@@ -44,7 +39,7 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    command: 'npm run dev -- -p 3001',
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
