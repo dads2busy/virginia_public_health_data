@@ -19,8 +19,19 @@ Each dashboard has its own `playwright.config.ts` (already exists in VA). Both c
 
 - Test directory: `./e2e`
 - Base URL: `BASE_URL` env var, default `http://127.0.0.1:3000`
-- Add `webServer` block so Playwright starts/stops `npm run dev` automatically
 - Chromium only, 60s timeout, traces on failure
+- Add `webServer` block so Playwright starts/stops `npm run dev` automatically:
+
+```typescript
+webServer: {
+  command: 'npm run dev',
+  url: baseURL,
+  reuseExistingServer: !process.env.CI,
+  timeout: 120_000,
+},
+```
+
+`reuseExistingServer: true` (local) means if you already have `npm run dev` running, Playwright uses it. In CI, it always starts fresh.
 
 ### Directory Structure
 
@@ -42,23 +53,25 @@ e2e/
 
 Extracted from the existing `smoke.spec.ts`. Provides:
 
-- `collectDataSignals(page)` — counts visible tables-with-rows, Plotly charts, Leaflet map containers
+- `collectDataSignals(page)` — counts visible tables-with-rows, Plotly charts, Leaflet map containers. The `isVisible` helper is defined *inside* the `page.evaluate` callback (not importable from module scope) because `page.evaluate` serializes and runs in the browser context.
 - `attachNetworkGuards(page)` — tracks failed requests and successful `/data/*.json` responses
 - `assertSomeDataAppears(page, dataResponseCount)` — asserts at least one data signal exists and no "no data" text
-- `waitForDataUpdate(page, opts?)` — waits for network idle + a short settle period after an interaction
-- `isVisible(el)` — CSS visibility check (used inside `page.evaluate`)
+- `waitForDataUpdate(page)` — waits for `networkidle` + 500ms settle period. This matches the existing smoke test pattern. The settle accounts for React state updates that trigger after data fetch completes.
 
 #### `navigation.ts`
 
 Dashboard-interaction helpers that use `data-testid` attributes:
 
-- `selectVariableFromSidePanel(page, variableKey)` — clicks `[data-testid="var-btn-{key}"]`, expanding the parent category if collapsed
-- `selectVariableFromDropdown(page, variableKey)` — opens dropdown, clicks `[data-testid="variable-option-{key}"]`
-- `switchLayer(page, level)` — clicks layer button or selects from dropdown
+- `openFilterMenu(page)` — clicks the Filter button in Navbar if FilterMenu is not already visible. **Must be called before** `selectVariableFromDropdown` or `switchLayer`, since FilterMenu conditionally renders (`if (!filterOpen) return null`).
+- `selectVariableFromSidePanel(page, variableKey)` — clicks `[data-testid="var-btn-{key}"]`. In NCR, expands the parent category header first if collapsed. In VA, the SidePanel has no collapsible categories (buttons are always rendered within the active metric set), so no expansion is needed.
+- `selectVariableFromDropdown(page, variableKey)` — calls `openFilterMenu`, then opens the VariableDropdown trigger, clicks `[data-testid="variable-option-{key}"]`
+- `switchLayer(page, level)` — calls `openFilterMenu`. For VA: clicks `[data-testid="layer-btn-{level}"]`. For NCR: uses `page.selectOption('[data-testid="layer-select"]', level)` (native `<select>` element).
 - `changeYear(page, direction)` — clicks `[data-testid="year-prev"]` or `[data-testid="year-next"]`
 - `switchMetricSet(page, set)` — VA only; clicks `[data-testid="metric-tab-{set}"]`
-- `getAvailableVariables(page)` — reads `measure_info.json` via fetch to get the full variable list
+- `getAvailableVariables(page)` — fetches both `measure_info.json` and `datapackage.json` from the running app, returns the intersection: `Object.keys(measureInfo)` filtered to keys that appear in at least one `datapackage.resources[].schema.fields[]`. Excludes `_geo10` suffixed keys (dashboard is `_geo20` only).
 - `getCurrentYear(page)` — reads value from `[data-testid="year-input"]`
+
+**Dashboard detection:** Navigation helpers detect which dashboard they're running against by checking for the presence of `[data-testid="metric-tab-rural_health"]` (VA-only element). This avoids needing separate test files for the two dashboards.
 
 ## `data-testid` Attributes
 
@@ -102,22 +115,29 @@ Refactor to import helpers from `e2e/lib/signals.ts`. No behavior changes — sa
 
 ### `variables.spec.ts` (new, highest value)
 
-Data-driven test that verifies every variable in `measure_info.json` loads data.
+Data-driven test that verifies every variable loads data when selected.
 
 **Strategy:**
-1. Fetch `measure_info.json` from the running app at test setup
-2. Group variables by category (matching SidePanel structure)
-3. For each variable:
-   - Click its SidePanel button (`var-btn-{key}`)
-   - Wait for data update (network idle + settle)
+1. At test setup, fetch `measure_info.json` and `datapackage.json` from the running app
+2. Compute the testable variable list (intersection of both files, excluding `_geo10` keys)
+3. Generate one `test()` call per variable using `test.describe` + loop. Individual `test()` calls per variable (not a single test with a loop) so that failures are isolated and the report shows exactly which variables broke.
+4. Each test:
+   - Click the variable's SidePanel button (`var-btn-{key}`)
+   - Wait for data update (networkidle + 500ms settle)
    - Assert data signals (table rows + map container)
    - Assert no failed `/data/*.json` requests
 
-**Parallelism:** Tests run sequentially within a single browser context (the dashboard is a single-page app; each variable click is a state change, not a navigation). But Playwright's `fullyParallel` can run different test files concurrently.
+**VA metric-set handling:** The VA SidePanel only shows variables for the active metric set. The test must switch metric sets to reach all variables. Strategy: group variables by metric set (using the metric-set config), iterate metric sets in order, and within each set iterate its variables. Call `switchMetricSet(page, set)` once per group before iterating that group's variables.
 
-**Timeout:** 5 seconds per variable interaction (includes network + render). Total test timeout scaled to variable count.
+**NCR category handling:** NCR's SidePanel shows all variables grouped by category. Categories start collapsed. The `selectVariableFromSidePanel` helper expands the category before clicking the variable button.
 
-**Filtering variables:** Skip `_geo10` suffixed variables (dashboard is `_geo20` only). Read the variable list from `measure_info.json` keys, filtering to only keys present in `datapackage.json` resources (confirming they have actual data).
+**Variables only in VariableDropdown:** Some variables may appear in `measure_info.json` and `datapackage.json` but not in the SidePanel (the SidePanel shows a curated subset). For these, fall back to `selectVariableFromDropdown`. Detection: if `[data-testid="var-btn-{key}"]` does not exist in the DOM, use the dropdown instead.
+
+**Parallelism:** Individual `test()` calls within a describe block share a browser context (the dashboard is a single-page app). Different test files can run concurrently via `fullyParallel`.
+
+**Timeout:** 15 seconds per variable test (includes network + render + possible lazy data load). Total suite timeout is Playwright's default per-file timeout (60s), increased if needed via `test.describe.configure({ timeout })` based on variable count.
+
+**Data stability assumption:** Tests assume `public/data/` contains a complete data build. If data files are missing, the network guard will catch 404s and the test will fail with a clear message indicating which data file was not found.
 
 ### `layers.spec.ts` (new)
 
@@ -142,8 +162,34 @@ Tests year navigation for a sample variable.
 1. Load default variable
 2. Click year-next, assert data persists
 3. Click year-prev, assert data persists
-4. Navigate to min year boundary, assert prev button disabled
-5. Navigate to max year boundary, assert next button disabled
+4. Navigate to min year boundary, assert prev button is disabled (`expect(button).toBeDisabled()`)
+5. Navigate to max year boundary, assert next button is disabled (`expect(button).toBeDisabled()`)
+
+## Component Modifications Required
+
+Every `data-testid` attribute listed above must be added to the source components. None exist today.
+
+### VA Dashboard (`virginia_public_health_data`)
+
+| File | Attribute(s) to Add |
+|------|---------------------|
+| `src/components/layout/SidePanel.tsx` | `var-btn-{variable}` on each variable button, `metric-tab-{set}` on each metric set tab |
+| `src/components/layout/FilterMenu.tsx` | `layer-btn-{level}` on each layer button |
+| `src/components/shared/VariableDropdown.tsx` | `variable-dropdown` on trigger button, `variable-option-{key}` on each option |
+| `src/components/shared/YearSelector.tsx` | `year-prev`, `year-next` on arrow buttons, `year-input` on the input |
+| `src/components/table/RankTable.tsx` | `rank-table` on the outermost container |
+| `src/components/map/DashboardMap.tsx` | `dashboard-map` on the map wrapper div |
+
+### NCR Dashboard (`national_capital_region_data`)
+
+| File | Attribute(s) to Add |
+|------|---------------------|
+| `src/components/layout/SidePanel.tsx` | `var-btn-{variable}` on each variable button, `var-category-{slug}` on each category header |
+| `src/components/layout/FilterMenu.tsx` | `layer-select` on the geographic level `<select>` |
+| `src/components/shared/VariableDropdown.tsx` | `variable-dropdown` on trigger button, `variable-option-{key}` on each option |
+| `src/components/shared/YearSelector.tsx` | `year-prev`, `year-next` on arrow buttons, `year-input` on the input |
+| `src/components/table/RankTable.tsx` | `rank-table` on the outermost container |
+| `src/components/map/DashboardMap.tsx` | `dashboard-map` on the map wrapper div |
 
 ## Category Slug Generation
 
@@ -170,8 +216,13 @@ function slugify(category: string): string {
 
 Both dashboards get identical `e2e/lib/` files and test files. The tests are dashboard-agnostic because:
 
-- Variable lists come from each dashboard's own `measure_info.json` at runtime
-- Layer switching uses `data-testid` attributes that map to each dashboard's UI pattern
+- Variable lists come from each dashboard's own `measure_info.json` + `datapackage.json` at runtime
+- Navigation helpers auto-detect the dashboard (VA vs NCR) by checking for VA-only elements
+- Layer switching uses the appropriate interaction method per dashboard (buttons vs `<select>`)
 - The `webServer` config points each dashboard to its own `npm run dev`
 
 When adding a test to one dashboard, copy it to the other. The shared library (`e2e/lib/`) is duplicated rather than extracted to a shared package — this avoids cross-repo dependency management for a small amount of code.
+
+## CI Integration
+
+The existing `playwright.config.ts` already has CI-specific settings (retries: 2, workers: 2, GitHub Actions reporter). Adding a GitHub Actions workflow for E2E tests is out of scope for this design but the config is ready for it. The `webServer` block ensures CI can run tests without a separate server-start step.
