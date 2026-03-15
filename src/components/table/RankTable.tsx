@@ -134,7 +134,7 @@ export function RankTable() {
   }, [selectedRegionId, tableAutoscroll, tableScrollBehavior])
 
   return (
-    <div ref={containerRef} className="mt-2 max-h-[300px] overflow-auto rounded border dark:border-gray-700">
+    <div ref={containerRef} data-testid="rank-table" className="mt-2 max-h-[300px] overflow-auto rounded border dark:border-gray-700">
       <table className="w-full text-left">
         <thead className="sticky top-0 bg-gray-100 dark:bg-gray-800">
           {table.getHeaderGroups().map((headerGroup) => (

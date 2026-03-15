@@ -44,7 +44,7 @@ export function FilterMenu() {
   if (!filterOpen) return null
 
   return (
-    <div className="border-b border-slate-700 px-4 py-3" style={{ backgroundColor: 'var(--surface-dark)' }}>
+    <div data-testid="filter-menu" className="border-b border-slate-700 px-4 py-3" style={{ backgroundColor: 'var(--surface-dark)' }}>
       <div className="flex flex-wrap items-end gap-4">
         {/* Starting Layer */}
         <div>
@@ -55,6 +55,7 @@ export function FilterMenu() {
               return (
                 <button
                   key={level}
+                  data-testid={`layer-btn-${level}`}
                   disabled={!available}
                   onClick={() => setStartingShapes(level)}
                   className={`rounded px-3 py-1 text-sm capitalize ${

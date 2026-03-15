@@ -34,6 +34,7 @@ export function SidePanel() {
         {metricSetTabs.map((tab) => (
           <button
             key={tab.key}
+            data-testid={`metric-tab-${tab.key}`}
             onClick={() => setMetricSet(tab.key)}
             className={`w-full rounded px-3 py-2 text-left text-sm font-medium transition-colors ${
               metricSet === tab.key
@@ -58,6 +59,7 @@ export function SidePanel() {
             {section.buttons.map((btn) => (
               <button
                 key={btn.variable}
+                data-testid={`var-btn-${btn.variable}`}
                 onClick={() => setSelectedVariable(btn.variable)}
                 className={`w-full rounded px-3 py-1.5 text-left text-sm transition-colors ${
                   selectedVariable === btn.variable
