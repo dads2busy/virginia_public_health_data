@@ -62,16 +62,18 @@ Extracted from the existing `smoke.spec.ts`. Provides:
 
 Dashboard-interaction helpers that use `data-testid` attributes:
 
-- `openFilterMenu(page)` — clicks the Filter button in Navbar if FilterMenu is not already visible. **Must be called before** `selectVariableFromDropdown` or `switchLayer`, since FilterMenu conditionally renders (`if (!filterOpen) return null`).
+- `openFilterMenu(page)` — checks if `[data-testid="filter-menu"]` exists in the DOM; if not, clicks the Filter button in Navbar to open it. **Must be called before** `selectVariableFromDropdown` or `switchLayer`, since FilterMenu conditionally renders (`if (!filterOpen) return null`).
 - `selectVariableFromSidePanel(page, variableKey)` — clicks `[data-testid="var-btn-{key}"]`. In NCR, expands the parent category header first if collapsed. In VA, the SidePanel has no collapsible categories (buttons are always rendered within the active metric set), so no expansion is needed.
 - `selectVariableFromDropdown(page, variableKey)` — calls `openFilterMenu`, then opens the VariableDropdown trigger, clicks `[data-testid="variable-option-{key}"]`
-- `switchLayer(page, level)` — calls `openFilterMenu`. For VA: clicks `[data-testid="layer-btn-{level}"]`. For NCR: uses `page.selectOption('[data-testid="layer-select"]', level)` (native `<select>` element).
+- `switchLayer(page, level)` — calls `openFilterMenu`. For VA: clicks `[data-testid="layer-btn-{level}"]` (throws if the button is disabled, indicating the variable has no data at that level). For NCR: uses `page.selectOption('[data-testid="layer-select"]', level)` (native `<select>` element).
 - `changeYear(page, direction)` — clicks `[data-testid="year-prev"]` or `[data-testid="year-next"]`
 - `switchMetricSet(page, set)` — VA only; clicks `[data-testid="metric-tab-{set}"]`
 - `getAvailableVariables(page)` — fetches both `measure_info.json` and `datapackage.json` from the running app, returns the intersection: `Object.keys(measureInfo)` filtered to keys that appear in at least one `datapackage.resources[].schema.fields[]`. Excludes `_geo10` suffixed keys (dashboard is `_geo20` only).
 - `getCurrentYear(page)` — reads value from `[data-testid="year-input"]`
 
-**Dashboard detection:** Navigation helpers detect which dashboard they're running against by checking for the presence of `[data-testid="metric-tab-rural_health"]` (VA-only element). This avoids needing separate test files for the two dashboards.
+**Dashboard detection:** Navigation helpers detect which dashboard they're running against by reading the `name` field from `datapackage.json` (already fetched by `getAvailableVariables`). VA uses `"vdh_rural_health"`, NCR uses a different name. This is more robust than checking for DOM elements that may not exist yet during test setup.
+
+**VA metric-set mapping:** The test imports the metric-set configuration directly from `src/lib/config/metric-sets.ts` (a TypeScript module that maps metric set names to their variable lists). Playwright tests run in Node and can import project TypeScript files. This avoids hardcoding the mapping or probing the DOM.
 
 ## `data-testid` Attributes
 
@@ -90,6 +92,7 @@ Added to components in both dashboards. These are the stable selectors tests dep
 | YearSelector input | `data-testid="year-input"` | |
 | RankTable container | `data-testid="rank-table"` | |
 | Map container wrapper | `data-testid="dashboard-map"` | |
+| FilterMenu container | `data-testid="filter-menu"` | |
 
 ### VA Only
 
@@ -113,6 +116,8 @@ Refactor to import helpers from `e2e/lib/signals.ts`. No behavior changes — sa
 1. Home loads and data appears
 2. Can interact without blanking out data
 
+Note: the refactoring also fixes the existing `isVisible` scoping bug (currently defined at module scope but used inside `page.evaluate`, which works by accident due to function hoisting but is fragile).
+
 ### `variables.spec.ts` (new, highest value)
 
 Data-driven test that verifies every variable loads data when selected.
@@ -133,7 +138,7 @@ Data-driven test that verifies every variable loads data when selected.
 
 **Variables only in VariableDropdown:** Some variables may appear in `measure_info.json` and `datapackage.json` but not in the SidePanel (the SidePanel shows a curated subset). For these, fall back to `selectVariableFromDropdown`. Detection: if `[data-testid="var-btn-{key}"]` does not exist in the DOM, use the dropdown instead.
 
-**Parallelism:** Individual `test()` calls within a describe block share a browser context (the dashboard is a single-page app). Different test files can run concurrently via `fullyParallel`.
+**Parallelism:** `variables.spec.ts` uses `test.describe.configure({ mode: 'serial' })` to ensure sequential execution within the describe block, since tests share browser state (the dashboard is a single-page app — each variable click mutates shared state). Different test *files* can still run concurrently via `fullyParallel`.
 
 **Timeout:** 15 seconds per variable test (includes network + render + possible lazy data load). Total suite timeout is Playwright's default per-file timeout (60s), increased if needed via `test.describe.configure({ timeout })` based on variable count.
 
@@ -155,6 +160,8 @@ Tests geographic level switching for a known-good variable that exists at multip
 
 Uses a hardcoded "reference variable" known to exist at all levels (e.g., a demographics variable).
 
+NCR's 5 special geographic levels (civic_association, zip_code, planning_district, supervisor_district, human_services_region) are excluded from initial layer tests. Most variables only have data at county/tract/block_group. Special levels can be added as a follow-up once the core tests are stable.
+
 ### `years.spec.ts` (new)
 
 Tests year navigation for a sample variable.
@@ -174,7 +181,7 @@ Every `data-testid` attribute listed above must be added to the source component
 | File | Attribute(s) to Add |
 |------|---------------------|
 | `src/components/layout/SidePanel.tsx` | `var-btn-{variable}` on each variable button, `metric-tab-{set}` on each metric set tab |
-| `src/components/layout/FilterMenu.tsx` | `layer-btn-{level}` on each layer button |
+| `src/components/layout/FilterMenu.tsx` | `filter-menu` on container div, `layer-btn-{level}` on each layer button |
 | `src/components/shared/VariableDropdown.tsx` | `variable-dropdown` on trigger button, `variable-option-{key}` on each option |
 | `src/components/shared/YearSelector.tsx` | `year-prev`, `year-next` on arrow buttons, `year-input` on the input |
 | `src/components/table/RankTable.tsx` | `rank-table` on the outermost container |
@@ -185,7 +192,7 @@ Every `data-testid` attribute listed above must be added to the source component
 | File | Attribute(s) to Add |
 |------|---------------------|
 | `src/components/layout/SidePanel.tsx` | `var-btn-{variable}` on each variable button, `var-category-{slug}` on each category header |
-| `src/components/layout/FilterMenu.tsx` | `layer-select` on the geographic level `<select>` |
+| `src/components/layout/FilterMenu.tsx` | `filter-menu` on container div, `layer-select` on the geographic level `<select>` |
 | `src/components/shared/VariableDropdown.tsx` | `variable-dropdown` on trigger button, `variable-option-{key}` on each option |
 | `src/components/shared/YearSelector.tsx` | `year-prev`, `year-next` on arrow buttons, `year-input` on the input |
 | `src/components/table/RankTable.tsx` | `rank-table` on the outermost container |
