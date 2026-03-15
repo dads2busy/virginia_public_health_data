@@ -21,7 +21,7 @@
                 "url": "https://www.census.gov/programs-surveys/acs.html"
             }
         ],
-        "provenance": "Computed from ACS Table B28002: B28002_004 (broadband of any type) / B28002_001 (total households) \u00d7 100.",
+        "provenance": "Computed from ACS Table B28002: B28002_004 (broadband of any type) / B28002_001 (total households) × 100.",
         "statement": "{value} of households in {features.name} have a broadband connection.",
         "type": "percent",
         "unit": "household",
@@ -49,7 +49,7 @@
                 "url": "https://www.census.gov/programs-surveys/acs.html"
             }
         ],
-        "provenance": "Computed from ACS Table B28002: B28002_007 (cable, fiber optic, or DSL) / B28002_001 (total households) \u00d7 100.",
+        "provenance": "Computed from ACS Table B28002: B28002_007 (cable, fiber optic, or DSL) / B28002_001 (total households) × 100.",
         "statement": "{value} of households in {features.name} have a cable, fiber optic, or DSL internet connection.",
         "type": "percent",
         "unit": "household",
@@ -77,7 +77,7 @@
                 "url": "https://www.census.gov/programs-surveys/acs.html"
             }
         ],
-        "provenance": "Computed from ACS Table B28002: B28002_013 (no internet access) / B28002_001 (total households) \u00d7 100.",
+        "provenance": "Computed from ACS Table B28002: B28002_013 (no internet access) / B28002_001 (total households) × 100.",
         "statement": "{value} of households in {features.name} do not have internet access.",
         "type": "percent",
         "unit": "household",
@@ -1270,7 +1270,7 @@
         "aggregation_method": "mean",
         "categories": "",
         "category": "Demographics",
-        "citations": "Theil, H. (1972). Statistical Decomposition Analysis. Amsterdam: North-Holland Publishing Company.; Reardon, S. F., & Firebaugh, G. (2002). Measures of Multigroup Segregation. Sociological Methodology, 32(1), 33\u201367.",
+        "citations": "Theil, H. (1972). Statistical Decomposition Analysis. Amsterdam: North-Holland Publishing Company.; Reardon, S. F., & Firebaugh, G. (2002). Measures of Multigroup Segregation. Sociological Methodology, 32(1), 33–67.",
         "data_type": "decimal",
         "equity_category": "",
         "layer": "",
@@ -1804,7 +1804,7 @@
         "data_type": "decimal",
         "equity_category": "",
         "layer": "",
-        "long_description": "Townsend Material Deprivation Index adapted for U.S. Census data. Combines four ACS-derived indicators: (1) unemployment rate (B23025, log-transformed), (2) overcrowding \u2014 proportion of occupied housing units with more than 1 person per room (B25014, log-transformed), (3) non-car ownership \u2014 proportion of households with no vehicle (B25044), and (4) non-home ownership \u2014 proportion of renter-occupied units (S2502). Each indicator is z-scored within year and geography level, summed, the sum is z-scored again, then min-max rescaled to [0, 1]. Higher values indicate greater material deprivation. Computed using 2020 Census geographic boundaries.",
+        "long_description": "Townsend Material Deprivation Index adapted for U.S. Census data. Combines four ACS-derived indicators: (1) unemployment rate (B23025, log-transformed), (2) overcrowding — proportion of occupied housing units with more than 1 person per room (B25014, log-transformed), (3) non-car ownership — proportion of households with no vehicle (B25044), and (4) non-home ownership — proportion of renter-occupied units (S2502). Each indicator is z-scored within year and geography level, summed, the sum is z-scored again, then min-max rescaled to [0, 1]. Higher values indicate greater material deprivation. Computed using 2020 Census geographic boundaries.",
         "long_name": "Material deprivation indicator (2020 geographies)",
         "measure_type": "index",
         "short_description": "Townsend Material Deprivation Index (0-1) combining unemployment, overcrowding, non-car ownership, and non-home ownership.",
@@ -1868,11 +1868,11 @@
         "equity_category": "Status",
         "layer": "",
         "long_description": "The employment rate measures the share of the civilian labor force that is currently working. High employment rates indicate a healthy local labor market with sufficient job opportunities. Low rates may reflect structural economic challenges, skills mismatches, or barriers to employment such as transportation or childcare access.",
-        "long_name": "Percentage civilian employed",
+        "long_name": "Employment Rate",
         "measure_type": "",
-        "provenance": "Computed from ACS 5-year estimates, table B23025 (Employment Status for the Population 16 Years and Over). Employment rate calculated as B23025_004 (employed) / B23025_003 (civilian labor force) \u00d7 100.",
+        "provenance": "Computed from ACS 5-year estimates, table B23025 (Employment Status for the Population 16 Years and Over). Employment rate calculated as B23025_004 (employed) / B23025_003 (civilian labor force) × 100.",
         "short_description": "Percentage of the civilian workforce population that is employed.",
-        "short_name": "Percentage employed",
+        "short_name": "Employment Rate",
         "sources": [
             {
                 "name": "American Community Survey",
@@ -1979,7 +1979,7 @@
         "data_type": "numeric",
         "equity_category": "Status",
         "layer": "",
-        "long_description": "The percentage of food insecure children. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
+        "long_description": "The percentage of food insecure children. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
         "long_name": "Percentage of food insecure children",
         "measure_type": "percent",
         "short_description": "",
@@ -2007,7 +2007,7 @@
         "data_type": "numeric",
         "equity_category": "Status",
         "layer": "",
-        "long_description": "The number of food insecure children. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
+        "long_description": "The number of food insecure children. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. Food insecure children are those children living in households that are not necessarily food insecure all the time. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: County (5)",
         "long_name": "Count of food insecure children",
         "measure_type": "count",
         "short_description": "",
@@ -2091,7 +2091,7 @@
         "data_type": "numeric",
         "equity_category": "",
         "layer": "",
-        "long_description": "Estimated number of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America\u2019s Map the Meal Gap website. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
+        "long_description": "Estimated number of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America’s Map the Meal Gap website. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
         "long_name": "Estimated number of total people in food insecure households",
         "measure_type": "count",
         "short_description": "",
@@ -2119,7 +2119,7 @@
         "data_type": "numeric",
         "equity_category": "",
         "layer": "",
-        "long_description": "Estimated percentage of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture\u2019s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America\u2019s Map the Meal Gap website. Food insecurity may reflect a household\u2019s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
+        "long_description": "Estimated percentage of total people in food insecure households according to Feeding America. Food insecurity refers to the US Department of Agriculture’s (USDA) measure of lack of access, at times, to enough food for an active, healthy life for all household members and limited or uncertain availability of nutritionally adequate foods. The brief providing the methodology of calculating these estimates is available on Feeding America’s Map the Meal Gap website. Food insecurity may reflect a household’s need to make trade-offs between important basic needs, such as housing or medical bills, and purchasing nutritionally adequate foods. Geographies: Census tract (11), County (5), Health Districts (51_hd)",
         "long_name": "Estimated percentage of total people in food insecure households",
         "measure_type": "percent",
         "short_description": "",
@@ -2228,7 +2228,7 @@
         "data_type": "integer",
         "equity_category": "",
         "layer": "",
-        "long_description": "Quintile indicator (1\u20135) measuring access to primary care, where 1 = worst access and 5 = best access. Derived from a composite z-score combining two components: (1) population-to-physician ratio, using CMS Medicare Physician PUF data to count primary care physicians (Internal Medicine, Family Practice, Pediatric Medicine, OB/GYN) within 30 miles of each census tract via OSRM driving distances and HUD ZIP-to-tract crosswalk allocation; and (2) percentage of uninsured residents aged 19-64 from ACS 5-year estimates (B27010). The underlying z-score is computed as -1 \u00d7 z(z(pop_per_physician) + z(pct_uninsured)), then converted to quintiles per year across all Virginia census tracts. County and health district values are the mean of their constituent tract quintiles.",
+        "long_description": "Quintile indicator (1–5) measuring access to primary care, where 1 = worst access and 5 = best access. Derived from a composite z-score combining two components: (1) population-to-physician ratio, using CMS Medicare Physician PUF data to count primary care physicians (Internal Medicine, Family Practice, Pediatric Medicine, OB/GYN) within 30 miles of each census tract via OSRM driving distances and HUD ZIP-to-tract crosswalk allocation; and (2) percentage of uninsured residents aged 19-64 from ACS 5-year estimates (B27010). The underlying z-score is computed as -1 × z(z(pop_per_physician) + z(pct_uninsured)), then converted to quintiles per year across all Virginia census tracts. County and health district values are the mean of their constituent tract quintiles.",
         "long_name": "Access to care indicator (2020 geographies)",
         "measure_type": "index",
         "short_description": "Quintile indicator (1-5) of physician availability within 30 miles and insurance coverage rate, where 5 = best access.",
@@ -2519,118 +2519,6 @@
         "unit": "index score",
         "variants": ""
     },
-    "vi_socioeconomic": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Health",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The socioeconomic status theme of the Social Vulnerability Index captures community-level economic disadvantage using Census indicators such as poverty rate, unemployment, per capita income, and educational attainment. Tracts with high socioeconomic vulnerability face compounding disadvantages that limit residents ability to prepare for and recover from emergencies. Economic hardship restricts access to transportation, healthcare, and safe housing during disaster events. This theme is one of four components that contribute to the overall SVI score.",
-        "long_name": "Social Vulnerability Index (Socioeconomic Status)",
-        "measure_type": "percentage",
-        "short_description": "Socioeconomic status theme for calculating Social Vulnerability Index.",
-        "short_name": "Social Vulnerability Index (Socioeconomic Status)",
-        "sources": [
-            {
-                "date_accessed": 2026,
-                "location": "ACS 5-Year Estimates (S1701, S2503, S2701, S0101, S0601, DP03, DP04, B03002, B09001, B11012, B16005, B18101, B26001)",
-                "location_url": "https://data.census.gov/",
-                "name": "American Community Survey / CDC ATSDR SVI Methodology",
-                "url": "https://www.atsdr.cdc.gov/placeandhealth/svi/index.html"
-            }
-        ],
-        "provenance": "Computed from ACS 5-year estimates using the CDC/ATSDR SVI 2022 methodology. Sixteen social factors from ACS tables (B/S/DP) are converted to percentages, percentile-ranked within the region (VA or NCR), summed by theme, and re-ranked. Uses B-table variables (B03002, B09001, B11012, B18101) for cross-year stability instead of DP05/DP02 which renumber across ACS vintages. Validated against CDC SVI 2020 at r>0.998 for all themes.",
-        "statement": "The socioeconomic status for {feature.name} is {value}.",
-        "type": "percent",
-        "unit": "index score",
-        "variants": ""
-    },
-    "vi_household": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Health",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The household characteristics theme of the Social Vulnerability Index measures demographic factors that increase vulnerability, including the proportion of residents aged 65 and older, aged 17 and under, with disabilities, and single-parent households. These populations often require additional assistance during evacuations and have specialized medical or caregiving needs that complicate disaster response. High scores on this theme indicate communities where a larger share of residents may be unable to shelter in place or evacuate independently. This theme is one of four components that contribute to the overall SVI score.",
-        "long_name": "Social Vulnerability Index (Housing characteristics)",
-        "measure_type": "percentage",
-        "short_description": "Housing characteristics index theme for calculating Social Vulnerability Index.",
-        "short_name": "Social Vulnerability Index (Housing characteristics)",
-        "sources": [
-            {
-                "date_accessed": 2026,
-                "location": "ACS 5-Year Estimates (S1701, S2503, S2701, S0101, S0601, DP03, DP04, B03002, B09001, B11012, B16005, B18101, B26001)",
-                "location_url": "https://data.census.gov/",
-                "name": "American Community Survey / CDC ATSDR SVI Methodology",
-                "url": "https://www.atsdr.cdc.gov/placeandhealth/svi/index.html"
-            }
-        ],
-        "provenance": "Computed from ACS 5-year estimates using the CDC/ATSDR SVI 2022 methodology. Sixteen social factors from ACS tables (B/S/DP) are converted to percentages, percentile-ranked within the region (VA or NCR), summed by theme, and re-ranked. Uses B-table variables (B03002, B09001, B11012, B18101) for cross-year stability instead of DP05/DP02 which renumber across ACS vintages. Validated against CDC SVI 2020 at r>0.998 for all themes.",
-        "statement": "The Housing characteristics index for {feature.name} is {value}.",
-        "type": "percent",
-        "unit": "index score",
-        "variants": ""
-    },
-    "vi_race_ethnicity": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Health",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The racial and ethnic minority status theme of the Social Vulnerability Index captures the proportion of residents who identify as racial or ethnic minorities and those with limited English proficiency. Historical patterns of residential segregation and disinvestment mean that minority communities often face disproportionate exposure to environmental hazards and reduced access to emergency resources. Language barriers can further impede receipt of evacuation warnings and access to recovery assistance. This theme is one of four components that contribute to the overall SVI score.",
-        "long_name": "Social Vulnerability Index (Racial & ethnic minority status)",
-        "measure_type": "percentage",
-        "short_description": "Racial & ethnic minority status theme for calculating Social Vulnerability Index.",
-        "short_name": "Social Vulnerability Index (Racial & ethnic minority status)",
-        "sources": [
-            {
-                "date_accessed": 2026,
-                "location": "ACS 5-Year Estimates (S1701, S2503, S2701, S0101, S0601, DP03, DP04, B03002, B09001, B11012, B16005, B18101, B26001)",
-                "location_url": "https://data.census.gov/",
-                "name": "American Community Survey / CDC ATSDR SVI Methodology",
-                "url": "https://www.atsdr.cdc.gov/placeandhealth/svi/index.html"
-            }
-        ],
-        "provenance": "Computed from ACS 5-year estimates using the CDC/ATSDR SVI 2022 methodology. Sixteen social factors from ACS tables (B/S/DP) are converted to percentages, percentile-ranked within the region (VA or NCR), summed by theme, and re-ranked. Uses B-table variables (B03002, B09001, B11012, B18101) for cross-year stability instead of DP05/DP02 which renumber across ACS vintages. Validated against CDC SVI 2020 at r>0.998 for all themes.",
-        "statement": "The racial & ethnic minority status for {feature.name} is {value}.",
-        "type": "percent",
-        "unit": "index score",
-        "variants": ""
-    },
-    "vi_housing_transportation": {
-        "aggregation_method": "mean",
-        "categories": "",
-        "category": "Health",
-        "citations": "",
-        "data_type": "decimal",
-        "equity_category": "Status",
-        "layer": "",
-        "long_description": "The housing type and transportation theme of the Social Vulnerability Index measures structural vulnerability through indicators such as multi-unit housing, mobile homes, crowding, lack of vehicle access, and group quarters populations. Residents in multi-unit or mobile housing face heightened risks during natural disasters, while those without vehicles may be unable to evacuate. Crowded living conditions can accelerate disease transmission during public health emergencies. This theme is one of four components that contribute to the overall SVI score.",
-        "long_name": "Social Vulnerability Index (Housing type & transportation)",
-        "measure_type": "percentage",
-        "short_description": "Housing type & transportation theme for calculating Social Vulnerability Index.",
-        "short_name": "Social Vulnerability Index (Housing type & transportation)",
-        "sources": [
-            {
-                "date_accessed": 2026,
-                "location": "ACS 5-Year Estimates (S1701, S2503, S2701, S0101, S0601, DP03, DP04, B03002, B09001, B11012, B16005, B18101, B26001)",
-                "location_url": "https://data.census.gov/",
-                "name": "American Community Survey / CDC ATSDR SVI Methodology",
-                "url": "https://www.atsdr.cdc.gov/placeandhealth/svi/index.html"
-            }
-        ],
-        "provenance": "Computed from ACS 5-year estimates using the CDC/ATSDR SVI 2022 methodology. Sixteen social factors from ACS tables (B/S/DP) are converted to percentages, percentile-ranked within the region (VA or NCR), summed by theme, and re-ranked. Uses B-table variables (B03002, B09001, B11012, B18101) for cross-year stability instead of DP05/DP02 which renumber across ACS vintages. Validated against CDC SVI 2020 at r>0.998 for all themes.",
-        "statement": "The housing type & transportation index for {feature.name} is {value}.",
-        "type": "percent",
-        "unit": "index score",
-        "variants": ""
-    },
     "avg_monthly_rate": {
         "aggregation_method": "",
         "categories": "",
@@ -2775,7 +2663,7 @@
         "data_type": "numeric",
         "equity_category": "",
         "layer": "",
-        "long_description": "The Walkability Index is a composite measure that ranks block groups according to their relative walkability, computed annually for 2017-2023. It combines four components: (1) D2A_Ranked \u2014 employment and household land use entropy from LEHD LODES WAC job counts by NAICS sector and ACS B11001 household counts, measuring the diversity of nearby land uses; (2) D2B_Ranked \u2014 employment-only entropy across five tiers (retail, office, industrial, service, entertainment); (3) D3B_Ranked \u2014 street intersection density from the EPA Smart Location Database V3, measuring pedestrian-friendly street connectivity; and (4) D4C_Ranked \u2014 distance to the nearest transit stop computed from national GTFS feeds via the Mobility Database, measuring transit accessibility. Each component is ranked into 20 quantile bins across all block groups in the coverage area. The final index is calculated as NatWalkInd = D2A_Ranked/6 + D2B_Ranked/6 + D3B_Ranked/3 + D4C_Ranked/3, producing scores from 1 (least walkable) to 20 (most walkable). Block group scores are aggregated to Census tracts and counties using population-weighted means.",
+        "long_description": "The Walkability Index is a composite measure that ranks block groups according to their relative walkability, computed annually for 2017-2023. It combines four components: (1) D2A_Ranked — employment and household land use entropy from LEHD LODES WAC job counts by NAICS sector and ACS B11001 household counts, measuring the diversity of nearby land uses; (2) D2B_Ranked — employment-only entropy across five tiers (retail, office, industrial, service, entertainment); (3) D3B_Ranked — street intersection density from the EPA Smart Location Database V3, measuring pedestrian-friendly street connectivity; and (4) D4C_Ranked — distance to the nearest transit stop computed from national GTFS feeds via the Mobility Database, measuring transit accessibility. Each component is ranked into 20 quantile bins across all block groups in the coverage area. The final index is calculated as NatWalkInd = D2A_Ranked/6 + D2B_Ranked/6 + D3B_Ranked/3 + D4C_Ranked/3, producing scores from 1 (least walkable) to 20 (most walkable). Block group scores are aggregated to Census tracts and counties using population-weighted means.",
         "long_name": "Walkability Index",
         "measure_type": "index",
         "short_description": "Composite walkability score (1-20) combining employment entropy, street connectivity, and transit proximity, updated annually from LODES, EPA SLD, and GTFS data.",
@@ -3208,10 +3096,10 @@
         "data_type": "numeric",
         "equity_category": "",
         "layer": "",
-        "long_description": "The uninsured rate measures the share of the population lacking any health coverage \u2014 public or private. Uninsured individuals are more likely to delay or forgo necessary medical care, leading to worse health outcomes and higher emergency department utilization. High uninsured rates often reflect gaps in employer-sponsored coverage, Medicaid eligibility, or marketplace affordability.",
+        "long_description": "The uninsured rate measures the share of the population lacking any health coverage — public or private. Uninsured individuals are more likely to delay or forgo necessary medical care, leading to worse health outcomes and higher emergency department utilization. High uninsured rates often reflect gaps in employer-sponsored coverage, Medicaid eligibility, or marketplace affordability.",
         "long_name": "Percent of population without health insurance",
         "measure_type": "percent",
-        "provenance": "Computed from ACS 5-year estimates, table B27010 (Types of Health Insurance Coverage by Age). Uninsured percentage = 100 \u00d7 (B27010_033 + B27010_050) / (B27010_018 + B27010_034) for the working-age population (19-64). Values standardized to 2020 census boundaries using population-weighted crosswalks.",
+        "provenance": "Computed from ACS 5-year estimates, table B27010 (Types of Health Insurance Coverage by Age). Uninsured percentage = 100 × (B27010_033 + B27010_050) / (B27010_018 + B27010_034) for the working-age population (19-64). Values standardized to 2020 census boundaries using population-weighted crosswalks.",
         "short_description": "Percentage of the working-age population (19-64) without any type of health insurance coverage.",
         "short_name": "Uninsured population",
         "sources": [
@@ -3239,7 +3127,7 @@
         "long_description": "The insured rate measures the share of the population covered by any health insurance plan, including employer-sponsored, marketplace, Medicaid, Medicare, or military coverage. Higher insurance rates indicate better access to preventive and routine care. This measure complements the uninsured rate by highlighting areas where coverage efforts have been most successful.",
         "long_name": "Percent of population with health insurance",
         "measure_type": "percent",
-        "provenance": "Computed from ACS 5-year estimates, table B27010 (Types of Health Insurance Coverage by Age). Insured percentage = 100 \u2212 uninsured percentage. Values standardized to 2020 census boundaries using population-weighted crosswalks.",
+        "provenance": "Computed from ACS 5-year estimates, table B27010 (Types of Health Insurance Coverage by Age). Insured percentage = 100 − uninsured percentage. Values standardized to 2020 census boundaries using population-weighted crosswalks.",
         "short_description": "Percentage of the working-age population (19-64) with any type of health insurance coverage.",
         "short_name": "Insured population",
         "sources": [
@@ -3254,6 +3142,454 @@
         "statement": "{value} of the population has health insurance in {features.name}.",
         "type": "percent",
         "unit": "",
+        "variants": ""
+    },
+    "inadequate_pc": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Health",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Proportion of births where the mother received inadequate prenatal care — either starting after the fourth month of pregnancy, receiving fewer than 50% of recommended visits, or having no prenatal care at all. High inadequate rates signal systemic barriers to maternal health services such as provider shortages, lack of insurance, or geographic isolation. Inadequate prenatal care is associated with higher rates of preterm birth, low birth weight, and maternal complications.",
+        "long_name": "Adequacy of Prenatal Care Utilization: Inadequate",
+        "measure_type": "proportion",
+        "short_description": "Proportion of births with late or no prenatal care, or fewer than 50% of recommended visits.",
+        "short_name": "Kotelchuck (inadequate percent)",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "CDC WONDER Natality Expanded (D149)",
+                "location_url": "https://wonder.cdc.gov/natality-expanded-current.html",
+                "name": "Centers for Disease Control and Prevention",
+                "url": "https://www.cdc.gov"
+            }
+        ],
+        "provenance": "Prenatal care adequacy is measured using the Adequacy of Prenatal Care Utilization (APNCU) index, also known as the Kotelchuck Index (Kotelchuck, M., 1994). Birth records are queried from CDC WONDER Natality Expanded (D149) by county, month, and number of prenatal visits. The index classifies each birth into four categories based on the month prenatal care began and the ratio of observed to expected visits. This pipeline assumes 39-week gestational age when computing expected visits.",
+        "statement": "{value}% of births in {features.name} had inadequate prenatal care.",
+        "type": "percent",
+        "unit": "percent",
+        "variants": ""
+    },
+    "intermediate_pc": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Health",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Proportion of births where the mother began prenatal care in the first four months but completed only 50-79% of recommended visits. Intermediate utilization often reflects barriers that prevent women from maintaining their visit schedule — transportation difficulties, work constraints, or gaps in insurance coverage — even when they initiate care early.",
+        "long_name": "Adequacy of Prenatal Care Utilization: Intermediate",
+        "measure_type": "proportion",
+        "short_description": "Proportion of births with 50-79% of recommended prenatal visits, starting by the 4th month.",
+        "short_name": "Kotelchuck (intermediate percent)",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "CDC WONDER Natality Expanded (D149)",
+                "location_url": "https://wonder.cdc.gov/natality-expanded-current.html",
+                "name": "Centers for Disease Control and Prevention",
+                "url": "https://www.cdc.gov"
+            }
+        ],
+        "provenance": "Prenatal care adequacy is measured using the Adequacy of Prenatal Care Utilization (APNCU) index, also known as the Kotelchuck Index (Kotelchuck, M., 1994). Birth records are queried from CDC WONDER Natality Expanded (D149) by county, month, and number of prenatal visits. The index classifies each birth into four categories based on the month prenatal care began and the ratio of observed to expected visits. This pipeline assumes 39-week gestational age when computing expected visits.",
+        "statement": "{value}% of births in {features.name} had intermediate prenatal care.",
+        "type": "percent",
+        "unit": "percent",
+        "variants": ""
+    },
+    "adequate_pc": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Health",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Proportion of births where the mother received adequate prenatal care — starting in the first four months and completing 80-109% of recommended visits. This is the target level of prenatal care utilization. Counties with high adequate rates have maternal health systems that successfully engage pregnant women early and maintain recommended visit schedules through delivery.",
+        "long_name": "Adequacy of Prenatal Care Utilization: Adequate",
+        "measure_type": "proportion",
+        "short_description": "Proportion of births with 80-109% of recommended prenatal visits, starting by the 4th month.",
+        "short_name": "Kotelchuck (adequate percent)",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "CDC WONDER Natality Expanded (D149)",
+                "location_url": "https://wonder.cdc.gov/natality-expanded-current.html",
+                "name": "Centers for Disease Control and Prevention",
+                "url": "https://www.cdc.gov"
+            }
+        ],
+        "provenance": "Prenatal care adequacy is measured using the Adequacy of Prenatal Care Utilization (APNCU) index, also known as the Kotelchuck Index (Kotelchuck, M., 1994). Birth records are queried from CDC WONDER Natality Expanded (D149) by county, month, and number of prenatal visits. The index classifies each birth into four categories based on the month prenatal care began and the ratio of observed to expected visits. This pipeline assumes 39-week gestational age when computing expected visits.",
+        "statement": "{value}% of births in {features.name} had adequate prenatal care.",
+        "type": "percent",
+        "unit": "percent",
+        "variants": ""
+    },
+    "adequateplus_pc": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Health",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Proportion of births where the mother received more than the recommended number of prenatal visits, beginning in the first four months of pregnancy (110% or more of expected visits). High adequate-plus rates may reflect intensive monitoring of high-risk pregnancies or provider practice patterns. The Kotelchuck Index classifies prenatal care utilization into four tiers based on timing of first visit and proportion of recommended visits received.",
+        "long_name": "Adequacy of Prenatal Care Utilization: Adequate Plus",
+        "measure_type": "proportion",
+        "short_description": "Proportion of births with prenatal care exceeding 110% of recommended visits, starting by the 4th month.",
+        "short_name": "Kotelchuck (adequate plus percent)",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "CDC WONDER Natality Expanded (D149)",
+                "location_url": "https://wonder.cdc.gov/natality-expanded-current.html",
+                "name": "Centers for Disease Control and Prevention",
+                "url": "https://www.cdc.gov"
+            }
+        ],
+        "provenance": "Prenatal care adequacy is measured using the Adequacy of Prenatal Care Utilization (APNCU) index, also known as the Kotelchuck Index (Kotelchuck, M., 1994). Birth records are queried from CDC WONDER Natality Expanded (D149) by county, month, and number of prenatal visits. The index classifies each birth into four categories based on the month prenatal care began and the ratio of observed to expected visits (expected visits defined by ACOG guidelines). This pipeline assumes 39-week gestational age when computing expected visits, as WONDER does not report gestational age in cross-tabulations.",
+        "statement": "{value}% of births in {features.name} had adequate-plus prenatal care.",
+        "type": "percent",
+        "unit": "percent",
+        "variants": ""
+    },
+    "perc_children_raised_by_GPs_geo20": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Demographics",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "State",
+        "layer": "",
+        "long_description": "The share of children living in grandparent-headed households reflects family disruption driven by parental incarceration, substance abuse, military deployment, or other crises. Communities with high rates of grandparent caregiving may need additional support services including kinship care resources, legal assistance for guardianship, and financial aid for older caregivers on fixed incomes.",
+        "long_name": "Children Raised by Grandparents (percent)",
+        "measure_type": "percent",
+        "provenance": "Computed from ACS 5-year estimates: table B10001 (Grandchildren Living with a Grandparent Householder) as a percentage of total population from table B01001 (Sex by Age).",
+        "short_description": "Percentage of children being raised by their grandparents.",
+        "short_name": "Children Raised by Grandparents",
+        "sources": [
+            {
+                "date_accessed": 2025,
+                "location": "5-Year estimates, tables B10001 and B01001, via the API",
+                "location_url": "https://www.census.gov/data/developers/data-sets/acs-5year.html",
+                "name": "American Community Survey",
+                "url": "https://www.census.gov/programs-surveys/acs.html"
+            }
+        ],
+        "statement": "The population of children raised by grandparents is {value} in {features.name}.",
+        "type": "percent",
+        "unit": "percent",
+        "variants": ""
+    },
+    "median_household_income_geo20": {
+        "aggregation_method": "median",
+        "categories": "",
+        "category": "Financial Well Being",
+        "citations": "",
+        "data_type": "integer",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Median household income represents the midpoint of all household incomes in a community — half earn more, half earn less. It is one of the most widely used indicators of economic well-being, reflecting local employment opportunities, wage levels, and cost-of-living dynamics. Communities with low median incomes often face compounding challenges in housing affordability, food security, and access to services.",
+        "long_name": "Median household income",
+        "measure_type": "count",
+        "provenance": "From ACS 5-year estimates, table B19013 (Median Household Income in the Past 12 Months, in Inflation-Adjusted Dollars). Values are adjusted to the survey year's constant dollars by the Census Bureau.",
+        "short_description": "Median household income in inflation-adjusted dollars.",
+        "short_name": "Median household income",
+        "sources": [
+            {
+                "date_accessed": 2022,
+                "location": "Table B19013",
+                "location_url": "",
+                "name": "American Community Survey",
+                "url": "https://www.census.gov/programs-surveys/acs"
+            }
+        ],
+        "statement": "The median household income in {features.name} is {value} per year.",
+        "type": "dollar",
+        "unit": "dollars",
+        "variants": ""
+    },
+    "total_cropland_acres": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total cropland acreage measures the extent of land actively cultivated for crop production in a county. This indicator reflects the scale of crop agriculture and land use patterns, serving as a baseline for understanding agricultural capacity and food production potential in the region.",
+        "long_name": "Total acerage used in agriculture for cropland",
+        "measure_type": "count",
+        "short_description": "Total acreage of land under crop cultivation in the county.",
+        "short_name": "Total acreage for cropland",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "The total acreage for cropland to {features.name} is {value}.",
+        "type": "count",
+        "unit": "acres",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "total_irrigatedCropland_acre": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Irrigated cropland acreage represents the portion of cropland equipped with irrigation infrastructure. Access to irrigation is a key determinant of crop yield stability and the ability to grow higher-value crops. Counties with more irrigated land tend to have more resilient agricultural output during drought conditions.",
+        "long_name": "Total acreage used in agriculture for irrigated cropland",
+        "measure_type": "count",
+        "short_description": "Acreage of cropland equipped with irrigation systems.",
+        "short_name": "Total acreage for irrigated cropland",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "The total acreage for irrigated cropland to {features.name} is {value}.",
+        "type": "count",
+        "unit": "acres",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "total_cropland_operations": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "The number of farm operations with cropland indicates how many distinct farming enterprises are engaged in crop production. This measure helps distinguish between counties where cropland is concentrated in a few large operations versus those with many smaller farms, which has implications for rural employment and economic diversity.",
+        "long_name": "Number of operations with land devoted to cropland growing",
+        "measure_type": "count",
+        "short_description": "Count of farm operations engaged in crop production.",
+        "short_name": "Number of operations with cropland",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "The total number of operations with cropland to {features.name} is {value}.",
+        "type": "count",
+        "unit": "operations",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "total_animal_expense": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total animal industry expenses capture the cost of livestock production including feed, veterinary care, and related inputs. High animal expenses often indicate a strong livestock sector and can reflect both the scale of animal agriculture and the intensity of production practices in a county.",
+        "long_name": "County's total expenses towards animal industry",
+        "measure_type": "count",
+        "short_description": "Aggregate expenditures on livestock production and animal care.",
+        "short_name": "Total expenses towards animal industry",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "The overall expenses towards animals to {features.name} is {value}.",
+        "type": "dollar",
+        "unit": "dollar",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "fruit_treeNut_total_sales": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total sales of fruits and tree nuts measures the market value of orchard and specialty crop production. This indicator highlights counties with significant horticultural activity, which tends to be labor-intensive and supports seasonal employment. Strong fruit and tree nut sales can indicate diversified agricultural economies.",
+        "long_name": "Total sales of fruits and treenuts within a given county",
+        "measure_type": "count",
+        "short_description": "Market value of fruit and tree nut products sold.",
+        "short_name": "Total sales of fruits and treenuts",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "Total sales of fruit and tree nuts to {features.name} is {value}.",
+        "type": "dollar",
+        "unit": "dollar",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "total_animalProducts_sales": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total animal product sales capture the market value of livestock and related products including meat, dairy, eggs, and wool. This measure reflects the economic contribution of the animal agriculture sector and is an important indicator of rural economic output and food supply capacity.",
+        "long_name": "Total sales of animal products within a given county",
+        "measure_type": "count",
+        "short_description": "Market value of all livestock and animal products sold.",
+        "short_name": "Total sales of animal products",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "Total sales of animal products to {features.name} is {value}.",
+        "type": "dollar",
+        "unit": "dollar",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "total_commodity_sales": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total commodity sales represent the aggregate market value of all agricultural products sold in a county. This comprehensive measure of agricultural output captures the overall economic significance of farming and ranching, enabling comparison of agricultural productivity across counties.",
+        "long_name": "Total sales of commodities within a given county",
+        "measure_type": "count",
+        "short_description": "Aggregate market value of all agricultural products sold.",
+        "short_name": "Total sales of commodities",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "Total sales of commodities to {features.name} is {value}",
+        "type": "dollar",
+        "unit": "dollar",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "total_calves_sales": {
+        "aggregation_method": "sum",
+        "categories": "",
+        "category": "Agriculture Industry",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Total calf sales measure the market value of cattle calves sold in a county. Calf sales are a key indicator of the beef cattle industry, which is one of Virginia's largest agricultural sectors. This measure reflects both the scale of cow-calf operations and prevailing market conditions for beef.",
+        "long_name": "Total sales of calves within a given county",
+        "measure_type": "count",
+        "short_description": "Market value of cattle calves sold in the county.",
+        "short_name": "Total sales of calves",
+        "sources": [
+            {
+                "date_accessed": 2023,
+                "location": "",
+                "location_url": "",
+                "name": "Department of Agriculture National Agriculture Statistics Service",
+                "url": "https://www.nass.usda.gov/"
+            }
+        ],
+        "statement": "Total sales of calves to {features.name} is {value}.",
+        "type": "dollar",
+        "unit": "dollar",
+        "variants": "",
+        "provenance": "USDA Census of Agriculture, county-level data for Virginia. Includes farm operations, acreage, sales, and production metrics."
+    },
+    "perc_freq_mental_distress": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Health",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Estimated percentage of adults reporting 14 or more days of poor mental health in the past 30 days. High prevalence of frequent mental distress reflects unmet behavioral health needs and is associated with reduced work productivity, strained social relationships, and increased demand for crisis services. Persistent mental distress at the neighborhood level often tracks with poverty, housing instability, and limited access to mental health providers.",
+        "long_name": "Frequent Mental Distress Among Adults",
+        "measure_type": "prevalence estimate",
+        "short_description": "Modeled prevalence of adults with 14+ poor mental health days per month, from BRFSS small-area estimation.",
+        "short_name": "Frequent mental distress",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "CDC PLACES",
+                "location_url": "https://www.cdc.gov/places/",
+                "name": "Centers for Disease Control and Prevention",
+                "url": "https://www.cdc.gov"
+            }
+        ],
+        "provenance": "Tract-level estimates from CDC PLACES (Population Level Analysis and Community Estimates), which applies multilevel regression with poststratification (MRP) to Behavioral Risk Factor Surveillance System (BRFSS) survey responses. Each model year pools two years of BRFSS data with Census tract demographics to generate small-area predictions. Values are crude prevalence (%). Confidence intervals converted from 95% CI (PLACES default) to approximate 90% MOE using the ratio 1.645/1.96.",
+        "statement": "{value}% of adults in {features.name} report frequent mental distress.",
+        "type": "percent",
+        "unit": "percent",
+        "variants": ""
+    },
+    "perc_freq_physical_distress": {
+        "aggregation_method": "mean",
+        "categories": "",
+        "category": "Health",
+        "citations": "",
+        "data_type": "numeric",
+        "equity_category": "Status",
+        "layer": "",
+        "long_description": "Estimated percentage of adults reporting 14 or more days of poor physical health in the past 30 days. Frequent physical distress captures chronic pain, disability, and illness burden at the community level. Neighborhoods with high rates often face compounding challenges including limited healthcare access, environmental hazards, and higher proportions of residents in physically demanding occupations.",
+        "long_name": "Frequent Physical Distress Among Adults",
+        "measure_type": "prevalence estimate",
+        "short_description": "Modeled prevalence of adults with 14+ poor physical health days per month, from BRFSS small-area estimation.",
+        "short_name": "Frequent physical distress",
+        "sources": [
+            {
+                "date_accessed": 2026,
+                "location": "CDC PLACES",
+                "location_url": "https://www.cdc.gov/places/",
+                "name": "Centers for Disease Control and Prevention",
+                "url": "https://www.cdc.gov"
+            }
+        ],
+        "provenance": "Tract-level estimates from CDC PLACES, which applies multilevel regression with poststratification (MRP) to BRFSS survey responses. Each model year pools two years of BRFSS data with Census tract demographics to generate small-area predictions. Values are crude prevalence (%). Confidence intervals converted from 95% CI to approximate 90% MOE.",
+        "statement": "{value}% of adults in {features.name} report frequent physical distress.",
+        "type": "percent",
+        "unit": "percent",
         "variants": ""
     }
 }
