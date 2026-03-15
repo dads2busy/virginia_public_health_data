@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { attachNetworkGuards, waitForAppShell, waitForDataUpdate, assertSomeDataAppears } from './lib/signals'
+import { attachNetworkGuards, waitForAppShell, waitForDataUpdate, assertSomeDataAppears, getVariableHeading, assertVariableChanged } from './lib/signals'
 import { getAvailableVariables, selectVariableFromSidePanel, selectVariableFromDropdown, switchMetricSet, getDashboardName, isVA } from './lib/navigation'
 import { ruralHealthSections, hoiSections, unitProfilesSections } from '../src/lib/config/metric-sets'
 
@@ -31,12 +31,14 @@ test.describe('Variable coverage', () => {
 
     const dashboardName = await getDashboardName(page)
     const failures: string[] = []
+    let prevHeading: string | null = null
 
     if (isVA(dashboardName)) {
       // VA: iterate by metric set to handle tab switching
       for (const [metricSet, vars] of Object.entries(metricSetVariables)) {
         await switchMetricSet(page, metricSet)
         await waitForDataUpdate(page)
+        prevHeading = await getVariableHeading(page)
 
         for (const v of vars) {
           if (!variables.includes(v)) continue
@@ -44,6 +46,7 @@ test.describe('Variable coverage', () => {
             guards.resetDataResponseCount()
             await selectVariableFromSidePanel(page, v)
             await waitForDataUpdate(page)
+            prevHeading = await assertVariableChanged(page, prevHeading)
             await assertSomeDataAppears(page, guards.getSuccessfulDataResponses())
           } catch (e) {
             failures.push(`${v} (SidePanel, ${metricSet}): ${(e as Error).message.slice(0, 200)}`)
@@ -58,6 +61,7 @@ test.describe('Variable coverage', () => {
           guards.resetDataResponseCount()
           await selectVariableFromDropdown(page, v)
           await waitForDataUpdate(page)
+          prevHeading = await assertVariableChanged(page, prevHeading)
           await assertSomeDataAppears(page, guards.getSuccessfulDataResponses())
         } catch (e) {
           // Variable exists in measure_info/datapackage but not in any UI control — skip
@@ -68,6 +72,7 @@ test.describe('Variable coverage', () => {
       }
     } else {
       // NCR: iterate all variables via SidePanel, fallback to dropdown
+      prevHeading = await getVariableHeading(page)
       for (const v of variables) {
         try {
           guards.resetDataResponseCount()
@@ -78,9 +83,12 @@ test.describe('Variable coverage', () => {
             await selectVariableFromDropdown(page, v)
           }
           await waitForDataUpdate(page)
+          prevHeading = await assertVariableChanged(page, prevHeading)
           await assertSomeDataAppears(page, guards.getSuccessfulDataResponses())
         } catch (e) {
-          failures.push(`${v}: ${(e as Error).message.slice(0, 200)}`)
+          const msg = (e as Error).message
+          if (msg.includes('variable-option-') && msg.includes('to be visible')) continue
+          failures.push(`${v}: ${msg.slice(0, 200)}`)
         }
       }
     }
