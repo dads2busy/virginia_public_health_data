@@ -41,7 +41,6 @@ test.describe('Variable coverage', () => {
         prevHeading = await getVariableHeading(page)
 
         for (const v of vars) {
-          if (!variables.includes(v)) continue
           try {
             guards.resetDataResponseCount()
             await selectVariableFromSidePanel(page, v)
