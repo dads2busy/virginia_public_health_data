@@ -29,3 +29,7 @@ public/data/*.json
 public/data/*.zip
 public/geo/*.geojson
 
+# Playwright
+test-results/
+playwright-report/
+
