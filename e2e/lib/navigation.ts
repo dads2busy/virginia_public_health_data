@@ -2,7 +2,7 @@ import { Page } from '@playwright/test'
 
 // --- Dashboard detection ---
 
-let _dashboardName: string | null = null
+let _dashboardName = ''
 
 export async function getDashboardName(page: Page): Promise<string> {
   if (_dashboardName) return _dashboardName
