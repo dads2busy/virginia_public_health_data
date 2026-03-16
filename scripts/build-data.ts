@@ -5,7 +5,7 @@
  * indexed JSON lookup objects matching the format used by the dashboard,
  * and writes them to public/data/.
  *
- * Also fetches GeoJSON shapes from GitHub and saves to public/geo/.
+ * Also copies GeoJSON shapes from geo-sources/ to public/geo/.
  *
  * Usage: npx tsx scripts/build-data.ts
  */
@@ -21,6 +21,7 @@ const ROOT = path.resolve(__dirname, '..')
 const DATA_DIR = path.join(ROOT, 'data')
 const PUBLIC_DATA_DIR = path.join(ROOT, 'public', 'data')
 const PUBLIC_GEO_DIR = path.join(ROOT, 'public', 'geo')
+const GEO_SRC_DIR = path.join(ROOT, 'geo-sources')
 
 interface CsvRow {
   ID: string
@@ -59,19 +60,11 @@ const DATASETS: Record<string, string> = {
   tract: 'tract.csv.xz',
 }
 
-// GeoJSON shape URLs to fetch at build time
-const GEOJSON_URLS: Record<string, string> = {
-  'tract-2020.geojson':
-    'https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/Census%20Geographies/Tract/2020/data/distribution/va_geo_census_cb_2020_census_tracts.geojson',
-  'county-2020.geojson':
-    'https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/Census%20Geographies/County/2020/data/distribution/va_geo_census_cb_2020_counties.geojson',
-  'district.geojson':
-    'https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/VA/State%20Geographies/Health%20Districts/2020/data/distribution/va_geo_vhd_2020_health_districts.geojson',
-}
+// GeoJSON shape files in geo-sources/ (copied from sdc-monorepo via scripts/refresh-geo.sh)
+const GEOJSON_FILES = ['tract-2020.geojson', 'county-2020.geojson', 'district.geojson']
 
-// Entity mapping URL
-const ENTITY_MAP_URL =
-  'https://raw.githubusercontent.com/uva-bi-sdad/sdc.geographies/main/entities/data/distribution/VA.json'
+// Entity map file in geo-sources/
+const ENTITY_MAP_FILE = 'VA.json'
 
 async function decompressXz(filePath: string): Promise<string> {
   const compressed = fs.readFileSync(filePath)
@@ -278,40 +271,40 @@ function buildFieldInfo(rows: CsvRow[], variableNames: string[], timeValues: num
   return fields
 }
 
-async function fetchJson(url: string): Promise<unknown> {
-  console.log(`  Fetching ${url}...`)
-  const response = await fetch(url)
-  if (!response.ok) throw new Error(`Failed to fetch ${url}: ${response.status}`)
-  return response.json()
-}
-
-async function fetchGeoJsonShapes(): Promise<void> {
+function copyGeoJsonShapes(): void {
   fs.mkdirSync(PUBLIC_GEO_DIR, { recursive: true })
 
-  for (const [filename, url] of Object.entries(GEOJSON_URLS)) {
-    const outPath = path.join(PUBLIC_GEO_DIR, filename)
-    if (fs.existsSync(outPath)) {
-      console.log(`  Skipping ${filename} (already exists)`)
+  for (const filename of GEOJSON_FILES) {
+    const srcPath = path.join(GEO_SRC_DIR, filename)
+    const destPath = path.join(PUBLIC_GEO_DIR, filename)
+    if (!fs.existsSync(srcPath)) {
+      console.warn(`  Warning: Source GeoJSON not found: ${srcPath}`)
       continue
     }
-    const data = await fetchJson(url)
-    fs.writeFileSync(outPath, JSON.stringify(data))
-    console.log(`  Wrote ${filename}`)
+    fs.copyFileSync(srcPath, destPath)
+    const size = (fs.statSync(destPath).size / 1024 / 1024).toFixed(1)
+    console.log(`  Copied ${filename} (${size} MB)`)
   }
 }
 
 /**
- * Fetch the VA entity map and extract a { geoid -> "rural"|"mixed"|"urban" } lookup.
+ * Read the VA entity map from geo-sources/ and extract a { geoid -> "rural"|"mixed"|"urban" } lookup.
  *
  * The entity map is structured as { category: { geoid: { type, ... } } }.
  * We extract from the "county", "district", and "tract" categories, which
  * correspond to the three geographic levels in the dashboard.
  */
-async function buildRegionTypeLookup(): Promise<void> {
+function buildRegionTypeLookup(): void {
   const outPath = path.join(PUBLIC_DATA_DIR, 'region-types.json')
+  const srcPath = path.join(GEO_SRC_DIR, ENTITY_MAP_FILE)
 
-  console.log('\nFetching entity map for region type classification...')
-  const entityMap = (await fetchJson(ENTITY_MAP_URL)) as Record<string, Record<string, { type?: string }>>
+  console.log('\nBuilding region type classification from entity map...')
+  if (!fs.existsSync(srcPath)) {
+    console.warn(`  Warning: Entity map not found: ${srcPath}`)
+    return
+  }
+
+  const entityMap = JSON.parse(fs.readFileSync(srcPath, 'utf-8')) as Record<string, Record<string, { type?: string }>>
 
   const lookup: Record<string, 'rural' | 'mixed' | 'urban'> = {}
   const validTypes = new Set(['rural', 'mixed', 'urban'])
@@ -568,12 +561,12 @@ async function main() {
   fs.writeFileSync(path.join(PUBLIC_DATA_DIR, 'datapackage.json'), JSON.stringify(datapackage, null, 2))
   console.log('\nWrote datapackage.json')
 
-  // Fetch GeoJSON shapes
-  console.log('\nFetching GeoJSON shapes...')
-  await fetchGeoJsonShapes()
+  // Copy GeoJSON shapes from geo-sources/
+  console.log('\nCopying GeoJSON shapes...')
+  copyGeoJsonShapes()
 
-  // Build region type lookup
-  await buildRegionTypeLookup()
+  // Build region type lookup from geo-sources/
+  buildRegionTypeLookup()
 
   console.log('\n=== Build complete ===')
 }
