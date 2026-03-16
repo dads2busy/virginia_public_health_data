@@ -33,3 +33,6 @@ public/geo/*.geojson
 test-results/
 playwright-report/
 
+# Superpowers (local tooling)
+docs/superpowers/
+
