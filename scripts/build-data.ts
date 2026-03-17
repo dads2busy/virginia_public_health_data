@@ -480,6 +480,41 @@ async function writePerVariableZips(lookups: Record<string, DataLookup>): Promis
   console.log(`  Wrote ${count} per-variable zip files`)
 }
 
+/**
+ * Build region-names.json from the entity map — a flat { geoid: "Name, Virginia" } lookup
+ * used by the dashboard to display human-readable region names.
+ */
+function buildRegionNameLookup(): void {
+  const outPath = path.join(PUBLIC_DATA_DIR, 'region-names.json')
+  const srcPath = path.join(GEO_SRC_DIR, ENTITY_MAP_FILE)
+
+  console.log('\nBuilding region name lookup from entity map...')
+  if (!fs.existsSync(srcPath)) {
+    console.warn(`  Warning: Entity map not found: ${srcPath}`)
+    return
+  }
+
+  const entityMap = JSON.parse(fs.readFileSync(srcPath, 'utf-8')) as Record<
+    string,
+    Record<string, { name?: string }>
+  >
+
+  const lookup: Record<string, string> = {}
+
+  for (const [, entities] of Object.entries(entityMap)) {
+    for (const [id, entity] of Object.entries(entities)) {
+      if (entity?.name) {
+        // County names get ", Virginia" suffix for consistency
+        const name = id.match(/^51\d{3}$/) ? `${entity.name}, Virginia` : entity.name
+        lookup[id] = name
+      }
+    }
+  }
+
+  fs.writeFileSync(outPath, JSON.stringify(lookup))
+  console.log(`  Wrote region-names.json (${Object.keys(lookup).length} named regions)`)
+}
+
 async function main() {
   console.log('=== VDH Rural Health Data Build ===\n')
 
@@ -567,6 +602,9 @@ async function main() {
 
   // Build region type lookup from geo-sources/
   buildRegionTypeLookup()
+
+  // Build region name lookup from geo-sources/
+  buildRegionNameLookup()
 
   console.log('\n=== Build complete ===')
 }
