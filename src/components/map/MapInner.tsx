@@ -68,12 +68,13 @@ export function MapInner() {
   const [geoData, setGeoData] = useState<Record<string, GeoJSONFeatureCollection>>({})
   const [mapBounds, setMapBounds] = useState<L.LatLngBounds | null>(null)
 
-  // Reset map bounds when drilling back up
+  // Zoom map bounds when drill-down selection changes
   const prevDistrict = useRef(selectedDistrict)
   const prevCounty = useRef(selectedCounty)
   useEffect(() => {
     const districtCleared = prevDistrict.current && !selectedDistrict
     const countyCleared = prevCounty.current && !selectedCounty
+    const countyChanged = selectedCounty !== prevCounty.current
 
     if (districtCleared) {
       // Went all the way back to district overview
@@ -87,11 +88,20 @@ export function MapInner() {
         const layer = L.geoJSON(feature as GeoJSON.Feature)
         setMapBounds(layer.getBounds())
       }
+    } else if (countyChanged && selectedCounty && geoData.county) {
+      // County selected (from dropdown or map click): zoom to county bounds
+      const feature = geoData.county.features.find(
+        (f) => f.properties.geoid === selectedCounty
+      )
+      if (feature) {
+        const layer = L.geoJSON(feature as GeoJSON.Feature)
+        setMapBounds(layer.getBounds())
+      }
     }
 
     prevDistrict.current = selectedDistrict
     prevCounty.current = selectedCounty
-  }, [selectedDistrict, selectedCounty, geoData.district])
+  }, [selectedDistrict, selectedCounty, geoData.district, geoData.county])
 
   // Load GeoJSON shapes
   useEffect(() => {

@@ -21,15 +21,15 @@ export function FilterMenu() {
   const shapes = useDashboardStore(selectShapes)
   const showCountyInput = useDashboardStore(selectShowCountyInput)
 
-  const { county, measureInfo, availableLevels } = useData()
+  const { county, measureInfo, availableLevels, regionNameMap } = useData()
 
   // Get county IDs
   const countyIds = useMemo(() => {
     if (!county) return []
     return Object.keys(county)
-      .filter((k) => k !== '_meta')
-      .sort()
-  }, [county])
+      .filter((k) => k !== '_meta' && k.startsWith('51') && regionNameMap[k])
+      .sort((a, b) => (regionNameMap[a] || a).localeCompare(regionNameMap[b] || b))
+  }, [county, regionNameMap])
 
   // Get variable options grouped by category — use dataset _meta.variables
   // as the source of truth for which variables exist, then resolve labels
@@ -86,7 +86,7 @@ export function FilterMenu() {
               <option value="">All Counties</option>
               {countyIds.map((id) => (
                 <option key={id} value={id}>
-                  {id}
+                  {regionNameMap[id]?.replace(', Virginia', '') || id}
                 </option>
               ))}
             </select>
