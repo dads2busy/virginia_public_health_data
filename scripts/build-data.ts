@@ -61,7 +61,7 @@ const DATASETS: Record<string, string> = {
   tract: 'tract.csv.xz',
 }
 
-// GeoJSON shape files in geo-sources/ (copied from sdc-monorepo via scripts/refresh-geo.sh)
+// GeoJSON shape files in geo-sources/ (copied from social-data-commons via scripts/refresh-geo.sh)
 const GEOJSON_FILES = ['tract-2020.geojson', 'county-2020.geojson', 'district.geojson']
 
 // Entity map file in geo-sources/
