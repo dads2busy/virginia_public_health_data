@@ -52,6 +52,31 @@ Users can drill down from district → county → tract, filter by region type (
 
 ## Architecture
 
+### Data flow
+
+```
+social-data-commons (Python pipelines, separate repo)
+   produces wide-format CSV.xz files
+                      ↓
+copied to data/*.csv.xz in this repo
+                      ↓
+scripts/build-data.ts (npm run build:data)
+   decompresses with lzma-native, parses with csv-parse
+   computes per-variable stats with simple-statistics
+   encodes long variable names as short codes (X2, X3, ...)
+   writes public/data/*.json + datapackage.json
+   fetches GeoJSON from uva-bi-sdad/sdc.geographies into public/geo/
+                      ↓
+optional: scripts/generate-narratives.ts, generate-correlations.ts
+   write public/data/narratives/*.json and public/data/correlations/*.json
+                      ↓
+Next.js static export (npm run build)
+   reads public/data + public/geo at runtime via DataProvider context
+   outputs ./out/ → GitHub Pages
+```
+
+Built artifacts (`public/data/`, `public/geo/`, `out/`) are gitignored and regenerated in CI.
+
 ### Directory layout
 
 ```
@@ -186,6 +211,20 @@ npm run dev             # http://localhost:3000
 
 `build:data` only needs to be re-run when source data changes. Build artifacts (`public/data/`, `public/geo/`) are gitignored.
 
+### Scripts
+
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Next.js dev server on `http://localhost:3000` |
+| `npm run build:data` | Decompress `data/*.csv.xz` → `public/data/*.json`; fetch GeoJSON to `public/geo/` |
+| `npm run build:narratives` | Generate Gemini-authored narrative blurbs per region/variable (requires `NEXT_PUBLIC_GEMINI_API_KEY`) |
+| `npm run build:correlations` | Precompute pairwise correlations across variables |
+| `npm run build` | Production static export to `./out/` |
+| `npm run start` | Serve the built export locally |
+| `npm run lint` | ESLint via `next lint` |
+| `npm test` | Vitest unit tests |
+| `npm run test:e2e` | Playwright end-to-end tests |
+
 ### Environment
 
 Configure in `.env.local` (never hardcode keys):
@@ -231,6 +270,17 @@ On push to `main`:
 - **AI assistance is first-class.** The Gemini chat assistant and pre-generated narrative/correlation outputs are integral to the user experience, not bolt-ons.
 
 ---
+
+## Conventions
+
+- Server components by default; client components only where interactivity demands it.
+- All data loading goes through `DataProvider` — components never import or fetch JSON directly.
+- UI state lives in the Zustand store; URL-shareable state lives in Nuqs; transient component state uses `useState` only when neither of the above applies.
+- `@/*` path alias for imports from `src/`.
+- Prettier: `printWidth: 120`, no semicolons, single quotes, `trailingComma: 'es5'`.
+- TypeScript types on all exported function signatures.
+- Components kept under ~200 lines; extract sub-components when growing larger.
+- The dashboard renders the `_geo20` (2020 Census) geography only; `_geo10` variants exist for researcher downloads but are not surfaced in the UI.
 
 ## Related repositories
 
