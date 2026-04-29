@@ -1,6 +1,6 @@
 # Virginia Public Health Data Dashboard
 
-An interactive choropleth map dashboard for exploring Virginia public health, demographic, economic, and environmental metrics. Built for the **Virginia Department of Health (VDH)**, this is a Next.js/TypeScript rewrite of an original R/Shiny application (`site.R` / `build.R`).
+An interactive choropleth map dashboard for exploring Virginia public health, demographic, economic, and environmental indicators across health districts, counties, and census tracts.
 
 **Live site:** https://uva-bi-sdad.github.io/virginia_public_health_data
 
@@ -8,196 +8,149 @@ An interactive choropleth map dashboard for exploring Virginia public health, de
 
 ## Purpose
 
-The dashboard lets users visualize ~50 health-related variables across three geographic levels:
+The dashboard visualizes dozens of indicators across three geographic levels:
 
 - **Health Districts** — 35 VDH administrative regions
 - **Counties** — Virginia counties and independent cities
-- **Census Tracts** — Fine-grained tract-level data
+- **Census Tracts** — tract-level data for fine-grained analysis
 
-Users can drill down from district → county → tract, filter by rural/mixed/urban region type, scrub through time (2009–2023), view ranked tables, and plot time-series charts. Dashboard state is serialized to the URL for sharing.
+Users can drill down from district → county → tract, filter by region type (rural/mixed/urban), scrub through time, view ranked tables, and plot time-series charts. Dashboard state is serialized to the URL for sharing, and an embedded Gemini chat assistant answers natural-language questions about the visible data.
 
 ### Metric Sets
 
-Three top-level metric groupings are available:
-
 | Metric Set | Categories |
 |---|---|
-| **Rural Health** | Education, Broadband, Nutrition/Food Security, Maternal & Infant Health, Healthcare Access, Behavioral Health, Employment |
-| **Health Opportunity Index (HOI)** | HOI composite index, Economic Opportunity, Built Environment, Consumer Opportunity, Social Impact, and 14 related measures |
+| **Rural Health** | Education, Broadband, Nutrition / Food Security, Maternal & Infant Health, Healthcare Access, Behavioral Health, Employment |
+| **Health Opportunity Index (HOI)** | HOI composite, Economic Opportunity, Built Environment, Consumer Opportunity, Social Impact, and related sub-measures |
 | **Unit Profiles** | Demographic Summary, Agriculture, Health, Education, Business & Employment |
+
+---
+
+## Stack
+
+| Technology | Role |
+|---|---|
+| **Next.js 15** (App Router) | React framework; static export (`output: 'export'`) |
+| **React 19** | UI components |
+| **TypeScript 5.7** (strict) | Type safety throughout |
+| **Tailwind CSS 4** | Utility-first styling via PostCSS |
+| **Zustand 5** | Global UI state with `persist` middleware (localStorage) |
+| **Nuqs 2** | URL search-param state for shareable views |
+| **next-themes** | Dark / light theme switching |
+| **React Leaflet 5** + **Leaflet 1.9** | Choropleth map with GeoJSON overlays (lazy loaded, no SSR) |
+| **Plotly.js** (basic, minified) | Time-series scatter / bar plots |
+| **TanStack Table 8** + **TanStack Virtual** | Sortable, virtualized rank table |
+| **@google/generative-ai** | Gemini-powered chat assistant and narrative / correlation generation |
+| **tsx** | TypeScript execution for build-time Node scripts |
+| **lzma-native** | xz decompression in build scripts |
+| **csv-parse** | CSV parsing in build scripts |
+| **simple-statistics** | Descriptive statistics in build scripts |
+| **Vitest** | Unit tests |
+| **Playwright** | End-to-end tests |
 
 ---
 
 ## Architecture
 
-### Tech Stack
-
-| Technology | Role |
-|---|---|
-| **Next.js 15** (App Router) | React framework; static site export (`output: 'export'`) |
-| **React 19** | UI component library |
-| **TypeScript 5.7** | Strict typing throughout; build errors are not suppressed |
-| **Tailwind CSS 4** | Utility-first styling via PostCSS |
-| **Zustand 5** | Global state with `persist` middleware (localStorage) |
-| **nuqs 2** | URL search-param state sync for shareable dashboard URLs |
-| **next-themes** | Dark/light theme switching |
-| **react-leaflet 5** / **Leaflet 1.9** | Interactive choropleth map with GeoJSON overlays |
-| **react-plotly.js** / **plotly.js-basic-dist-min** | Time-series scatter/bar plots |
-| **@tanstack/react-table 8** | Sortable rank table |
-| **@tanstack/react-virtual** | Row virtualization for large (tract-level) tables |
-| **tsx** | TypeScript execution for the Node.js build script |
-| **lzma-native** | xz decompression in the build script |
-| **csv-parse** | CSV parsing in the build script |
-| **simple-statistics** | Descriptive statistics (mean, SD, min, max) in the build script |
-| **Vitest** | Unit testing |
-| **Playwright** | End-to-end testing |
-
----
-
-### Directory Structure
+### Directory layout
 
 ```
 virginia_public_health_data/
-├── data/                        # Source data (not served; committed as-is)
-│   ├── health_district.csv.xz   # xz-compressed CSV for district level
-│   ├── county.csv.xz            # xz-compressed CSV for county level
-│   ├── tract.csv.xz             # xz-compressed CSV for tract level (~9.2 MB compressed)
-│   └── measure_info.json        # Human-readable variable metadata (~864 KB)
+├── data/                        # Source data — wide-format xz-compressed CSVs
+│   ├── health_district.csv.xz   # combined district-level wide CSV
+│   ├── county.csv.xz            # combined county-level wide CSV
+│   ├── tract.csv.xz             # combined tract-level wide CSV
+│   ├── va_*.csv.xz              # per-indicator source files from social-data-commons
+│   └── measure_info.json        # human-readable variable metadata
 │
-├── public/
-│   ├── data/                    # Build output — JSON lookups served to the browser
-│   │   ├── district.json        # ~367 KB
-│   │   ├── county.json          # ~1.8 MB
-│   │   ├── tract.json           # ~32 MB (loaded lazily, only on tract drill-down)
-│   │   ├── measure_info.json    # Variable metadata copy
-│   │   └── datapackage.json     # Schema + per-variable stats (~1.4 MB)
-│   └── geo/                     # GeoJSON boundary files (fetched at build time)
-│       ├── district.geojson     # 35 VDH Health Districts (~193 KB)
-│       ├── county-2020.geojson  # Virginia counties, 2020 Census (~88 KB)
-│       └── tract-2020.geojson   # Census tracts, 2020 (~940 KB)
+├── public/                      # Static assets served by Next.js
+│   ├── data/                    # Build output (gitignored, generated in CI)
+│   │   ├── district.json
+│   │   ├── county.json
+│   │   ├── tract.json           # loaded lazily on tract drill-down
+│   │   ├── measure_info.json
+│   │   ├── datapackage.json     # schema + per-variable stats
+│   │   ├── narratives/          # AI-generated narrative text
+│   │   └── correlations/        # precomputed correlation matrices
+│   └── geo/                     # GeoJSON boundary files (gitignored, fetched in CI)
 │
 ├── scripts/
-│   └── build-data.ts            # Data build script (replaces build.R)
+│   ├── build-data.ts            # Decompresses CSVs → indexed JSON lookups
+│   ├── generate-narratives.ts   # Gemini-authored narrative blurbs per region/variable
+│   ├── generate-correlations.ts # Pairwise correlations across variables
+│   └── refresh-geo.sh           # Helper to refresh GeoJSON sources
 │
 ├── src/
-│   ├── app/                     # Next.js App Router
-│   │   ├── layout.tsx           # Root layout: ThemeProvider, NuqsAdapter, fonts
-│   │   ├── page.tsx             # Single-page dashboard: composes all panels
-│   │   └── globals.css
-│   ├── components/              # React UI components (see below)
-│   └── lib/                     # Core logic: data, state, color, config
+│   ├── app/                     # Next.js App Router (layout, page, globals.css)
+│   ├── components/              # React UI (see below)
+│   ├── hooks/
+│   └── lib/                     # Core logic: data, state, color, config, gemini, geo
 │
-├── .github/workflows/
-│   └── build.yml                # CI/CD: build:data → next build → GitHub Pages deploy
-├── next.config.ts               # Static export, basePath, env vars
+├── e2e/                         # Playwright specs
+├── geo-sources/                 # GeoJSON source manifests
+├── .github/workflows/build.yml  # CI: build:data → next build → GitHub Pages deploy
+├── next.config.ts
 ├── package.json
 └── tsconfig.json
 ```
 
----
-
-### Component Tree (`src/components/`)
+### Components (`src/components/`)
 
 ```
-DataProvider.tsx              # React Context: data loading + availableLevels computation
-├── layout/
-│   ├── Navbar.tsx            # Top bar: metric-set switcher, theme toggle
-│   ├── SidePanel.tsx         # Left panel: variable selector tree
-│   ├── FilterMenu.tsx        # Region type (rural/mixed/urban) + drill-down controls
-│   ├── SettingsDrawer.tsx    # Color scale, animation, plot type, table settings
-│   └── AboutDrawer.tsx       # About / data source information
-├── map/
-│   ├── DashboardMap.tsx      # Map outer shell, SSR guard (dynamic import)
-│   └── MapInner.tsx          # Leaflet map: GeoJSON render, coloring, hover, drill-down
-├── info/
-│   ├── VariableInfo.tsx      # Selected variable name, description, sources
-│   ├── RegionInfo.tsx        # Hovered/selected region name + value callout
-│   └── SummaryInfo.tsx       # Descriptive statistics for current view
-├── legend/
-│   └── ColorLegend.tsx       # Color scale bar + min/max/median labels
-├── plot/
-│   └── TimeSeriesPlot.tsx    # Plotly scatter/bar chart for selected region over time
-├── table/
-│   └── RankTable.tsx         # Virtualized, sortable rank table (all regions)
-└── shared/
-    ├── Breadcrumb.tsx         # District > County > Tract navigation crumbs
-    ├── YearSelector.tsx       # Year slider/input
-    ├── ExportDialog.tsx       # CSV/TSV export dialog
-    └── DynamicHeading.tsx     # Utility: heading with dynamic level
+DataProvider.tsx              # React Context: data loading + availableLevels
+├── chat/
+│   ├── AskGeminiButton.tsx   # Entry point for the AI chat assistant
+│   ├── ChatDrawer.tsx        # Slide-in chat panel
+│   └── ChatInput.tsx
+├── layout/                   # Navbar, SidePanel, FilterMenu, drawers (Settings, About)
+├── map/                      # DashboardMap (SSR guard) + MapInner (Leaflet)
+├── info/                     # VariableInfo, RegionInfo, SummaryInfo
+├── legend/                   # ColorLegend
+├── plot/                     # TimeSeriesPlot (Plotly)
+├── table/                    # RankTable (virtualized)
+└── shared/                   # Breadcrumb, YearSelector, ExportDialog, etc.
 ```
 
----
+### Library (`src/lib/`)
 
-### Core Library (`src/lib/`)
-
-#### `lib/data/`
-
-- **`types.ts`** — All TypeScript interfaces. Key types:
-  - `DataLookup` — the runtime data format: `{ _meta: { time, variables }, [regionId]: { [xCode]: value|array } }`
-  - `DataMeta` / `VariableMapping` — variable-to-short-code mapping and time range
-  - `MeasureInfo` / `MeasureInfoMap` — human-readable variable metadata
-  - `Datapackage` / `DatapackageField` — schema metadata with per-variable stats (mean, SD, min, max)
-  - `GeoJSONFeatureCollection` / `GeoJSONFeature` — GeoJSON shapes
-  - Union types: `ShapeLevel`, `MetricSet`, `RegionType`, `PlotType`, `MapAnimation`, etc.
-
-- **`loader.ts`** — Runtime data fetching with an in-memory `Map` cache. Prepends `NEXT_PUBLIC_BASE_PATH` to all URLs for GitHub Pages compatibility. Key functions: `loadInitialData()`, `loadDataset(name)`, `loadGeoJson(path)`.
-
-- **`aggregation.ts`** — Pure data utilities:
-  - `getValueAtTime()` — extracts a scalar from a time-series array at a given offset
-  - `getRegionValues()` — builds `Map<regionId, number>` for all regions at a given year (used for map coloring)
-  - `computeSummary()` — computes descriptive statistics (n, min, max, mean, median, Q1/Q3, IQR, fences)
-
-#### `lib/store/`
-
-- **`index.ts`** — Zustand store with `persist` middleware:
-  - Selection state: `metricSet`, `selectedDistrict`, `selectedCounty`, `selectedVariable`, `selectedYear`
-  - Filter state: `startingShapes`, `regionTypes` (rural/mixed/urban)
-  - Interaction state: `hoveredRegionId`, `selectedRegionId`
-  - `settings` object (theme, color scale mode/palette, map animation style, plot type, table behavior) — persisted to localStorage under key `vdh-dashboard-settings`
-
-- **`selectors.ts`** — Derived state:
-  - `selectShapes` — resolves active `ShapeLevel` from drill-down state
-  - `selectPalette` — picks `lajolla` (rank mode) or `vik` (diverging)
-  - `selectShowCountyInput`, `selectCountyInputLocked`
-
-#### `lib/color/`
-
-- **`scale.ts`** — `valueToColor(value, palette, stats, settings)` maps a numeric value to a hex color string. Supports linear, median-centered, mean-centered, and rank-order scaling.
-- **`palettes.ts`** — Color palette definitions (`vik` diverging blue–red, `lajolla` sequential).
-
-#### `lib/config/`
-
-- **`metric-sets.ts`** — Defines the three metric sets and their category/button hierarchies for the side panel. ~50+ named variables.
-- **`map-shapes.ts`** — GeoJSON source URLs (from `uva-bi-sdad/sdc.geographies` on GitHub), local paths, and Virginia map defaults (center `[37.85, -79.45]`, zoom 6.8).
+- **`data/`** — `types.ts` (all interfaces), `loader.ts` (runtime fetch with in-memory cache, `NEXT_PUBLIC_BASE_PATH` aware), `aggregation.ts` (time-slice extraction, summary stats).
+- **`store/`** — Zustand store (`index.ts`) with `persist` middleware under key `vdh-dashboard-settings`; derived selectors (`selectors.ts`) for shape level, palette, drill-down state.
+- **`color/`** — `valueToColor()` with linear, mean-centered, median-centered, and rank-order modes; `lajolla` (sequential) and `vik` (diverging) palettes.
+- **`config/`** — `metric-sets.ts` defines the three metric sets and their side-panel hierarchies; `map-shapes.ts` lists GeoJSON sources and Virginia map defaults.
+- **`gemini/`** — Gemini client, prompt context builder, and types for the chat assistant.
+- **`geo/`** — Geo helpers used by the map and build scripts.
 
 ---
 
-### Data Pipeline
+## Data pipeline
 
-#### Source format (`data/*.csv.xz`)
+### Source format
 
-xz-compressed CSVs with columns: `ID`, `time`, then one column per variable (e.g., `perc_hh_with_broadband`, `percent_food_insecure`).
+`data/*.csv.xz` files are xz-compressed wide-format CSVs with columns `ID`, `time`, then one column per variable (e.g. `perc_hh_with_broadband`, `percent_food_insecure`). They are produced upstream by the [social-data-commons](https://github.com/uva-bi-sdad/social-data-commons) pipelines and copied into this repo.
 
-#### Build script (`scripts/build-data.ts`)
+### Build (`npm run build:data`)
 
-Replaces the original `build.R`. Run via `npm run build:data`:
+`scripts/build-data.ts`:
 
-1. Decompresses `.csv.xz` files with `lzma-native`
-2. Parses CSVs with `csv-parse`
-3. Computes per-variable statistics with `simple-statistics`
-4. Encodes variable names as short codes (`X2`, `X3`, …) to reduce JSON payload size
-5. Writes indexed JSON lookups to `public/data/`
-6. Fetches GeoJSON boundary files from `uva-bi-sdad/sdc.geographies` on GitHub → `public/geo/`
-7. Writes `datapackage.json` with field-level schema and statistics
+1. Decompresses each `.csv.xz` with `lzma-native`.
+2. Parses CSVs with `csv-parse`.
+3. Computes per-variable statistics with `simple-statistics`.
+4. Encodes variable names as short codes (`X2`, `X3`, …) to shrink the JSON payload (especially `tract.json`).
+5. Writes indexed JSON lookups to `public/data/`.
+6. Fetches GeoJSON boundary files from `uva-bi-sdad/sdc.geographies` into `public/geo/`.
+7. Emits `datapackage.json` with per-field schema and statistics.
 
-#### Runtime JSON format (`public/data/*.json`)
+Two optional build steps power the AI features:
 
-Variables are short-code encoded. Time-series data is stored as arrays offset from the global time minimum:
+- `npm run build:narratives` (`scripts/generate-narratives.ts`) — uses Gemini to generate narrative blurbs per region/variable.
+- `npm run build:correlations` (`scripts/generate-correlations.ts`) — precomputes pairwise correlations across variables.
+
+### Runtime JSON format
 
 ```json
 {
   "_meta": {
-    "time": { "value": [2009, 2010, ..., 2023], "name": "time" },
+    "time": { "value": [2009, 2010, ..., 2024], "name": "time" },
     "variables": {
       "perc_hh_with_broadband": { "code": "X2", "time_range": [0, 14] },
       "percent_food_insecure":  { "code": "X3", "time_range": [2, 14] }
@@ -208,61 +161,78 @@ Variables are short-code encoded. Time-series data is stored as arrays offset fr
 }
 ```
 
-Region IDs are GEOID strings (e.g., `"51001"` for Accomack County). Scalar values indicate the variable has only one time point for that region.
+Region IDs are GEOID strings (e.g. `"51001"` for Accomack County). Time-series are arrays offset from the global time minimum; scalars indicate a single observation.
 
-#### Data loading at runtime
+### Runtime data loading
 
-`DataProvider.tsx` manages loading state:
-- **Eagerly** loads `district.json`, `county.json`, `measure_info.json`, `datapackage.json` in parallel on mount
-- **Lazily** loads `tract.json` only when the user drills down to tract level (~32 MB)
-- `availableLevels` is computed from `datapackage.json` metadata; the active level auto-switches when the selected variable isn't available at the current level
+`DataProvider.tsx` orchestrates loading:
+
+- **Eagerly** loads `district.json`, `county.json`, `measure_info.json`, and `datapackage.json` in parallel on mount.
+- **Lazily** loads `tract.json` only when the user drills down to tract level.
+- Computes `availableLevels` from `datapackage.json`; the active level auto-switches when the selected variable isn't available at the current level.
+- All data loading flows through DataProvider — components never fetch JSON directly.
 
 ---
 
-### Deployment
+## Development
 
-#### Local development
+### Local setup
 
 ```bash
 npm install
 npm run build:data      # generate public/data/ and public/geo/
-npm run dev             # Next.js dev server at http://localhost:3000
+npm run dev             # http://localhost:3000
 ```
 
-`public/data/` and `public/geo/` are committed to the repo, so `build:data` only needs to be re-run when source data changes.
+`build:data` only needs to be re-run when source data changes. Build artifacts (`public/data/`, `public/geo/`) are gitignored.
 
-#### Production build
+### Environment
+
+Configure in `.env.local` (never hardcode keys):
+
+```
+NEXT_PUBLIC_GEMINI_API_KEY=your-gemini-key
+```
+
+### Production build
 
 ```bash
-npm run build           # Next.js static export → out/
+npm run build           # static export → out/
 ```
 
-`next.config.ts` sets `basePath: '/virginia_public_health_data'` in production and exposes it as `NEXT_PUBLIC_BASE_PATH` for runtime fetch calls.
+`next.config.ts` sets `basePath: '/virginia_public_health_data'` in production and exposes `NEXT_PUBLIC_BASE_PATH` for runtime fetches.
 
-#### CI/CD (`.github/workflows/build.yml`)
+### Testing
 
-Triggered on push to `main`:
+```bash
+npm test                # Vitest unit tests
+npm run test:e2e        # Playwright end-to-end tests
+```
+
+### CI/CD (`.github/workflows/build.yml`)
+
+On push to `main`:
+
 1. `npm ci`
-2. `npm run build:data` — regenerates JSON data files
+2. `npm run build:data` — regenerate JSON data and GeoJSON
 3. `npm run build` — Next.js static export to `out/`
-4. Uploads `out/` as a GitHub Pages artifact and deploys
-
-#### Testing
-
-```bash
-npm test          # Vitest unit tests
-npm run test:e2e  # Playwright end-to-end tests
-```
-
-Neither `vitest.config.ts` nor `playwright.config.ts` exist; both runners use their default configurations.
+4. Upload `out/` as a GitHub Pages artifact and deploy
 
 ---
 
-### Key Design Decisions
+## Key design decisions
 
-- **Static export:** The entire site is pre-rendered to static HTML/JS/CSS. There is no server-side runtime. All data is fetched from static JSON files at runtime.
-- **Short-code variable encoding:** Variable names like `perc_hh_with_broadband` are mapped to `X2`, `X3`, etc. in the JSON output to reduce file size (especially important for `tract.json` at ~32 MB).
-- **Lazy tract loading:** Tract-level data is the largest dataset and is only fetched on demand when the user drills down, keeping initial page load fast.
-- **URL state via nuqs:** All significant dashboard state (variable, year, selected region, drill-down level) is reflected in URL search params, enabling bookmarkable and shareable views.
-- **Zustand + localStorage persistence:** User preferences (color scale, theme, animation style, etc.) are persisted across sessions without requiring a backend.
-- **GeoJSON sourced from `uva-bi-sdad/sdc.geographies`:** Boundary files are fetched at build time and committed to `public/geo/`. They do not need to be re-fetched unless boundaries change.
+- **Static export.** The site is fully pre-rendered; there is no server runtime. All data is fetched from static JSON at runtime.
+- **Short-code variable encoding.** Long variable names are mapped to `X2`, `X3`, … in the runtime JSON to keep payload sizes manageable, especially at the tract level.
+- **Lazy tract loading.** Tract data is fetched only on drill-down, keeping initial page load fast.
+- **URL state via Nuqs.** Variable, year, selected region, and drill-down level are all URL-reflected, enabling bookmarkable and shareable views.
+- **Persisted preferences.** Settings (color scale, theme, animation, plot type, table behavior) are persisted to localStorage via Zustand's `persist` middleware.
+- **GeoJSON from `uva-bi-sdad/sdc.geographies`.** Boundary files are fetched at build time. The dashboard renders the `_geo20` (2020 Census) geography only.
+- **AI assistance is first-class.** The Gemini chat assistant and pre-generated narrative/correlation outputs are integral to the user experience, not bolt-ons.
+
+---
+
+## Related repositories
+
+- **[social-data-commons](https://github.com/uva-bi-sdad/social-data-commons)** — Python pipelines that produce the source datasets in `data/`.
+- **[national_capital_region_data](https://github.com/uva-bi-sdad/national_capital_region_data)** — Sister dashboard for the National Capital Region; same architecture, kept in sync.
