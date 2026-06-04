@@ -68,6 +68,12 @@ export function MapInner() {
   const [geoData, setGeoData] = useState<Record<string, GeoJSONFeatureCollection>>({})
   const [mapBounds, setMapBounds] = useState<L.LatLngBounds | null>(null)
 
+  // Stable handle to the active GeoJSON layer + an index of per-feature layers by geoid.
+  // These let us recolor / highlight imperatively instead of remounting all features.
+  const geoJsonRef = useRef<L.GeoJSON | null>(null)
+  const layersByIdRef = useRef<Map<string, L.Path>>(new Map())
+  const prevHoveredRef = useRef<string | null>(null)
+
   // Zoom map bounds when drill-down selection changes
   const prevDistrict = useRef(selectedDistrict)
   const prevCounty = useRef(selectedCounty)
@@ -174,36 +180,29 @@ export function MapInner() {
           ? valueToColor(value, summary, paletteName, colorScaleCenter, colorByOrder, sortedValues)
           : getNAColor(themeDark)
 
-      const isHovered = regionId === hoveredRegionId
-
+      // Base style only. Hover highlight is applied imperatively (see applyHover) so that
+      // hovering does not force a recolor of every feature.
       return {
         fillColor,
-        weight: isHovered ? polygonOutline + 2 : polygonOutline,
-        color: isHovered ? hoverBorderColor : borderColor,
+        weight: polygonOutline,
+        color: borderColor,
         fillOpacity: 0.7,
         opacity: 1,
       }
     },
-    [summary, regionValues, paletteName, colorScaleCenter, colorByOrder, sortedValues, themeDark, polygonOutline, hoveredRegionId, borderColor, hoverBorderColor]
+    [summary, regionValues, paletteName, colorScaleCenter, colorByOrder, sortedValues, themeDark, polygonOutline, borderColor]
   )
 
   // Event handlers for features
   const onEachFeature = useCallback(
     (feature: GeoJSONFeature, layer: Layer) => {
+      layersByIdRef.current.set(feature.properties.geoid, layer as L.Path)
       layer.on({
-        mouseover: (e: LeafletMouseEvent) => {
+        mouseover: () => {
           setHoveredRegionId(feature.properties.geoid, (feature.properties.region_name as string) ?? feature.properties.name)
-          const target = e.target as Layer & { setStyle?: (s: PathOptions) => void }
-          if (target.setStyle) {
-            target.setStyle({ weight: polygonOutline + 2, color: hoverBorderColor })
-          }
         },
-        mouseout: (e: LeafletMouseEvent) => {
+        mouseout: () => {
           setHoveredRegionId(null)
-          const target = e.target as Layer & { setStyle?: (s: PathOptions) => void }
-          if (target.setStyle) {
-            target.setStyle({ weight: polygonOutline, color: borderColor })
-          }
         },
         click: (e: LeafletMouseEvent) => {
           const id = feature.properties.geoid
@@ -220,8 +219,47 @@ export function MapInner() {
         },
       })
     },
-    [shapes, polygonOutline, borderColor, hoverBorderColor, setMapBounds, setHoveredRegionId, setSelectedDistrict, setSelectedCounty, setSelectedRegionId]
+    [shapes, setMapBounds, setHoveredRegionId, setSelectedDistrict, setSelectedCounty, setSelectedRegionId]
   )
+
+  // Apply / clear the hover highlight on a single feature layer (O(1) per hover).
+  const applyHover = useCallback(
+    (id: string | null) => {
+      const layers = layersByIdRef.current
+      const prev = prevHoveredRef.current
+      if (prev && prev !== id) {
+        layers.get(prev)?.setStyle({ weight: polygonOutline, color: borderColor })
+      }
+      if (id) {
+        const target = layers.get(id)
+        if (target) {
+          target.setStyle({ weight: polygonOutline + 2, color: hoverBorderColor })
+          target.bringToFront()
+        }
+      }
+      prevHoveredRef.current = id
+    },
+    [polygonOutline, borderColor, hoverBorderColor]
+  )
+
+  // Highlight the hovered region (driven by hover on the map OR the table) without
+  // rebuilding any layers.
+  useEffect(() => {
+    applyHover(hoveredRegionId)
+  }, [hoveredRegionId, applyHover])
+
+  // Recolor the existing layer in place when coloring inputs change, instead of
+  // remounting all features via a changing `key`.
+  useEffect(() => {
+    const layer = geoJsonRef.current
+    if (!layer) return
+    layer.setStyle(styleFeature as L.StyleFunction)
+    // setStyle resets every feature to its base style, so re-apply the current hover.
+    const hovered = prevHoveredRef.current
+    if (hovered) {
+      layersByIdRef.current.get(hovered)?.setStyle({ weight: polygonOutline + 2, color: hoverBorderColor })
+    }
+  }, [styleFeature, polygonOutline, hoverBorderColor])
 
   const currentGeoJson = geoData[shapes]
   const countyOverlayGeoJson = shapes === 'tract' ? geoData.county : null
@@ -237,6 +275,7 @@ export function MapInner() {
 
   return (
     <MapContainer
+      preferCanvas
       center={mapDefaults.center}
       zoom={mapDefaults.zoom}
       zoomSnap={0.1}
@@ -248,7 +287,10 @@ export function MapInner() {
       <MapController bounds={mapBounds} />
       {currentGeoJson && (
         <GeoJSON
-          key={`${shapes}-${selectedVariable}-${selectedYear}-${paletteName}-${hoveredRegionId}-${regionTypes.rural}-${regionTypes.mixed}-${regionTypes.urban}`}
+          // Rebuild only when the underlying geography changes. Recoloring and hover
+          // highlighting are handled imperatively (setStyle) to avoid remounting all features.
+          key={shapes}
+          ref={geoJsonRef}
           data={currentGeoJson}
           style={styleFeature as (feature?: GeoJSON.Feature) => PathOptions}
           onEachFeature={onEachFeature as (feature: GeoJSON.Feature, layer: Layer) => void}
@@ -256,7 +298,7 @@ export function MapInner() {
       )}
       {countyOverlayGeoJson && (
         <GeoJSON
-          key={`county-overlay-${selectedVariable}-${selectedYear}-${paletteName}-${hoveredRegionId}-${themeDark}`}
+          key={`county-overlay-${themeDark}`}
           data={countyOverlayGeoJson}
           style={() => countyOverlayStyle}
           interactive={false}
